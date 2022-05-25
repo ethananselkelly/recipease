@@ -10,10 +10,14 @@ import TopBar from "./layout/TopBar";
 
 const App = (props) => {
   const [currentUser, setCurrentUser] = useState(undefined);
+  const [loading, setLoading] = useState(false)
+
   const fetchCurrentUser = async () => {
+    setLoading(true)
     try {
       const user = await getCurrentUser()
       setCurrentUser(user)
+      setLoading(false)
     } catch(err) {
       setCurrentUser(null)
     }
