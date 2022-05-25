@@ -15,6 +15,21 @@ class User extends uniqueFunc(Model) {
     return "users";
   }
 
+  static get relationMappings() {
+    const { Recipe } = require("./index.js")
+
+    return {
+      recipes: {
+        relation: Model.HasManyRelation,
+        modelClass: Recipe,
+        join: {
+          from: "users.id",
+          to: "recipes.userId"
+        }
+      }
+    }
+  }
+
   set password(newPassword) {
     this.cryptedPassword = Bcrypt.hashSync(newPassword, saltRounds);
   }
@@ -29,7 +44,7 @@ class User extends uniqueFunc(Model) {
       required: ["email"],
 
       properties: {
-        email: { type: "string", format: "email" },
+        email: { type: "string", pattern: "^\\S+@\\S+\\.\\S+$" },
         cryptedPassword: { type: "string" },
       },
     };
