@@ -18,5 +18,8 @@
   },
   "engines": {
     "node": "^14.15"
+  },
+  "dependencies": {
+    "cheerio": "^1.0.0-rc.11"
   }
 }
