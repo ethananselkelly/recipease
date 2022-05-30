@@ -1,8 +1,6 @@
 import cheerio from 'cheerio'
 import got from 'got'
 
-// const url = 'https://www.ethanchlebowski.com/cooking-techniques-recipes/marinated-salmon-edamame-poke-bowl'
-
 class Scraper {
   static async getRecipe(url) {
     const apiResponse = await got(url)
