@@ -10,8 +10,6 @@ const RecipeShow = (props) => {
   })
 
   const recipeId = props.match.params.id
-  //not sure if i need user here
-  // const user = props.user
 
   const getRecipe = async () => {
     try {
@@ -38,8 +36,6 @@ const RecipeShow = (props) => {
   let directionsList = recipe.directions.map((direction) => (
     <li key={direction}>{direction}</li>
   ))
-
-  // debugger
 
   return (
     <>
