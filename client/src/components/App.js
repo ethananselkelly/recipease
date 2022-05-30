@@ -9,6 +9,7 @@ import SignInForm from "./authentication/SignInForm";
 import TopBar from "./layout/TopBar";
 import RecipesIndex from "./RecipesIndex";
 import RecipeShow from "./RecipeShow";
+import ScraperShow from "./scraperShow";
 
 const App = (props) => {
   const [currentUser, setCurrentUser] = useState(undefined);
@@ -40,6 +41,7 @@ const App = (props) => {
         <Route exact path="/user-sessions/new" component={SignInForm} />
         <Route exact path="/recipes" component={RecipesIndex} />
         <Route exact path="/recipes/:id" component={RecipeShow} />
+        <Route exact path="/scraper" component={ScraperShow} />
       </Switch>
     </Router>
   );
