@@ -1,9 +1,11 @@
 import React, { useState } from 'react'
+import { Redirect } from 'react-router-dom'
 
 const ScraperShow = (props) => {
   const [recipeURL, setRecipeURL] = useState({
     url: ''
   })
+  const [shouldRedirect, setShouldRedirect] = useState(false)
   
   const postRecipe = async (recipeURL) => {
     try {
@@ -33,15 +35,21 @@ const ScraperShow = (props) => {
     )
   }
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault()
-    postRecipe(recipeURL)
+    await postRecipe(recipeURL)
+    
+    setShouldRedirect(true)
+    
+  }
 
+  if(shouldRedirect) {
+    return <Redirect push to={`/recipes`} />
   }
 
   return (
     <div>
-      <p>this is scraper page</p>
+      <p>Enter a link to a recipe below and save it to your profile</p>
       <form onSubmit={handleSubmit}>
         <div>
           <label>

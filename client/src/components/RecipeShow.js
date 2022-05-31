@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { withRouter } from 'react-router'
+import { Link } from 'react-router-dom'
 
 const RecipeShow = (props) => {
   const [recipe, setRecipe] = useState({
@@ -30,8 +31,8 @@ const RecipeShow = (props) => {
     getRecipe()
   }, [])
   
-  let ingredientsList = recipe.ingredients.map((ingredient) => (
-    <li key={ingredient}>{ingredient}</li>
+  let ingredientsList = recipe.ingredients.map((ingredient, index) => (
+    <li key={index}>{ingredient}</li>
   ))
   let directionsList = recipe.directions.map((direction) => (
     <li key={direction}>{direction}</li>
@@ -39,6 +40,11 @@ const RecipeShow = (props) => {
 
   return (
     <>
+      <div>
+        <p>
+          <Link to={`/recipes`}>back to recipes</Link>
+        </p>
+      </div>
       <div>
         <h1>
           {recipe.name}
@@ -50,9 +56,9 @@ const RecipeShow = (props) => {
         </ul>
       </div>
       <div>
-        <ul>
+        <ol>
           {directionsList}  
-        </ul> 
+        </ol> 
       </div>
     </>
   )
