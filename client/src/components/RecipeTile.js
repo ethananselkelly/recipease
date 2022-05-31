@@ -1,10 +1,11 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 const RecipeTile = ({ recipe }) => {
 
   return (
     <div>
-      <p>{recipe.name}</p>
+      <Link to={`/recipes/${recipe.id}`}>{recipe.name}</Link>
     </div>
   )
 }
