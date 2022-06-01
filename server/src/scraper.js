@@ -11,7 +11,7 @@ class Scraper {
     const $recipe = $body.find('.ccm-wrapper')
     const $ingredients = $body.find('.ccm-section-ingredients')
     const $directions = $body.find('.ccm-section-instructions')
-    
+        
     const Recipe = {}
     
     Recipe.name = $recipe.find('.ccm-name').text()
@@ -24,7 +24,9 @@ class Scraper {
       const ingredientList = $(element).find('span')
       ingredientList.each((index, element) => {
         const ingredient = $(element).text()
-        Recipe.ingredients.push(ingredient)
+        if (isNaN(ingredient)) {
+          Recipe.ingredients.push(ingredient)
+        }
       })
     })
     
@@ -39,7 +41,5 @@ class Scraper {
     return Recipe
   }
 }
-
-// console.log(Recipe)
 
 export default Scraper
