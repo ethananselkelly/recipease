@@ -30,8 +30,10 @@ recipesRouter.post('/', async (req, res) => {
   const { body } = req
   const userId = req.user.id
   const url = body.url
-  const recipe = await Scraper.getRecipe(url)
+  const domain = (new URL(url)).hostname.replace('www.', '').replace('.com', '')
+  const recipe = await Scraper[domain](url)
   const { name, ingredients, directions } = recipe
+  
   try {
     const newRecipe = await Recipe.query().insertAndFetch({ name, ingredients, directions, userId, url })
     return res.status(201).json({ recipe: newRecipe })

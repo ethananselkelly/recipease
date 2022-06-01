@@ -34,8 +34,8 @@ const RecipeShow = (props) => {
   let ingredientsList = recipe.ingredients.map((ingredient, index) => (
     <li key={index}>{ingredient}</li>
   ))
-  let directionsList = recipe.directions.map((direction) => (
-    <li key={direction}>{direction}</li>
+  let directionsList = recipe.directions.map((direction, index) => (
+    <li key={index}>{direction}</li>
   ))
 
   return (
