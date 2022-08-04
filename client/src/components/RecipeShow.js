@@ -6,7 +6,7 @@ const RecipeShow = (props) => {
   const [recipe, setRecipe] = useState({
     name: '',
     ingredients: [],
-    directions: [],
+    instructions: [],
     notes: ''
   })
 
@@ -34,7 +34,7 @@ const RecipeShow = (props) => {
   let ingredientsList = recipe.ingredients.map((ingredient, index) => (
     <li key={index}>{ingredient}</li>
   ))
-  let directionsList = recipe.directions.map((direction, index) => (
+  let instructionsList = recipe.instructions.map((direction, index) => (
     <li key={index}>{direction}</li>
   ))
 
@@ -57,7 +57,7 @@ const RecipeShow = (props) => {
       </div>
       <div>
         <ol>
-          {directionsList}  
+          {instructionsList}  
         </ol> 
       </div>
     </>

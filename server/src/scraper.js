@@ -10,14 +10,14 @@ class Scraper {
     const $body = $('body')
     const $recipe = $body.find('.ccm-wrapper')
     const $ingredients = $body.find('.ccm-section-ingredients')
-    const $directions = $body.find('.ccm-section-instructions')
+    const $instructions = $body.find('.ccm-section-instructions')
         
     const Recipe = {}
     
     Recipe.name = $recipe.find('.ccm-name').text()
     
     Recipe.ingredients = []
-    Recipe.directions = []
+    Recipe.instructions = []
     Recipe.url = url
     
     $ingredients.each((index, element) => {
@@ -30,11 +30,11 @@ class Scraper {
       })
     })
     
-    $directions.each((index, element) => {
+    $instructions.each((index, element) => {
       const directionList = $(element).find('li')
       directionList.each((index, element) => {
         const direction = $(element).text()
-        Recipe.directions.push(direction)
+        Recipe.instructions.push(direction)
       })
     })
 
@@ -48,14 +48,14 @@ class Scraper {
     const $body = $('body')
     const $recipe = $body.find('.rZ4lf')
     const $ingredients = $body.find('ul.public-DraftStyleDefault-ul')
-    const $directions = $body.find('ol.public-DraftStyleDefault-ol')
+    const $instructions = $body.find('ol.public-DraftStyleDefault-ol')
         
     const Recipe = {}
     
     Recipe.name = $recipe.find('span:first.blog-post-title-font').text()
     
     Recipe.ingredients = []
-    Recipe.directions = []
+    Recipe.instructions = []
     Recipe.url = url
     
     $ingredients.each((index, element) => {
@@ -66,11 +66,11 @@ class Scraper {
       })
     })
     
-    $directions.each((index, element) => {
+    $instructions.each((index, element) => {
       const directionList = $(element).find('li')
       directionList.each((index, element) => {
         const direction = $(element).text()
-        Recipe.directions.push(direction)
+        Recipe.instructions.push(direction)
       })
     })
     console.log(Recipe)

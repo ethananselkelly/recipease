@@ -1,7 +1,8 @@
 import express from 'express'
 import objection from 'objection'
 import { Recipe, User } from '../../../models/index.js'
-import Scraper from '../../../scraper.js'
+import recipeScraper from 'recipe-scraper'
+
 const { ValidationError } = objection
 
 const recipesRouter = new express.Router()
@@ -30,12 +31,12 @@ recipesRouter.post('/', async (req, res) => {
   const { body } = req
   const userId = req.user.id
   const url = body.url
-  const domain = (new URL(url)).hostname.replace('www.', '').replace('.com', '')
-  const recipe = await Scraper[domain](url)
-  const { name, ingredients, directions } = recipe
+  const source = (new URL(url)).hostname.replace('www.', '').replace('.com', '')
+  const recipe = await recipeScraper(url)
+  const { name, ingredients, instructions, tags, image, notes } = recipe
   
   try {
-    const newRecipe = await Recipe.query().insertAndFetch({ name, ingredients, directions, userId, url })
+    const newRecipe = await Recipe.query().insertAndFetch({ name, ingredients, instructions, notes, userId, url, image, tags, source })
     return res.status(201).json({ recipe: newRecipe })
   } catch(error) {
     if (error instanceof ValidationError) {
