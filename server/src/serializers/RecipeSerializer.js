@@ -3,13 +3,13 @@ class RecipeSerializer {
     const allowedAttributes = [
       'id', 
       'name', 
+      'source',
+      'url', 
       'ingredients', 
       'instructions', 
       'notes', 
-      'url', 
-      'image', 
       'tags', 
-      'source'
+      'image'
     ]
 
     let serializedRecipe = {}
