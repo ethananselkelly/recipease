@@ -1,5 +1,6 @@
 @import "./foundation/settings";
 @import "~foundation-sites/scss/foundation";
+@import "../recipeShow.scss";
 @include foundation-everything;
 // place global css here
 *,
