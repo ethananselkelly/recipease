@@ -2,6 +2,7 @@ import express from 'express'
 import objection from 'objection'
 import { Recipe, User } from '../../../models/index.js'
 import recipeScraper from 'recipe-scraper'
+import RecipeSerializer from '../../../serializers/RecipeSerializer.js'
 
 const { ValidationError } = objection
 
@@ -10,8 +11,9 @@ const recipesRouter = new express.Router()
 recipesRouter.get('/', async (req, res) => {
   const user = await User.query().findById(req.user.id)
   try {
-    user.recipes = await user.$relatedQuery('recipes')
-    return res.status(200).json({ recipes: user.recipes })
+    const recipes = await user.$relatedQuery('recipes')
+    const serializedRecipes = recipes.map(recipe => RecipeSerializer.getSummary(recipe))
+    return res.status(200).json({ recipes: serializedRecipes })
   } catch(err) {
     return res.status(500).json({ errors: err })
   }
@@ -21,7 +23,8 @@ recipesRouter.get('/:id', async (req, res) =>{
   const recipeIndex = req.params.id
   try {
     const recipe = await Recipe.query().findById(recipeIndex)
-    return res.status(200).json({ recipe: recipe })
+    const serializedRecipe = RecipeSerializer.getSummary(recipe)
+    return res.status(200).json({ recipe: serializedRecipe })
   } catch (error) {
     return res.status(500).json({ errors: error })
   }
