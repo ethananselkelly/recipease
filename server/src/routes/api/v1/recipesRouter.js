@@ -36,10 +36,11 @@ recipesRouter.post('/', async (req, res) => {
   const url = body.url
   const source = (new URL(url)).hostname.replace('www.', '').replace('.com', '')
   const recipe = await recipeScraper(url)
-  const { name, ingredients, instructions, tags, image, notes } = recipe
+  const { name, ingredients, instructions, tags, image, description } = recipe
   
   try {
-    const newRecipe = await Recipe.query().insertAndFetch({ name, ingredients, instructions, notes, userId, url, image, tags, source })
+    console.log(recipe)
+    const newRecipe = await Recipe.query().insertAndFetch({ name, ingredients, instructions, notes: description, userId, url, image, tags, source })
     return res.status(201).json({ recipe: newRecipe })
   } catch(error) {
     if (error instanceof ValidationError) {

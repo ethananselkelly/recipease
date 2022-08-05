@@ -1,0 +1,33 @@
+.lists {
+  display: flex;  
+  flex-direction: column;
+  gap: 2rem;
+  border: 10px solid black;
+}
+
+.list {
+  // border: 5px solid red;
+  display: flex;
+  flex-direction: column;
+  // justify-content: space-evenly;
+}
+
+.ingredient {
+  gap: 1rem;
+  // border: 5px solid blue;
+}
+
+.instruction {
+  gap: 1rem;
+  // border: 5px solid blue;
+}
+
+@media screen and (min-width: 750px) {
+  .lists {
+    flex-direction: row;
+  }
+
+  .lists > * {
+    flex: 1;
+  }
+}
