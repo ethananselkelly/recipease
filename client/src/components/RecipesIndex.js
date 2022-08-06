@@ -36,7 +36,7 @@ const RecipesIndex = (props) => {
   }
   
   return (
-    <div>
+    <div className='container'>
       {recipeListItems}
     </div>
   )

@@ -48,16 +48,15 @@ const ScraperShow = (props) => {
   }
 
   return (
-    <div>
-      <p>Enter a link to a recipe below and save it to your profile</p>
+    <div className='container'>
+      <p>Enter a link to a recipe below</p>
       <form onSubmit={handleSubmit}>
         <div>
           <label>
-            URL:
             <input type="text" name="url" onChange={handleInputChange} value={recipeURL.url}/>
           </label>
           <div>
-            <input type="submit" value="Submit" />
+            <input type="submit" value="Save Recipe" />
           </div>
         </div>
       </form>
