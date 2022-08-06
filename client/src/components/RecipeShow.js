@@ -44,25 +44,24 @@ const RecipeShow = (props) => {
 
   return (
     <>
-      <div>
+      <div className='container'>
         <p>
-          <Link to={`/recipes`}>back to recipes</Link>
+          <Link to={`/recipes`}>Back to recipes</Link>
         </p>
       </div>
       {/* <div style={{
       backgroundImage: `url(${recipe.image})`
     }}> */}
       <div>
-        <div>
+        <div className='container'>
           <img src={recipe.image} />
         </div>
-        <div>
+        <div className='container'>
           <h1>
             {recipe.name}
           </h1> 
-          <a href={recipe.url} target='_blank'>{recipe.url}</a>
         </div>
-        <div className='lists'>
+        <div className='lists container'>
           <ul className='list'>
             {ingredientsList}
           </ul>
@@ -70,10 +69,11 @@ const RecipeShow = (props) => {
             {instructionsList}  
           </ol> 
         </div>
-        <div>
+        <div className='container'>
           <p>
             {recipe.notes}
           </p>
+          <a href={recipe.url} target='_blank'>Link to recipe source</a>
         </div>
       </div>
     </>
