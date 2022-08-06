@@ -11,8 +11,8 @@ const recipesRouter = new express.Router()
 recipesRouter.get('/', async (req, res) => {
   const user = await User.query().findById(req.user.id)
   try {
-    const recipes = await user.$relatedQuery('recipes')
-    const serializedRecipes = recipes.map(recipe => RecipeSerializer.getSummary(recipe))
+    user.recipes = await user.$relatedQuery('recipes')
+    const serializedRecipes = user.recipes.map(recipe => RecipeSerializer.getSummary(recipe))
     return res.status(200).json({ recipes: serializedRecipes })
   } catch(err) {
     return res.status(500).json({ errors: err })
@@ -32,15 +32,19 @@ recipesRouter.get('/:id', async (req, res) =>{
 
 recipesRouter.post('/', async (req, res) => {
   const { body } = req
-  const userId = req.user.id
   const url = body.url
   const source = (new URL(url)).hostname.replace('www.', '').replace('.com', '')
   const recipe = await recipeScraper(url)
   const { name, ingredients, instructions, tags, image, description } = recipe
-  
+  let newRecipe
   try {
-    console.log(recipe)
-    const newRecipe = await Recipe.query().insertAndFetch({ name, ingredients, instructions, notes: description, userId, url, image, tags, source })
+    const existingRecipe = await Recipe.query().findOne({ url: url })
+    if (existingRecipe) {
+      newRecipe = await existingRecipe.$relatedQuery('users').relate( req.user.id )
+    } else {
+      newRecipe = await Recipe.query().insertAndFetch({ name, ingredients, instructions, notes: description, url, image, tags, source })
+      await newRecipe.$relatedQuery('users').relate( req.user.id )
+    } 
     return res.status(201).json({ recipe: newRecipe })
   } catch(error) {
     if (error instanceof ValidationError) {

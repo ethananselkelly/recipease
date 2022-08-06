@@ -6,14 +6,26 @@ class Recipe extends Model {
   }
 
   static get relationMappings() {
-    const { User } = require("./index.js")
+    const { User, UserRecipe } = require("./index.js")
     return {
-      user: {
-        relation: Model.BelongsToOneRelation,
+      users: {
+        relation: Model.ManyToManyRelation,
         modelClass: User,
         join: {
-          from: "recipes.userId",
+          from: "recipes.id",
+          through: {
+            from: 'userRecipes.recipeId',
+            to: 'userRecipes.userId'
+          },
           to: "users.id"
+        }
+      },
+      userRecipes: {
+        relation: Model.HasManyRelation,
+        modelClass: UserRecipe,
+        join: {
+          from: 'recipes.id',
+          to: 'userRecipes.recipeId'
         }
       }
     }
