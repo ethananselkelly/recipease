@@ -1,5 +1,4 @@
 RECIPEASE
 =========
-This app has two purposes:
-1. Act as a place for one to easily save and browse recipes sourced from various websites.
-2. Cut out the long and unnecessary blog posts and preambles that most online recipes have, only displaying the ingredients and instructions in a simple format.
+Simple web app for scraping and saving recipes from all over the internet. Skip the blog post straight to the important stuff
+Uses the https://github.com/jadkins89/Recipe-Scraper scraper package
