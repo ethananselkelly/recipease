@@ -61,6 +61,7 @@ const RecipeShow = (props) => {
             {recipe.name}
           </h1> 
         </div>
+        <hr className='dashed'/>
         <div className='lists container'>
           <ul className='list'>
             {ingredientsList}
@@ -69,6 +70,7 @@ const RecipeShow = (props) => {
             {instructionsList}  
           </ol> 
         </div>
+        <hr className='dashed'/>
         <div className='container'>
           <p>
             {recipe.notes}
