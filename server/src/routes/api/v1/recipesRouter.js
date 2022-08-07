@@ -40,7 +40,10 @@ recipesRouter.post('/', async (req, res) => {
   try {
     const existingRecipe = await Recipe.query().findOne({ url: url })
     if (existingRecipe) {
-      newRecipe = await existingRecipe.$relatedQuery('users').relate( req.user.id )
+      const existingJoin = await existingRecipe.$relatedQuery('users').findOne({ userId: req.user.id })
+      if (!existingJoin) {
+        newRecipe = await existingRecipe.$relatedQuery('users').relate( req.user.id )
+      }
     } else {
       newRecipe = await Recipe.query().insertAndFetch({ name, ingredients, instructions, notes: description, url, image, tags, source })
       await newRecipe.$relatedQuery('users').relate( req.user.id )
