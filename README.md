@@ -13,14 +13,16 @@ Recipease was created using Node 14.15. Please make sure you have the proper pac
 
 The database is designed to work with Postgres/SQL.
 
-$ createdb recipease_development
+> $ createdb recipease_development
 
 Run the following commands in your server folder to create the database:
 
-$ yarn migrate:latest
+> $ yarn migrate:latest
 
 To run the website, make sure you are in your root file and run:
 
-$ yarn run dev
+> $ yarn run dev
 
-Then navigate to https://localhost:3000
+Then navigate to:
+
+> https://localhost:3000
