@@ -9,7 +9,6 @@ import SignInForm from "./authentication/SignInForm";
 import TopBar from "./layout/TopBar";
 import RecipesIndex from "./RecipesIndex";
 import RecipeShow from "./RecipeShow";
-import Scraper from "./Scraper";
 
 const App = (props) => {
   const [currentUser, setCurrentUser] = useState(undefined);
