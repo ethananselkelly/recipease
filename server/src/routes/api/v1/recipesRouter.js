@@ -40,7 +40,10 @@ recipesRouter.post('/', async (req, res) => {
   try {
     const existingRecipe = await Recipe.query().findOne({ url: url })
     if (existingRecipe) {
-      newRecipe = await existingRecipe.$relatedQuery('users').relate( req.user.id )
+      const existingJoin = await existingRecipe.$relatedQuery('users').findOne({ userId: req.user.id })
+      if (!existingJoin) {
+        newRecipe = await existingRecipe.$relatedQuery('users').relate( req.user.id )
+      }
     } else {
       newRecipe = await Recipe.query().insertAndFetch({ name, ingredients, instructions, notes: description, url, image, tags, source })
       await newRecipe.$relatedQuery('users').relate( req.user.id )
@@ -50,6 +53,17 @@ recipesRouter.post('/', async (req, res) => {
     if (error instanceof ValidationError) {
       return res.status(422).json({ errors: error.data})
     }
+    return res.status(500).json({ errors: error })
+  }
+})
+
+recipesRouter.delete('/', async (req, res) => {
+  const { id } = req.body
+  try {
+    const deletedRecipe = await Recipe.query().findById( id )
+    await deletedRecipe.$relatedQuery('users').unrelate().findById( req.user.id )
+    return res.status(200).json({ deletedRecipe })
+  } catch(error) {
     return res.status(500).json({ errors: error })
   }
 })

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { withRouter } from 'react-router'
+import { Redirect, withRouter } from 'react-router'
 import { Link } from 'react-router-dom'
 
 const RecipeShow = (props) => {
@@ -13,6 +13,8 @@ const RecipeShow = (props) => {
     tags: [],
     image: ''
   })
+  
+  const [shouldRedirect, setShouldRedirect] = useState(false)
 
   const recipeId = props.match.params.id
 
@@ -30,7 +32,7 @@ const RecipeShow = (props) => {
       console.error(`Error in fetch ${error.message}`)
     }
   }
-
+  
   useEffect(() => {
     getRecipe()
   }, [])
@@ -41,6 +43,40 @@ const RecipeShow = (props) => {
   let instructionsList = recipe.instructions.map((direction, index) => (
     <li className='instruction' key={index}>{direction}</li>
   ))
+  
+  const removeRecipe = async () => {
+    try {
+      const response = await fetch(`/api/v1/recipes`,
+      {
+        method: 'DELETE',
+        headers: new Headers({
+          'Content-type': 'application/json',
+        }),
+        body: JSON.stringify(recipe)
+      })
+      if (!response.ok) {
+        const errorMessage = `${response.status} (${response.statusText})`
+        const error = new Error(errorMessage)
+        throw error
+      }
+      return true
+    } catch (error) {
+      console.error(`Error in fetch: ${error.message}`)
+    }
+  }
+
+  const handleRemove = async (event) => {
+    event.preventDefault()
+    if(window.confirm('Remove this recipe?')) {
+      await removeRecipe()
+      setShouldRedirect(true)
+    }
+
+  }
+
+  if (shouldRedirect) {
+    return <Redirect to={`/recipes`} />
+  }
 
   return (
     <>
@@ -48,10 +84,8 @@ const RecipeShow = (props) => {
         <p>
           <Link to={`/recipes`}>Back to recipes</Link>
         </p>
+        <button onClick={handleRemove}>Remove recipe</button>
       </div>
-      {/* <div style={{
-      backgroundImage: `url(${recipe.image})`
-    }}> */}
       <div>
         <div className='container'>
           <img src={recipe.image} />
@@ -61,6 +95,7 @@ const RecipeShow = (props) => {
             {recipe.name}
           </h1> 
         </div>
+        <hr className='dashed'/>
         <div className='lists container'>
           <ul className='list'>
             {ingredientsList}
@@ -69,6 +104,7 @@ const RecipeShow = (props) => {
             {instructionsList}  
           </ol> 
         </div>
+        <hr className='dashed'/>
         <div className='container'>
           <p>
             {recipe.notes}
