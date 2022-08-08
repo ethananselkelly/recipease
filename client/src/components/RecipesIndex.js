@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import RecipeTile from './RecipeTile'
+import Scraper from './Scraper'
 
 const RecipesIndex = (props) => {
   const [recipes, setRecipes] = useState([])
@@ -23,6 +24,15 @@ const RecipesIndex = (props) => {
     getRecipes()
   }, [])
   
+  const updateRecipes = async (addedRecipe) => {
+    const found = recipes.find(recipe => {
+      return recipe.id === addedRecipe.id
+    })
+    if (!found) {
+      await getRecipes()
+    }
+  }
+
   let recipeListItems
   if (recipes[0]) {
     recipeListItems = recipes.map((recipeObject) => {
@@ -36,9 +46,16 @@ const RecipesIndex = (props) => {
   }
   
   return (
-    <div className='container'>
-      {recipeListItems}
-    </div>
+    <>
+      <div>
+        <Scraper 
+          updateRecipes={updateRecipes}
+        />
+      </div>
+      <div className='container'>
+        {recipeListItems}
+      </div>
+    </>
   )
 }
 

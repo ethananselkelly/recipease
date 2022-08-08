@@ -1,11 +1,9 @@
 import React, { useState } from 'react'
-import { Redirect } from 'react-router-dom'
 
-const ScraperShow = (props) => {
+const Scraper = ({ updateRecipes }) => {
   const [recipeURL, setRecipeURL] = useState({
     url: ''
   })
-  const [shouldRedirect, setShouldRedirect] = useState(false)
   
   const postRecipe = async (recipeURL) => {
     try {
@@ -21,7 +19,10 @@ const ScraperShow = (props) => {
         const error = new Error(errorMessage)
         throw error
       }
-      return true
+      const body = await response.json()
+      const newRecipe = body.recipe
+      await updateRecipes(newRecipe)
+      return newRecipe
     } catch (error) {
       console.error(`Error in fetch: ${error.message}`)
     }
@@ -37,23 +38,17 @@ const ScraperShow = (props) => {
 
   const handleSubmit = async (event) => {
     event.preventDefault()
-    await postRecipe(recipeURL)
-    
-    setShouldRedirect(true)
-    
-  }
-
-  if(shouldRedirect) {
-    return <Redirect push to={`/recipes`} />
+    await postRecipe(recipeURL)  
+    document.getElementById('url').value = ''
   }
 
   return (
     <div className='container'>
       <p>Enter a link to a recipe below</p>
-      <form onSubmit={handleSubmit}>
+      <form id='scraper' onSubmit={handleSubmit}>
         <div>
           <label>
-            <input type="text" name="url" onChange={handleInputChange} value={recipeURL.url}/>
+            <input type="text" name="url" id='url' onChange={handleInputChange} value={recipeURL.url}/>
           </label>
           <div>
             <input type="submit" value="Save Recipe" />
@@ -65,4 +60,4 @@ const ScraperShow = (props) => {
 
 }
 
-export default ScraperShow
+export default Scraper
