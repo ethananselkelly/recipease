@@ -57,4 +57,15 @@ recipesRouter.post('/', async (req, res) => {
   }
 })
 
+recipesRouter.delete('/', async (req, res) => {
+  const { id } = req.body
+  try {
+    const deletedRecipe = await Recipe.query().findById( id )
+    await deletedRecipe.$relatedQuery('users').unrelate().findById( req.user.id )
+    return res.status(200).json({ deletedRecipe })
+  } catch(error) {
+    return res.status(500).json({ errors: error })
+  }
+})
+
 export default recipesRouter
