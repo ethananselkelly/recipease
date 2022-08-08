@@ -80,11 +80,10 @@ const RecipeShow = (props) => {
 
   return (
     <>
-      <div className='container'>
+      <div className='nav container'>
         <p>
           <Link to={`/recipes`}>Back to recipes</Link>
         </p>
-        <button onClick={handleRemove}>Remove recipe</button>
       </div>
       <div>
         <div className='container'>
@@ -109,7 +108,11 @@ const RecipeShow = (props) => {
           <p>
             {recipe.notes}
           </p>
-          <a href={recipe.url} target='_blank'>Link to recipe source</a>
+        </div>
+        <hr className='dashed'/>
+        <div className='nav container'>
+        <a href={recipe.url} target='_blank'>Link to recipe source</a>
+        <button className='removeButton' onClick={handleRemove}>Remove recipe</button>
         </div>
       </div>
     </>

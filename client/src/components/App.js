@@ -35,7 +35,6 @@ const App = (props) => {
       <TopBar user={currentUser} />
       <Switch>
         <Route exact path="/">
-          <h2 className="container">Recipease</h2>
           <p className="container">Sign in/sign up to get started</p>
         </Route>
         <Route exact path="/users/new" component={RegistrationForm} />

@@ -21,6 +21,24 @@
   margin: 1rem;
 }
 
+.nav.container {
+  display: flex;
+  margin-left: 1rem;
+  margin-right: 1.5rem;
+  justify-content: space-between;
+  align-items: baseline;
+  // border: 3px solid black;
+}
+
+.removeButton {
+  color: #1879ba;
+  
+}
+
+.removeButton:hover {
+  cursor: pointer;
+}
+
 hr.dashed {
   border: 0;
   border-top: 2px dashed #bbb;
