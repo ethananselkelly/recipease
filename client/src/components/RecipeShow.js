@@ -85,6 +85,7 @@ const RecipeShow = (props) => {
           <Link to={`/recipes`}>Back to recipes</Link>
         </p>
       </div>
+      <hr className='dashed'/>
       <div>
         <div className='container'>
           <img src={recipe.image} />
