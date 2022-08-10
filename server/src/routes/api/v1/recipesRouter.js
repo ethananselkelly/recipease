@@ -1,8 +1,8 @@
 import express from 'express'
 import objection from 'objection'
 import { Recipe, User } from '../../../models/index.js'
-import recipeScraper from 'recipe-scraper'
 import RecipeSerializer from '../../../serializers/RecipeSerializer.js'
+import handleRecipePost from '../../../services/handleRecipePost.js'
 
 const { ValidationError } = objection
 
@@ -11,7 +11,7 @@ const recipesRouter = new express.Router()
 recipesRouter.get('/', async (req, res) => {
   const user = await User.query().findById(req.user.id)
   try {
-    user.recipes = await user.$relatedQuery('recipes')
+    user.recipes = await user.$relatedQuery('recipes').orderBy('name')
     const serializedRecipes = user.recipes.map(recipe => RecipeSerializer.getSummary(recipe))
     return res.status(200).json({ recipes: serializedRecipes })
   } catch(err) {
@@ -31,24 +31,9 @@ recipesRouter.get('/:id', async (req, res) =>{
 })
 
 recipesRouter.post('/', async (req, res) => {
-  const { body } = req
-  const url = body.url
-  const source = (new URL(url)).hostname.replace('www.', '').replace('.com', '')
-  const recipe = await recipeScraper(url)
-  const { name, ingredients, instructions, tags, image, description } = recipe
-  let newRecipe
   try {
-    const existingRecipe = await Recipe.query().findOne({ url: url })
-    if (existingRecipe) {
-      const existingJoin = await existingRecipe.$relatedQuery('users').findOne({ userId: req.user.id })
-      if (!existingJoin) {
-        newRecipe = await existingRecipe.$relatedQuery('users').relate( req.user.id )
-      }
-    } else {
-      newRecipe = await Recipe.query().insertAndFetch({ name, ingredients, instructions, notes: description, url, image, tags, source })
-      await newRecipe.$relatedQuery('users').relate( req.user.id )
-    } 
-    return res.status(201).json({ recipe: newRecipe })
+    const recipeReturn = await handleRecipePost(req)
+    return res.status(201).json({ recipe: recipeReturn })
   } catch(error) {
     if (error instanceof ValidationError) {
       return res.status(422).json({ errors: error.data})
