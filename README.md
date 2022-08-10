@@ -1,6 +1,6 @@
 RECIPEASE
 =========
-Simple web app for scraping and saving recipes from all over the internet
+Simple full-stack web app for scraping and saving recipes from all over the internet.
 
 Skips the blog posts and goes straight to the important stuff
 
@@ -11,7 +11,7 @@ Running the App
 
 Recipease was created using Node 14.15. Please make sure you have the proper packages installed using yarn install
 
-The database is designed to work with Postgres/SQL.
+The database is designed to work with PostgresSQL.
 
 > $ createdb recipease_development
 
