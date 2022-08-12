@@ -4,6 +4,7 @@ import config from "../../config";
 
 const RegistrationForm = () => {
   const [userPayload, setUserPayload] = useState({
+    username: "",
     email: "",
     password: "",
     passwordConfirmation: "",
@@ -15,9 +16,15 @@ const RegistrationForm = () => {
 
   const validateInput = (payload) => {
     setErrors({});
-    const { email, password, passwordConfirmation } = payload;
+    const { username, email, password, passwordConfirmation } = payload;
     const emailRegexp = config.validation.email.regexp.emailRegex;
     let newErrors = {};
+    if (username.trim() == "") {
+      newErrors = {
+        ...newErrors,
+        username: "is required"
+      }
+    }
     if (!email.match(emailRegexp)) {
       newErrors = {
         ...newErrors,
@@ -92,12 +99,29 @@ const RegistrationForm = () => {
 
   return (
     <div className="grid-container">
-      <h1>Register</h1>
+      <h3>Register</h3>
       <form onSubmit={onSubmit}>
         <div>
           <label>
+            Username
+            <input 
+              type="text" 
+              name="username" 
+              value={userPayload.username} 
+              onChange={onInputChange} 
+            />
+            <FormError error={errors.username} />
+          </label>
+        </div>
+        <div>
+          <label>
             Email
-            <input type="text" name="email" value={userPayload.email} onChange={onInputChange} />
+            <input 
+              type="text" 
+              name="email" 
+              value={userPayload.email} 
+              onChange={onInputChange} 
+            />
             <FormError error={errors.email} />
           </label>
         </div>
