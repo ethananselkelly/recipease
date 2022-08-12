@@ -47,14 +47,18 @@ const RecipesIndex = (props) => {
   
   return (
     <>
-      <div>
+    <div className='index-container'>
+      <div className='scraper'>
         <Scraper 
           updateRecipes={updateRecipes}
         />
       </div>
       <div className='container'>
-        {recipeListItems}
+        <ol>
+          {recipeListItems}
+        </ol>
       </div>
+    </div>
     </>
   )
 }

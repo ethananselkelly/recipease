@@ -4,8 +4,13 @@ import { Link } from 'react-router-dom'
 const RecipeTile = ({ recipe }) => {
 
   return (
-    <div>
-      <Link to={`/recipes/${recipe.id}`}>{recipe.name}</Link>
+    <div className='recipe-tile'>
+      <li>
+        <div className='recipe-info'>
+          <Link to={`/recipes/${recipe.id}`}>{recipe.name}</Link>
+          <p className='source'>{recipe.source}</p>
+        </div>
+      </li>
     </div>
   )
 }
