@@ -43,7 +43,7 @@ const Scraper = ({ updateRecipes }) => {
   }
 
   return (
-    <div className='container'>
+    <div className='scraper-container'>
       <p>Enter a link to a recipe below</p>
       <form id='scraper' onSubmit={handleSubmit}>
         <div>

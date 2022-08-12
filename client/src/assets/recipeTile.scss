@@ -1,0 +1,29 @@
+.recipe-tile {
+  display: flex;
+  margin: 0.25em;
+}
+
+.recipe-tile:hover {
+  background-color: lightgrey;
+  margin-right: 5rem;
+}
+
+.recipe-info {
+  display: flex;
+  margin-right: .1rem;
+  padding-left: 5px;
+  padding-right: 5px;
+  align-items: baseline;
+  justify-content: space-around;
+}
+
+.recipe-info > * {
+  margin-right: 1rem;
+  // flex: 1;
+  // justify-content: space-around;
+}
+
+.source {
+  margin: 0;
+  font-size: 70%;
+}
