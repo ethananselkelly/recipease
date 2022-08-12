@@ -4,6 +4,7 @@ import config from "../../config";
 
 const RegistrationForm = () => {
   const [userPayload, setUserPayload] = useState({
+    username: "",
     email: "",
     password: "",
     passwordConfirmation: "",
@@ -15,9 +16,15 @@ const RegistrationForm = () => {
 
   const validateInput = (payload) => {
     setErrors({});
-    const { email, password, passwordConfirmation } = payload;
+    const { username, email, password, passwordConfirmation } = payload;
     const emailRegexp = config.validation.email.regexp.emailRegex;
     let newErrors = {};
+    if (username.trim() == "") {
+      newErrors = {
+        ...newErrors,
+        username: "is required"
+      }
+    }
     if (!email.match(emailRegexp)) {
       newErrors = {
         ...newErrors,
@@ -92,12 +99,31 @@ const RegistrationForm = () => {
 
   return (
     <div className="grid-container">
-      <h1>Register</h1>
-      <form onSubmit={onSubmit}>
+      <h3>Register</h3>
+      <form className="register-form" onSubmit={onSubmit}>
+        <div>
+          <label>
+            Username
+            <input 
+              className="form-input"
+              type="text" 
+              name="username" 
+              value={userPayload.username} 
+              onChange={onInputChange} 
+            />
+            <FormError error={errors.username} />
+          </label>
+        </div>
         <div>
           <label>
             Email
-            <input type="text" name="email" value={userPayload.email} onChange={onInputChange} />
+            <input 
+              className="form-input"
+              type="text" 
+              name="email" 
+              value={userPayload.email} 
+              onChange={onInputChange} 
+            />
             <FormError error={errors.email} />
           </label>
         </div>
@@ -105,6 +131,7 @@ const RegistrationForm = () => {
           <label>
             Password
             <input
+              className="form-input"
               type="password"
               name="password"
               value={userPayload.password}
@@ -117,6 +144,7 @@ const RegistrationForm = () => {
           <label>
             Password Confirmation
             <input
+              className="form-input"
               type="password"
               name="passwordConfirmation"
               value={userPayload.passwordConfirmation}
