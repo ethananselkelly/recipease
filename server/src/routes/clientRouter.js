@@ -9,7 +9,8 @@ const clientRoutes = [
   "/users/new",
   "/recipes",
   "/recipes/:id",
-  "/scraper"
+  "/scraper",
+  "/recipe-form",
 ];
 
 const authedClientRoutes = ["/profile"];

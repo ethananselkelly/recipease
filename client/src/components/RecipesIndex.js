@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { Link } from 'react-router-dom'
 import RecipeTile from './RecipeTile'
 import Scraper from './Scraper'
 
@@ -52,6 +53,11 @@ const RecipesIndex = (props) => {
         <Scraper 
           updateRecipes={updateRecipes}
         />
+      </div>
+      <div className='container'>
+        <p>
+          <Link to={`/recipe-form`}>Enter a recipe manually</Link>
+        </p>
       </div>
       <div className='container'>
         <ol>
