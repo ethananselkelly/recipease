@@ -3,6 +3,7 @@ import objection from 'objection'
 import { Recipe, User } from '../../../models/index.js'
 import RecipeSerializer from '../../../serializers/RecipeSerializer.js'
 import handleRecipePost from '../../../services/handleRecipePost.js'
+import handleRecipeForm from '../../../services/handleRecipeForm.js'
 
 const { ValidationError } = objection
 
@@ -14,8 +15,8 @@ recipesRouter.get('/', async (req, res) => {
     user.recipes = await user.$relatedQuery('recipes').orderBy('name')
     const serializedRecipes = user.recipes.map(recipe => RecipeSerializer.getSummary(recipe))
     return res.status(200).json({ recipes: serializedRecipes })
-  } catch(err) {
-    return res.status(500).json({ errors: err })
+  } catch (error) {
+    return res.status(500).json({ errors: error })
   }
 })
 
@@ -34,11 +35,23 @@ recipesRouter.post('/', async (req, res) => {
   try {
     const recipeReturn = await handleRecipePost(req)
     return res.status(201).json({ recipe: recipeReturn })
-  } catch(error) {
+  } catch (error) {
     if (error instanceof ValidationError) {
       return res.status(422).json({ errors: error.data})
     }
     return res.status(500).json({ errors: error })
+  }
+})
+
+recipesRouter.post('/recipe-form', async (req, res) => {
+  try {
+    const recipeReturn = await handleRecipeForm(req)
+    return res.status(201).json({ recipe: recipeReturn})
+  } catch (error) {
+    if (error instanceof ValidationError) {
+      return res.status(422).json({ errors: error.data })
+    }
+    return res.status(500).json({ errors: error  })
   }
 })
 
@@ -48,7 +61,7 @@ recipesRouter.delete('/', async (req, res) => {
     const deletedRecipe = await Recipe.query().findById( id )
     await deletedRecipe.$relatedQuery('users').unrelate().findById( req.user.id )
     return res.status(200).json({ deletedRecipe })
-  } catch(error) {
+  } catch (error) {
     return res.status(500).json({ errors: error })
   }
 })

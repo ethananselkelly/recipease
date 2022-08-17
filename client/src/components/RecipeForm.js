@@ -1,4 +1,6 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { Redirect } from "react-router-dom";
+import FormError from "./layout/FormError";
 
 const RecipeForm = (props) => {
   
@@ -15,6 +17,84 @@ const RecipeForm = (props) => {
   const [errors, setErrors] = useState({});
 
   const [shouldRedirect, setShouldRedirect] = useState(false);
+
+  const postRecipeForm = async (recipePayload) => {
+    try {
+      const response = await fetch(`/api/v1/recipes/recipe-form`, {
+        method: "POST",
+        headers: new Headers({
+          "Content-Type": "application/json",
+        }),
+        body: JSON.stringify(recipePayload)
+      })
+      if (!response.ok) {
+        const errorMessage = `${response.status} (${response.statusText})`
+        const error = new Error(errorMessage)
+        throw error
+      }
+      const body = await response.json()
+      const newRecipe = body.recipe
+      return newRecipe
+    } catch (error) {
+      console.error(`Error in fetch: ${error.message}`)
+    }
+  }
+
+  const validateInput = (payload) => {
+    setErrors({});
+    const { name, ingredients, instructions } = payload;
+    let newErrors = {};
+    if (name.trim() == "") {
+      newErrors = {
+        ...newErrors,
+        name: "name is required"
+      }
+    }
+    if (ingredients.length < 3) {
+      newErrors = {
+        ...newErrors,
+        ingredients: "must have at least 3 ingredients"
+      }
+    } else {
+      ingredients.forEach((ingredient) => {
+        if (ingredient.name.trim() === '') {
+          newErrors = {
+            ...newErrors,
+            ingredients: "ingredients cannot be blank"
+          }
+        }
+      })
+    }
+    if (instructions.length < 2) {
+      newErrors = {
+        ...newErrors,
+        instructions: "must have at least 2 instructions"
+      }
+    } else {
+      instructions.forEach((instruction) => {
+        if (instruction.name.trim() === '') {
+          newErrors = {
+            ...newErrors,
+            instructions: "instructions cannot be blank"
+          }
+        }
+      })
+    }
+
+    setErrors(newErrors);
+    if (Object.keys(newErrors).length === 0) {
+      return true
+    }
+    return false
+  };
+
+  const handleSubmit = async (event) => {
+    event.preventDefault()
+    if (validateInput(recipePayload)) {
+      await postRecipeForm(recipePayload)  
+      setShouldRedirect(true)
+    }
+  }
 
   const onInputChange = (event) => {
     setRecipePayload({
@@ -97,7 +177,9 @@ const RecipeForm = (props) => {
     return (
       <div key={index+1}>
         {index+1}.
-        <input
+        <textarea
+          rows='3'
+          cols='30'
           type='text'
           name='instruction'
           value={instruction.name || ''}
@@ -113,10 +195,14 @@ const RecipeForm = (props) => {
     )
   })
 
+  if (shouldRedirect) {
+    return <Redirect to={`/recipes`} />
+  }
+
   return (
     <div className="grid-container">
       <h3>New Recipe Form</h3>
-      <form>
+      <form onSubmit={handleSubmit}>
         <div>
           <label>
             Name
@@ -126,6 +212,7 @@ const RecipeForm = (props) => {
               value={recipePayload.name || ''}
               onChange={onInputChange}
             />
+            <FormError error={errors.name} />
           </label>
         </div>
         <div>
@@ -138,6 +225,7 @@ const RecipeForm = (props) => {
             >
               Add ingredient
             </button>
+            <FormError error={errors.ingredients} />
           </label>
         </div>
         <div>
@@ -150,13 +238,14 @@ const RecipeForm = (props) => {
             >
               Add instruction
             </button>
+            <FormError error={errors.instructions} />
           </label>
         </div>
         <div>
           <label>
             Notes
             <textarea 
-              rows='5'
+              rows='4'
               cols='30'
               type='text'
               name='notes'
