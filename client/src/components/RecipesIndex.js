@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import RecipeTile from './RecipeTile'
 import Scraper from './Scraper'
+import KeywordSearch from './KeywordSearch'
 
 const RecipesIndex = (props) => {
   const [recipes, setRecipes] = useState([])
@@ -43,7 +44,7 @@ const RecipesIndex = (props) => {
       />
     })
   } else {
-    recipeListItems = <p>no recipes saved</p>
+    recipeListItems = <p>No recipes saved</p>
   }
   
   return (
@@ -58,6 +59,13 @@ const RecipesIndex = (props) => {
         <p>
           <Link to={`/recipe-form`}>Enter a recipe manually</Link>
         </p>
+      </div>
+      <div className='scraper'>
+        <KeywordSearch 
+          setRecipes={setRecipes}
+          getRecipes={getRecipes}
+          recipes={recipes}
+        />
       </div>
       <div className='container'>
         <ol>
