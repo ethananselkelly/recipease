@@ -20,6 +20,22 @@ recipesRouter.get('/', async (req, res) => {
   }
 })
 
+recipesRouter.get('/search', async (req, res) => {
+  const keyword = req.query.keyword.toLowerCase()
+  const user = await User.query().findById(req.user.id)
+  try {
+    const recipes = await user
+      .$relatedQuery('recipes')
+      .where('name', 'ILike', `%${keyword}%`)
+      .orWhere('tags', '@>', [`${keyword}`])
+      .orWhere('notes', 'ILike', `%${keyword}%`)
+    const serializedRecipes = recipes.map(recipe => RecipeSerializer.getSummary(recipe))
+    return res.status(200).json({ recipes: serializedRecipes, returnedKeyword:keyword })
+  } catch (error) {
+    return res.status(500).json({ errors: error })
+  }
+})
+
 recipesRouter.get('/:id', async (req, res) =>{
   const recipeIndex = req.params.id
   try {
