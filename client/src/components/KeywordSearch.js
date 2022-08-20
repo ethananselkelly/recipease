@@ -24,10 +24,10 @@ const KeywordSearch = ({ recipes, setRecipes, getRecipes }) => {
         throw error
       }
       const body = await response.json()
-      console.log(body)
-      setRecipes(body.recipes)
+      const { recipes, returnedKeyword } = body
+      setRecipes(recipes)
       setSearchResults(true)
-      setReturnedKeyword(body.returnedKeyword)
+      setReturnedKeyword(returnedKeyword)
     } catch (error) {
       console.error(`Error in fetch: ${error.message}`)
     }
