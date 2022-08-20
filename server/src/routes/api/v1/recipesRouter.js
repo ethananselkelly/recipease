@@ -4,6 +4,7 @@ import { Recipe, User } from '../../../models/index.js'
 import RecipeSerializer from '../../../serializers/RecipeSerializer.js'
 import handleRecipePost from '../../../services/handleRecipePost.js'
 import handleRecipeForm from '../../../services/handleRecipeForm.js'
+import handleRecipeSearch from '../../../services/handleRecipeSearch.js'
 
 const { ValidationError } = objection
 
@@ -21,15 +22,9 @@ recipesRouter.get('/', async (req, res) => {
 })
 
 recipesRouter.get('/search', async (req, res) => {
-  const keyword = req.query.keyword.toLowerCase()
-  const user = await User.query().findById(req.user.id)
   try {
-    const recipes = await user
-      .$relatedQuery('recipes')
-      .where('name', 'ILike', `%${keyword}%`)
-      .orWhere('tags', '@>', [`${keyword}`])
-      .orWhere('notes', 'ILike', `%${keyword}%`)
-    const serializedRecipes = recipes.map(recipe => RecipeSerializer.getSummary(recipe))
+    const recipeSearch = await handleRecipeSearch(req)
+    const { serializedRecipes, keyword } = recipeSearch
     return res.status(200).json({ recipes: serializedRecipes, returnedKeyword:keyword })
   } catch (error) {
     return res.status(500).json({ errors: error })
