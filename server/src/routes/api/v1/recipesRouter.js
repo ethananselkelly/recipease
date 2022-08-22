@@ -2,7 +2,7 @@ import express from 'express'
 import objection from 'objection'
 import { Recipe, User } from '../../../models/index.js'
 import RecipeSerializer from '../../../serializers/RecipeSerializer.js'
-import handleRecipePost from '../../../services/handleRecipePost.js'
+import handleRecipeScraper from '../../../services/handleRecipeScraper.js'
 import handleRecipeForm from '../../../services/handleRecipeForm.js'
 import handleRecipeSearch from '../../../services/handleRecipeSearch.js'
 
@@ -13,7 +13,7 @@ const recipesRouter = new express.Router()
 recipesRouter.get('/', async (req, res) => {
   const user = await User.query().findById(req.user.id)
   try {
-    user.recipes = await user.$relatedQuery('recipes').orderBy('name')
+    user.recipes = await user.$relatedQuery('recipes').orderBy('createdAt', 'desc')
     const serializedRecipes = user.recipes.map(recipe => RecipeSerializer.getSummary(recipe))
     return res.status(200).json({ recipes: serializedRecipes })
   } catch (error) {
@@ -44,7 +44,7 @@ recipesRouter.get('/:id', async (req, res) =>{
 
 recipesRouter.post('/', async (req, res) => {
   try {
-    const recipeReturn = await handleRecipePost(req)
+    const recipeReturn = await handleRecipeScraper(req)
     return res.status(201).json({ recipe: recipeReturn })
   } catch (error) {
     if (error instanceof ValidationError) {

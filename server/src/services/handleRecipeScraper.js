@@ -1,7 +1,7 @@
 import { Recipe } from '../models/index.js'
 import recipeScraper from 'recipe-scraper'
 
-const handleRecipePost = async (req) => {
+const handleRecipeScraper = async (req) => {
   const { body } = req
   const url = body.url
   let recipeReturn
@@ -25,4 +25,4 @@ const handleRecipePost = async (req) => {
   return recipeReturn
 }
 
-export default handleRecipePost
+export default handleRecipeScraper
