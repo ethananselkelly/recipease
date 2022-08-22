@@ -3,7 +3,6 @@ import { Recipe } from '../models/index.js'
 const handleRecipeForm = async (req) => {
   const source = req.user.username
   const { body } = req
-  console.log(body)
   const { name, notes, image } = body
   const ingredients = body.ingredients.map(({ name }) => name)
   const instructions = body.instructions.map(({ name }) => name)
