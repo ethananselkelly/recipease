@@ -64,15 +64,17 @@ const KeywordSearch = ({ recipes, setRecipes, getRecipes }) => {
 
   return (
     <div className="container">
-    <form id='keywordSearch' onSubmit={handleSubmit}>
-      <label>
-        <input type='text' name='keyword' id='keyword' onChange={handleInputChange} value={keyword.keyword} />
-      </label>
-      <input type='submit' value='Search Recipes' />
-    </form>
-    <div>
-      {showResults}
-    </div>
+      <div className="search">
+        <form className="search form" id='keywordSearch' onSubmit={handleSubmit}>
+          <label className="search bar">
+            <input type='text' name='keyword' id='keyword' onChange={handleInputChange} value={keyword.keyword} />
+          </label>
+          <input className="submit" type='submit' value='Search' />
+        </form>
+        <div>
+          {showResults}
+        </div>
+      </div>
     </div>
   )
 }

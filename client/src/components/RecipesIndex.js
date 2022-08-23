@@ -49,24 +49,29 @@ const RecipesIndex = (props) => {
   
   return (
     <>
-    <div className='index-container'>
-      <div className='scraper'>
-        <Scraper 
-          updateRecipes={updateRecipes}
-        />
+    <div className='index container'>
+      <div className='scraper form'>
+        <div className='scraper'>
+          <Scraper 
+            updateRecipes={updateRecipes}
+          />
+        </div>
+        <p className='or'>Or</p>
+        <div className='form container'>
+          <p>
+            <Link to={`/recipe-form`}>Enter a recipe manually</Link>
+          </p>
+        </div>
       </div>
-      <div className='container'>
-        <p>
-          <Link to={`/recipe-form`}>Enter a recipe manually</Link>
-        </p>
-      </div>
-      <div className='scraper'>
+      <hr className='dashed'/>
+      <div className='search'>
         <KeywordSearch 
           setRecipes={setRecipes}
           getRecipes={getRecipes}
           recipes={recipes}
         />
       </div>
+      <hr className='dashed'/>
       <div className='container'>
         <ol>
           {recipeListItems}

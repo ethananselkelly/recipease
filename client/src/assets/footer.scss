@@ -1,0 +1,17 @@
+.footer.container {
+  display:flex;
+  justify-content: flex-end;
+  margin-left: 2rem;
+  margin-right: 2rem;
+}
+
+hr.dashed {
+  border: 0;
+  border-top: 2px dashed #bbb;
+  margin: 1rem;
+}
+
+.link {
+  margin-left: 1rem;
+  margin-right: 1rem;
+}

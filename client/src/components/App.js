@@ -11,6 +11,7 @@ import RecipesIndex from "./RecipesIndex";
 import RecipeShow from "./RecipeShow";
 import AuthenticatedRoute from "./authentication/AuthenticatedRoute";
 import RecipeForm from "./RecipeForm";
+import Footer from "./layout/Footer";
 
 const App = (props) => {
   const [currentUser, setCurrentUser] = useState(undefined);
@@ -44,6 +45,7 @@ const App = (props) => {
         <AuthenticatedRoute exact path="/recipes/:id" component={RecipeShow} user={currentUser}/>
         <AuthenticatedRoute exact path="/recipe-form" component={RecipeForm} user={currentUser}/>
       </Switch>
+      <Footer/>
     </Router>
   );
 };

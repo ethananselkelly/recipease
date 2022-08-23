@@ -1,11 +1,50 @@
-.scraper {
-  display: flex;
-}
-
 .index-container {
   margin-left: 1rem;
 }
 
-.scraper-container {
+.scraper.container {
+  display: flex;
+  flex-direction: row;
   margin-left: 1rem;
+  justify-content: flex-start;
+  align-items: baseline;
+}
+
+.scraper.input {
+  margin-right: 1rem;
+}
+
+.scraper.header {
+  margin-left: 1rem;
+  margin-top: 1rem;
+  margin-bottom: 0;
+}
+
+.scraper.form {
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+  height:auto
+}
+
+.scraper {
+  margin-bottom:0;
+}
+
+.search.form {
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+}
+
+.search.bar {
+  margin-right: 1rem;
+}
+
+.form.container {
+  align-items:center;
+}
+
+.or {
+  margin-right: 1rem;
 }
