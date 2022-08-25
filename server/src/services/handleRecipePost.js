@@ -1,5 +1,6 @@
 import { Recipe } from '../models/index.js'
-import recipeScraper from 'recipe-scraper'
+// import recipeScraper from 'recipe-scraper'
+import pythonScraper from '../pythonScraper.js'
 
 const handleRecipePost = async (req) => {
   const { body } = req
@@ -15,10 +16,12 @@ const handleRecipePost = async (req) => {
       recipeReturn = existingJoin
     }
   } else {
-    const source = (new URL(url)).hostname.replace('www.', '').replace('.com', '')
-    const recipe = await recipeScraper(url)
-    const { name, ingredients, instructions, tags, image, description } = recipe
-    const newRecipe = await Recipe.query().insertAndFetch({ name, ingredients, instructions, notes: description, url, image, tags, source })
+    // const source = (new URL(url)).hostname.replace('www.', '').replace('.com', '')
+    // const recipe = await recipeScraper(url)
+    const recipe = await pythonScraper(url)
+    console.log(recipe)
+    const { name, ingredients, instructions, image, source } = recipe
+    const newRecipe = await Recipe.query().insertAndFetch({ name, ingredients, instructions, url, image, source })
     await newRecipe.$relatedQuery('users').relate( req.user.id )
     recipeReturn = newRecipe
   }
