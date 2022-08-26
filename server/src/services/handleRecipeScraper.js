@@ -1,11 +1,11 @@
 import { Recipe } from '../models/index.js'
-import recipeScraper from 'recipe-scraper'
+import pythonScraper from '../pythonScraper.js'
 
 const handleRecipeScraper = async (req) => {
   const { body } = req
-  const url = body.url
+  const recipeUrl = body.url
   let recipeReturn
-  const existingRecipe = await Recipe.query().findOne({ url: url })
+  const existingRecipe = await Recipe.query().findOne({ url: recipeUrl })
   if (existingRecipe) {
     const existingJoin = await existingRecipe.$relatedQuery('users').findOne({ userId: req.user.id })
     if (!existingJoin) {
@@ -15,10 +15,9 @@ const handleRecipeScraper = async (req) => {
       recipeReturn = existingJoin
     }
   } else {
-    const source = (new URL(url)).hostname.replace('www.', '').replace('.com', '')
-    const recipe = await recipeScraper(url)
-    const { name, ingredients, instructions, tags, image, description } = recipe
-    const newRecipe = await Recipe.query().insertAndFetch({ name, ingredients, instructions, notes: description, url, image, tags, source })
+    const recipe = await pythonScraper(recipeUrl)
+    const { name, ingredients, instructions, image, url, source } = recipe
+    const newRecipe = await Recipe.query().insertAndFetch({ name, ingredients, instructions, source, url, image })
     await newRecipe.$relatedQuery('users').relate( req.user.id )
     recipeReturn = newRecipe
   }
