@@ -13,7 +13,7 @@ const recipesRouter = new express.Router()
 recipesRouter.get('/', async (req, res) => {
   const user = await User.query().findById(req.user.id)
   try {
-    user.recipes = await user.$relatedQuery('recipes').orderBy('name')
+    user.recipes = await user.$relatedQuery('recipes').orderBy('createdAt', 'desc')
     const serializedRecipes = user.recipes.map(recipe => RecipeSerializer.getSummary(recipe))
     return res.status(200).json({ recipes: serializedRecipes })
   } catch (error) {
