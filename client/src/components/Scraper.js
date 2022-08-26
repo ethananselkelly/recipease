@@ -43,15 +43,15 @@ const Scraper = ({ updateRecipes }) => {
   }
 
   return (
-    <div className='scraper-container'>
-      <p>Enter a link to a recipe below</p>
+    <div>
+      <p className='scraper header'>Enter a URL to a recipe below</p>
       <form id='scraper' onSubmit={handleSubmit}>
-        <div>
-          <label>
+        <div className='scraper container'>
+          <label className='scraper input'>
             <input type="text" name="url" id='url' onChange={handleInputChange} value={recipeURL.url}/>
           </label>
-          <div>
-            <input type="submit" value="Save Recipe" />
+          <div className='scraper submit'>
+            <input type="submit" value="Save" />
           </div>
         </div>
       </form>
