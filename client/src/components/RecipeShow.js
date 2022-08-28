@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
-import { Redirect, withRouter } from 'react-router'
+import { withRouter } from 'react-router'
 import { Link } from 'react-router-dom'
+import SaveButton from './SaveButton'
 
 const RecipeShow = (props) => {
   const [recipe, setRecipe] = useState({
@@ -14,7 +15,7 @@ const RecipeShow = (props) => {
     image: ''
   })
   
-  const [shouldRedirect, setShouldRedirect] = useState(false)
+  const [isUserRecipe, setIsUserRecipe] = useState(false)
 
   const recipeId = props.match.params.id
 
@@ -28,6 +29,9 @@ const RecipeShow = (props) => {
       }
       const body = await response.json()
       setRecipe(body.recipe)
+      if (body.userRecipe) {
+        setIsUserRecipe(true)
+      }
     } catch (error) {
       console.error(`Error in fetch ${error.message}`)
     }
@@ -43,41 +47,20 @@ const RecipeShow = (props) => {
   let instructionsList = recipe.instructions.map((direction, index) => (
     <li className='instruction' key={index}>{direction}</li>
   ))
+
+  let notes
+  if (recipe.notes) {
+    notes =
+      <>
+        <hr className='dashed'/>
+        <div className='container'>
+          <p>
+            {recipe.notes}
+          </p>
+        </div>
+      </>
+  }
   
-  const removeRecipe = async () => {
-    try {
-      const response = await fetch(`/api/v1/recipes`,
-      {
-        method: 'DELETE',
-        headers: new Headers({
-          'Content-type': 'application/json',
-        }),
-        body: JSON.stringify(recipe)
-      })
-      if (!response.ok) {
-        const errorMessage = `${response.status} (${response.statusText})`
-        const error = new Error(errorMessage)
-        throw error
-      }
-      return true
-    } catch (error) {
-      console.error(`Error in fetch: ${error.message}`)
-    }
-  }
-
-  const handleRemove = async (event) => {
-    event.preventDefault()
-    if(window.confirm('Remove this recipe?')) {
-      await removeRecipe()
-      setShouldRedirect(true)
-    }
-
-  }
-
-  if (shouldRedirect) {
-    return <Redirect to={`/recipes`} />
-  }
-
   return (
     <>
       <div className='nav container'>
@@ -104,16 +87,16 @@ const RecipeShow = (props) => {
             {instructionsList}  
           </ol> 
         </div>
-        <hr className='dashed'/>
-        <div className='container'>
-          <p>
-            {recipe.notes}
-          </p>
-        </div>
+        {notes}
         <hr className='dashed'/>
         <div className='nav container'>
         <a href={recipe.url} target='_blank'>Link to recipe source</a>
-        <button className='removeButton' onClick={handleRemove}>Remove recipe</button>
+        <SaveButton 
+          isUserRecipe={isUserRecipe} 
+          setIsUserRecipe={setIsUserRecipe}
+          recipe={recipe}
+          user={props.user}
+        />
         </div>
       </div>
     </>
