@@ -5,6 +5,7 @@ import RecipeSerializer from '../../../serializers/RecipeSerializer.js'
 import handleRecipeScraper from '../../../services/handleRecipeScraper.js'
 import handleRecipeForm from '../../../services/handleRecipeForm.js'
 import handleRecipeSearch from '../../../services/handleRecipeSearch.js'
+import handleGetRecipe from '../../../services/handleGetRecipe.js'
 
 const { ValidationError } = objection
 
@@ -32,11 +33,10 @@ recipesRouter.get('/search', async (req, res) => {
 })
 
 recipesRouter.get('/:id', async (req, res) =>{
-  const recipeIndex = req.params.id
   try {
-    const recipe = await Recipe.query().findById(recipeIndex)
-    const serializedRecipe = RecipeSerializer.getSummary(recipe)
-    return res.status(200).json({ recipe: serializedRecipe })
+    const recipeGet = await handleGetRecipe(req)
+    const { serializedRecipe, userRecipe } = recipeGet
+    return res.status(200).json({ recipe: serializedRecipe, userRecipe })
   } catch (error) {
     return res.status(500).json({ errors: error })
   }
@@ -50,6 +50,16 @@ recipesRouter.post('/', async (req, res) => {
     if (error instanceof ValidationError) {
       return res.status(422).json({ errors: error.data})
     }
+    return res.status(500).json({ errors: error })
+  }
+})
+
+recipesRouter.post('/:id', async (req, res) => {
+  try {
+    const recipe = await Recipe.query().findOne({ id: req.body.id })
+    const newJoin = await recipe.$relatedQuery('users').relate( req.user.id )
+    return res.status(201).json({ newJoin })
+  } catch (error) {
     return res.status(500).json({ errors: error })
   }
 })
