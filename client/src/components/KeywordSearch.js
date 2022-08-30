@@ -57,7 +57,7 @@ const KeywordSearch = ({ recipes, setRecipes, getRecipes }) => {
        for '{returnedKeyword}'
       </p>
       <form onSubmit={handleReset}>
-        <input type='submit' value='Reset' />
+        <input className="minus-button" type='submit' value='Reset' />
       </form>
     </>
   }
@@ -69,7 +69,7 @@ const KeywordSearch = ({ recipes, setRecipes, getRecipes }) => {
           <label className="search bar">
             <input type='text' name='keyword' id='keyword' onChange={handleInputChange} value={keyword.keyword} />
           </label>
-          <input className="submit" type='submit' value='Search' />
+          <input className="minus-button" type='submit' value='Search' />
         </form>
         <div>
           {showResults}

@@ -3,11 +3,6 @@
   margin: 0.25em;
 }
 
-.recipe-tile:hover {
-  background-color: lightgrey;
-  margin-right: 5rem;
-}
-
 .recipe-info {
   display: flex;
   margin-right: .1rem;
@@ -19,8 +14,6 @@
 
 .recipe-info > * {
   margin-right: 1rem;
-  // flex: 1;
-  // justify-content: space-around;
 }
 
 .source {

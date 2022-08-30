@@ -7,7 +7,7 @@ const RecipeTile = ({ recipe }) => {
     <div className='recipe-tile'>
       <li>
         <div className='recipe-info'>
-          <Link to={`/recipes/${recipe.id}`}>{recipe.name}</Link>
+          <Link className='recipe-link' to={`/recipes/${recipe.id}`}>{recipe.name}</Link>
           <p className='source'>{recipe.source}</p>
         </div>
       </li>

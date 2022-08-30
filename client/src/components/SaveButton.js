@@ -57,14 +57,14 @@ const SaveButton = ({isUserRecipe, setIsUserRecipe, recipe, user}) => {
   if (user) {
     if (isUserRecipe) {
       saveButton = 
-      <button className='removeButton' onClick={handleRemove}>Unsave recipe</button>
+      <button className='join-button show-link' onClick={handleRemove}>Unsave recipe</button>
     } else {
       saveButton =
-      <button className='removeButton' onClick={handleSave}>Save recipe</button>
+      <button className='join-button show-link' onClick={handleSave}>Save recipe</button>
     }
   } else {
     saveButton = 
-    <Link to={`/user-sessions/new`}>Sign in to save recipe </Link>
+    <Link className='show-link' to={`/user-sessions/new`}>Sign in to save recipe </Link>
   }
 
   return saveButton
