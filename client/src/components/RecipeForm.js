@@ -226,7 +226,8 @@ const RecipeForm = (props) => {
         <div>
           <label>
             <p>Ingredients</p>
-            
+          </label>
+          <div>
             <button
               className="add-button"
               type='button'
@@ -234,14 +235,15 @@ const RecipeForm = (props) => {
             >
               Add ingredient
             </button>
-            {ingredientInputs}
-            <FormError error={errors.ingredients} />
-          </label>
+          </div>
+          {ingredientInputs}
+          <FormError error={errors.ingredients} />
         </div>
         <div>
           <label>
             <p>Instructions</p>
-            
+          </label>
+          <div>
             <button
               className="add-button"
               type='button'
@@ -249,9 +251,9 @@ const RecipeForm = (props) => {
             >
               Add instruction
             </button>
-            {instructionInputs}
-            <FormError error={errors.instructions} />
-          </label>
+          </div>
+          {instructionInputs}
+          <FormError error={errors.instructions} />
         </div>
         <div>
           <label>
