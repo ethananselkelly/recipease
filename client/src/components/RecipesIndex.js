@@ -49,7 +49,7 @@ const RecipesIndex = (props) => {
   
   return (
     <>
-    <div className='index container'>
+    <div className='index-container'>
       <div className='scraper form'>
         <div className='scraper'>
           <Scraper 
@@ -59,7 +59,7 @@ const RecipesIndex = (props) => {
         <p className='or'>Or</p>
         <div className='form container'>
           <p>
-            <Link to={`/recipe-form`}>Enter a recipe manually</Link>
+            <Link className='recipe-link' to={`/recipe-form`}>Enter a recipe manually</Link>
           </p>
         </div>
       </div>

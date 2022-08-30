@@ -62,21 +62,21 @@ const RecipeShow = (props) => {
   }
   
   return (
-    <>
+    <div className='index-container'>
       <div className='nav container'>
         <p>
-          <Link to={`/recipes`}>Back to recipes</Link>
+          <Link className='show-link' to={`/recipes`}>Back to recipes</Link>
         </p>
       </div>
       <hr className='dashed'/>
       <div>
         <div className='container'>
-          <img src={recipe.image} />
+          <img className='recipe image' src={recipe.image} />
         </div>
         <div className='container'>
-          <h1>
+          <h4>
             {recipe.name}
-          </h1> 
+          </h4> 
         </div>
         <hr className='dashed'/>
         <div className='lists container'>
@@ -89,17 +89,17 @@ const RecipeShow = (props) => {
         </div>
         {notes}
         <hr className='dashed'/>
-        <div className='nav container'>
-        <a href={recipe.url} target='_blank'>Link to recipe source</a>
-        <SaveButton 
-          isUserRecipe={isUserRecipe} 
-          setIsUserRecipe={setIsUserRecipe}
-          recipe={recipe}
-          user={props.user}
-        />
+        <div className='nav-container'>
+          <a className='show-link' href={recipe.url} target='_blank'>Link to recipe source</a>
+          <SaveButton 
+            isUserRecipe={isUserRecipe} 
+            setIsUserRecipe={setIsUserRecipe}
+            recipe={recipe}
+            user={props.user}
+          />
         </div>
       </div>
-    </>
+    </div>
   )
 }
 

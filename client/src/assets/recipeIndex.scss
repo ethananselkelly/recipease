@@ -1,5 +1,7 @@
 .index-container {
+  height: 100%;
   margin-left: 1rem;
+  flex:1;
 }
 
 .scraper.container {
@@ -47,4 +49,8 @@
 
 .or {
   margin-right: 2rem;
+}
+
+.recipe-link:hover {
+  text-decoration: underline;
 }

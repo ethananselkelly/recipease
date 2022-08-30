@@ -155,15 +155,19 @@ const RecipeForm = (props) => {
 
   const ingredientInputs = recipePayload.ingredients.map((ingredient, index) => {
     return (
-      <div key={index+1}>
-        {index+1}.
+      <div className="ingredient-input" key={index+1}>
+        <div className="list-number">
+          {index+1}.
+        </div>
         <input
+          className="input-field"
           type='text'
           name='ingredient'
           value={ingredient.name || ''}
           onChange={onIngredientChange(index)}
         />
         <button 
+          className="minus-button"
           type='button'
           onClick={removeIngredient(index)}
         >
@@ -175,9 +179,12 @@ const RecipeForm = (props) => {
 
   const instructionInputs = recipePayload.instructions.map((instruction, index) => {
     return (
-      <div key={index+1}>
-        {index+1}.
+      <div className="instruction-input" key={index+1}>
+        <div className="list-number">
+          {index+1}.
+        </div>
         <textarea
+          className="input-field"
           rows='3'
           cols='30'
           type='text'
@@ -186,6 +193,7 @@ const RecipeForm = (props) => {
           onChange={onInstructionChange(index)}
         />
         <button 
+          className="minus-button"
           type='button'
           onClick={removeInstruction(index)}
         >
@@ -200,9 +208,9 @@ const RecipeForm = (props) => {
   }
 
   return (
-    <div className="grid-container">
-      <h3>New Recipe Form</h3>
-      <form onSubmit={handleSubmit}>
+    <div className="index-container">
+      <form className="grid-container" onSubmit={handleSubmit}>
+        <h4>New Recipe</h4>
         <div>
           <label>
             Name
@@ -217,27 +225,31 @@ const RecipeForm = (props) => {
         </div>
         <div>
           <label>
-            Ingredients
-            {ingredientInputs}
+            <p>Ingredients</p>
+            
             <button
+              className="add-button"
               type='button'
               onClick={addIngredient}
             >
               Add ingredient
             </button>
+            {ingredientInputs}
             <FormError error={errors.ingredients} />
           </label>
         </div>
         <div>
           <label>
-            Instructions
-            {instructionInputs}
+            <p>Instructions</p>
+            
             <button
+              className="add-button"
               type='button'
               onClick={addInstruction}
             >
               Add instruction
             </button>
+            {instructionInputs}
             <FormError error={errors.instructions} />
           </label>
         </div>
@@ -276,7 +288,7 @@ const RecipeForm = (props) => {
             />
           </label>
           <div>
-            <input type="submit" value="Save Recipe" />
+            <input className="save-button" type="submit" value="Save Recipe" />
           </div>
         </div>
       </form>

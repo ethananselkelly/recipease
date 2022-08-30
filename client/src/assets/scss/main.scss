@@ -4,6 +4,7 @@
 @import "../recipeIndex.scss";
 @import "../recipeTile.scss";
 @import "../footer.scss";
+@import "../recipeForm.scss";
 @include foundation-everything;
 // place global css here
 *,
@@ -15,4 +16,18 @@
 :root {
   -moz-tab-size: 4;
   tab-size: 4;
+}
+
+html, body {
+  height: 100%;
+}
+
+#app {
+  display: flex;
+  min-height: 100%;
+  flex-direction: column;
+}
+
+.tab:hover {
+  text-decoration: underline;
 }

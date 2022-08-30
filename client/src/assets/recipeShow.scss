@@ -1,3 +1,8 @@
+.recipe.image {
+  height: 50vh;
+  object-fit: cover;
+}
+
 .lists {
   display: flex;  
   flex-direction: column;
@@ -21,7 +26,7 @@
   margin: 1rem;
 }
 
-.nav.container {
+.nav-container {
   display: flex;
   margin-left: 1rem;
   margin-right: 1.5rem;
@@ -29,12 +34,12 @@
   align-items: baseline;
 }
 
-.removeButton {
+.join-button {
   color: #1879ba;
   
 }
 
-.removeButton:hover {
+.join-button:hover {
   cursor: pointer;
 }
 
@@ -52,4 +57,8 @@ hr.dashed {
   .lists > * {
     flex: 1;
   }
+}
+
+.show-link:hover {
+  text-decoration: underline;
 }

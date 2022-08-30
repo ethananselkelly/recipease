@@ -1,0 +1,95 @@
+.ingredient-input {
+  display: flex;
+  align-items: baseline;
+  margin:auto;
+}
+
+.instruction-input {
+  display: flex;
+  align-items: flex-start;
+  margin:auto;
+}
+
+.input-field {
+  margin-left: .5rem;
+  margin-right: .5rem;
+}
+
+.minus-button {
+  margin-left: .5rem;
+  display:inline-block;
+  padding:0.1em 0.5em;
+  border:0.1em solid #000000;
+  // margin:0 0.3em 0.3em 0;
+  border-radius:0.12em;
+  box-sizing: border-box;
+  text-decoration:none;
+  // font-family:'Roboto',sans-serif;
+  // font-weight:300;
+  color:#000000;
+  text-align:center;
+  transition: all 0.2s;
+}
+
+.minus-button:hover{
+  cursor: pointer;
+  color:#ffffff;
+  background-color:#000000;
+}
+
+.add-button {
+  margin-left: 1rem;
+  margin-top: 0rem;
+  margin-bottom: .5rem;
+  display:inline-block;
+  padding:0.1em 0.5em;
+  border:0.1em solid #000000;
+  // margin:0 0.3em 0.3em 0;
+  border-radius:0.12em;
+  box-sizing: border-box;
+  text-decoration:none;
+  // font-family:'Roboto',sans-serif;
+  // font-weight:300;
+  color:#000000;
+  // background-color: #d3d3d3;
+  text-align:center;
+  transition: all 0.2s;
+}
+
+.add-button:hover {
+  cursor: pointer;
+  color:#ffffff;
+  background-color:#000000;
+}
+.form-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.list-number {
+  margin-right: .25rem;
+}
+
+.save-button {
+  // margin-left: .5rem;
+  margin-top: 0rem;
+  margin-bottom: .5rem;
+  display:inline-block;
+  padding:0.1em 0.5em;
+  border:0.1em solid #000000;
+  // margin:0 0.3em 0.3em 0;
+  border-radius:0.12em;
+  box-sizing: border-box;
+  text-decoration:none;
+  // font-family:'Roboto',sans-serif;
+  // font-weight:300;
+  color:#000000;
+  text-align:center;
+  transition: all 0.2s;
+}
+
+.save-button:hover {
+  cursor: pointer;
+  color:#ffffff;
+  background-color:#000000;
+}

@@ -2,7 +2,6 @@
   display:flex;
   justify-content: flex-end;
   margin-left: 2rem;
-  margin-right: 2rem;
 }
 
 hr.dashed {
@@ -14,4 +13,8 @@ hr.dashed {
 .link {
   margin-left: 1rem;
   margin-right: 1rem;
+}
+
+.link:hover {
+  text-decoration: underline;
 }
