@@ -1,1 +1,2 @@
-web: yarn run start; source server/venv/bin/activate
+web: yarn run start
+worker: source server/venv/bin/activate
