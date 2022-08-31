@@ -18,11 +18,18 @@ const RegistrationForm = () => {
     setErrors({});
     const { username, email, password, passwordConfirmation } = payload;
     const emailRegexp = config.validation.email.regexp.emailRegex;
+    const passwordRegexp = config.validation.password.regexp.passwordRegex
     let newErrors = {};
     if (username.trim() == "") {
       newErrors = {
         ...newErrors,
         username: "is required"
+      }
+    }
+    if (username.trim().length < 5) {
+      newErrors = {
+        ...newErrors,
+        username: "must be at least 5 characters"
       }
     }
     if (!email.match(emailRegexp)) {
@@ -32,10 +39,10 @@ const RegistrationForm = () => {
       };
     }
 
-    if (password.trim() == "") {
+    if (password.trim() == "" || !password.match(passwordRegexp)) {
       newErrors = {
         ...newErrors,
-        password: "is required",
+        password: "minimum eight characters, at least one uppercase letter, one lowercase letter and one number",
       };
     }
 
