@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react'
-import { Link } from 'react-router-dom'
 import RecipeTile from './RecipeTile'
 import Scraper from './Scraper'
 import KeywordSearch from './KeywordSearch'
@@ -56,15 +55,10 @@ const RecipesIndex = (props) => {
             updateRecipes={updateRecipes}
           />
         </div>
-        <p className='or'>Or</p>
-        <div className='form container'>
-          <p>
-            <Link className='recipe-link' to={`/recipe-form`}>Enter a recipe manually</Link>
-          </p>
-        </div>
       </div>
       <hr className='dashed'/>
       <div className='search'>
+        <p className='index header'>Search saved recipes</p>
         <KeywordSearch 
           setRecipes={setRecipes}
           getRecipes={getRecipes}

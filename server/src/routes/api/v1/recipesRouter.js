@@ -3,7 +3,6 @@ import objection from 'objection'
 import { Recipe, User } from '../../../models/index.js'
 import RecipeSerializer from '../../../serializers/RecipeSerializer.js'
 import handleRecipeScraper from '../../../services/handleRecipeScraper.js'
-import handleRecipeForm from '../../../services/handleRecipeForm.js'
 import handleRecipeSearch from '../../../services/handleRecipeSearch.js'
 import handleGetRecipe from '../../../services/handleGetRecipe.js'
 
@@ -61,18 +60,6 @@ recipesRouter.post('/:id', async (req, res) => {
     return res.status(201).json({ newJoin })
   } catch (error) {
     return res.status(500).json({ errors: error })
-  }
-})
-
-recipesRouter.post('/recipe-form', async (req, res) => {
-  try {
-    const recipeReturn = await handleRecipeForm(req)
-    return res.status(201).json({ recipe: recipeReturn})
-  } catch (error) {
-    if (error instanceof ValidationError) {
-      return res.status(422).json({ errors: error.data })
-    }
-    return res.status(500).json({ errors: error  })
   }
 })
 

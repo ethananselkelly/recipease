@@ -10,8 +10,8 @@ import TopBar from "./layout/TopBar";
 import RecipesIndex from "./RecipesIndex";
 import RecipeShow from "./RecipeShow";
 import AuthenticatedRoute from "./authentication/AuthenticatedRoute";
-import RecipeForm from "./RecipeForm";
 import Footer from "./layout/Footer";
+import Home from "./Home";
 
 const App = (props) => {
   const [currentUser, setCurrentUser] = useState(undefined);
@@ -36,16 +36,13 @@ const App = (props) => {
     <Router>
       <TopBar user={currentUser} />
       <Switch>
-        <Route exact path="/">
-          <p className="container">Sign in/sign up to get started</p>
-        </Route>
+        <Route exact path="/" component={Home}/>
         <Route exact path="/users/new" component={RegistrationForm} />
         <Route exact path="/user-sessions/new" component={SignInForm} />
         <AuthenticatedRoute exact path="/recipes" component={RecipesIndex} user={currentUser}/>
         <Route exact path="/recipes/:id">
           <RecipeShow user={currentUser} />
         </Route>        
-        <AuthenticatedRoute exact path="/recipe-form" component={RecipeForm} user={currentUser}/>
       </Switch>
       <Footer/>
     </Router>
