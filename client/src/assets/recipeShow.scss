@@ -45,6 +45,7 @@
 
 hr.dashed {
   border: 0;
+  // width: 100%;
   border-top: 2px dashed #bbb;
   margin-top: 0;
 }
@@ -56,6 +57,13 @@ hr.dashed {
 
   .lists > * {
     flex: 1;
+  }
+}
+
+@media screen and (min-width: 1400px) {
+  .content {
+    margin-left: 10%;
+    margin-right: 10%;
   }
 }
 
