@@ -29,7 +29,8 @@ const TopBar = ({ user }) => {
         </ul>
       </div>
       <div className="top-bar-right">
-        <ul className="menu">{user ? authenticatedListItems : unauthenticatedListItems}</ul>
+        <p className="menu right">{user ? `Hello, ${user.username}` : ''}</p>
+        <ul className="menu right">{user ? authenticatedListItems : unauthenticatedListItems}</ul>
       </div>
     </div>
   );
