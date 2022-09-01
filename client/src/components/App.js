@@ -35,18 +35,16 @@ const App = (props) => {
   return (
     <Router>
       <TopBar user={currentUser} />
-      <div className="content">
-        <Switch>
-          <Route exact path="/" component={Home}/>
-          <Route exact path="/users/new" component={RegistrationForm} />
-          <Route exact path="/user-sessions/new" component={SignInForm} />
-          <AuthenticatedRoute exact path="/recipes" component={RecipesIndex} user={currentUser}/>
-          <Route exact path="/recipes/:id">
-            <RecipeShow user={currentUser} />
-          </Route>        
-        </Switch>
-        <Footer/>
-      </div>
+      <Switch>
+        <Route exact path="/" component={Home}/>
+        <Route exact path="/users/new" component={RegistrationForm} />
+        <Route exact path="/user-sessions/new" component={SignInForm} />
+        <AuthenticatedRoute exact path="/recipes" component={RecipesIndex} user={currentUser}/>
+        <Route exact path="/recipes/:id">
+          <RecipeShow user={currentUser} />
+        </Route>        
+      </Switch>
+      <Footer/>
     </Router>
   );
 };
