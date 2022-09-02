@@ -1,4 +1,4 @@
-.recipe.image {
+.recipe-image {
   height: 50vh;
   object-fit: cover;
 }
@@ -45,7 +45,6 @@
 
 hr.dashed {
   border: 0;
-  // width: 100%;
   border-top: 2px dashed #bbb;
   margin-top: 0;
 }
@@ -62,4 +61,8 @@ hr.dashed {
 
 .show-link:hover {
   text-decoration: underline;
+}
+
+.instruction.list {
+  flex-grow: 1.75;
 }
