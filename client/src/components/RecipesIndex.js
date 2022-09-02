@@ -49,7 +49,7 @@ const RecipesIndex = (props) => {
   return (
     <>
     <div className='index-container'>
-      <div className='scraper form'>
+      <div className='scraper-form'>
         <div className='scraper'>
           <Scraper 
             updateRecipes={updateRecipes}
@@ -58,7 +58,7 @@ const RecipesIndex = (props) => {
       </div>
       <hr className='dashed'/>
       <div className='search'>
-        <p className='index header'>Search saved recipes</p>
+        <p className='index-header'>Search saved recipes</p>
         <KeywordSearch 
           setRecipes={setRecipes}
           getRecipes={getRecipes}
