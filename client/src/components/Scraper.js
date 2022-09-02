@@ -6,7 +6,6 @@ const Scraper = ({ updateRecipes }) => {
   const [recipeURL, setRecipeURL] = useState({
     url: ''
   })
-
   const [errors, setErrors] = useState(null)
   const [visibility, setVisibility] = useState(false)
   
