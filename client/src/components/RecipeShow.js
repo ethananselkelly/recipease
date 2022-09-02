@@ -71,7 +71,7 @@ const RecipeShow = (props) => {
       <hr className='dashed'/>
       <div>
         <div className='container'>
-          <img className='recipe image' src={recipe.image} />
+          <img className='recipe-image' src={recipe.image} />
         </div>
         <div className='container'>
           <h4>
@@ -80,10 +80,10 @@ const RecipeShow = (props) => {
         </div>
         <hr className='dashed'/>
         <div className='lists container'>
-          <ul className='list'>
+          <ul className='ingredient list'>
             {ingredientsList}
           </ul>
-          <ol className='list'>
+          <ol className='instruction list'>
             {instructionsList}  
           </ol> 
         </div>
