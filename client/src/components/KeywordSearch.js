@@ -65,8 +65,8 @@ const KeywordSearch = ({ recipes, setRecipes, getRecipes }) => {
   return (
     <div className="container">
       <div className="search">
-        <form className="search form" id='keywordSearch' onSubmit={handleSubmit}>
-          <label className="search bar">
+        <form className="search-form" id='keywordSearch' onSubmit={handleSubmit}>
+          <label className="search-bar">
             <input type='text' name='keyword' id='keyword' onChange={handleInputChange} value={keyword.keyword} />
           </label>
           <input className="minus-button" type='submit' value='Search' />
