@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import FormError from './layout/FormError'
+import { ThreeDots } from 'react-loader-spinner'
 
 const Scraper = ({ updateRecipes }) => {
   const [recipeURL, setRecipeURL] = useState({
@@ -7,6 +8,7 @@ const Scraper = ({ updateRecipes }) => {
   })
 
   const [errors, setErrors] = useState(null)
+  const [visibility, setVisibility] = useState(false)
   
   const postRecipe = async (recipeURL) => {
     try {
@@ -25,7 +27,6 @@ const Scraper = ({ updateRecipes }) => {
       const body = await response.json()
       const newRecipe = body.recipe
       await updateRecipes(newRecipe)
-      setErrors(null)
       document.getElementById('url').value = ''
       return newRecipe
     } catch (error) {
@@ -44,7 +45,10 @@ const Scraper = ({ updateRecipes }) => {
 
   const handleSubmit = async (event) => {
     event.preventDefault()
+    setVisibility(true)
+    setErrors(null)
     await postRecipe(recipeURL)  
+    setVisibility(false)
   }
 
   let hint
@@ -64,7 +68,14 @@ const Scraper = ({ updateRecipes }) => {
             <input className='minus-button' type="submit" value="Save" />
           </div>
         </div>
-        <div className='scraper-error'>
+        <div className='scraper-feedback'>
+          <ThreeDots 
+            height='40'
+            width='40'
+            radius={2}
+            color='#1879ba'
+            visible={visibility}
+          />
           <FormError error={errors} />
           {hint}
         </div>

@@ -37,6 +37,7 @@
     "react": "~16.13",
     "react-dom": "~16.13",
     "react-hot-loader": "^4.12.21",
+    "react-loader-spinner": "^5.3.3",
     "react-router-dom": "5.2",
     "redbox-react": "~1.6",
     "sass-loader": "^8.0.2",
