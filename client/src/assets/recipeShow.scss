@@ -1,6 +1,15 @@
 .recipe-image {
+  display: flex;
   height: 50vh;
   object-fit: cover;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.recipe-name {
+  padding-left: 2rem;
+  padding-right: 2rem;
+  text-align: center;
 }
 
 .lists {
@@ -49,13 +58,22 @@ hr.dashed {
   margin-top: 0;
 }
 
-@media screen and (min-width: 750px) {
+@media screen and (min-width: 50em) {
   .lists {
     flex-direction: row;
+    margin-right: 2rem;
+    margin-left: 2rem;
   }
 
   .lists > * {
     flex: 1;
+    padding-left: 2rem;
+    padding-right: 2rem;
+
+  }
+
+  .instruction.list {
+    flex-grow: 2;
   }
 }
 
@@ -63,6 +81,4 @@ hr.dashed {
   text-decoration: underline;
 }
 
-.instruction.list {
-  flex-grow: 1.75;
-}
+
