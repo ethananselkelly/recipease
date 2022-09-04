@@ -1,0 +1,19 @@
+.text-container {
+  width:90%;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@media (min-width: 40em) {
+  .text-container {
+    width: 50%;
+    // text-align: center;
+    // margin-left: auto;
+    // margin-right: auto;
+  }
+}
+
+.header-text {
+  text-align: center;
+}
