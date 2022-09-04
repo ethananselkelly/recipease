@@ -71,12 +71,12 @@ const RecipeShow = (props) => {
       <hr className='dashed'/>
       <div>
         <div className='container'>
-          <img className='recipe-image' src={recipe.image} />
-        </div>
-        <div className='container'>
-          <h4>
+          <h4 className='recipe-name'>
             {recipe.name}
           </h4> 
+        </div>
+        <div className='image-container'>
+          <img className='recipe-image' src={recipe.image} />
         </div>
         <hr className='dashed'/>
         <div className='lists container'>

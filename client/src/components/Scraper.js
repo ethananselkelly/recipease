@@ -7,7 +7,8 @@ const Scraper = ({ updateRecipes }) => {
     url: ''
   })
   const [errors, setErrors] = useState(null)
-  const [visibility, setVisibility] = useState(false)
+  const [showLoading, setShowLoading] = useState(false)
+  const [showSuccess, setShowSuccess] = useState(false)
   
   const postRecipe = async (recipeURL) => {
     try {
@@ -26,10 +27,12 @@ const Scraper = ({ updateRecipes }) => {
       const body = await response.json()
       const newRecipe = body.recipe
       await updateRecipes(newRecipe)
-      document.getElementById('url').value = ''
+      setRecipeURL({url: ''})
+      setShowSuccess(true)
+      setTimeout(() => {setShowSuccess(false)}, 1500)
       return newRecipe
     } catch (error) {
-      setErrors('bad URL')
+      setErrors(`couldn't scrape recipe from URL`)
       console.error(`Error in fetch: ${error.message}`)
     }
   }
@@ -44,10 +47,17 @@ const Scraper = ({ updateRecipes }) => {
 
   const handleSubmit = async (event) => {
     event.preventDefault()
-    setVisibility(true)
+    setShowLoading(true)
     setErrors(null)
     await postRecipe(recipeURL)  
-    setVisibility(false)
+    setShowLoading(false)
+  }
+
+  let scrapeSuccess 
+  if (showSuccess) {
+    scrapeSuccess = <p>Recipe scraped ✔️</p>
+  } else {
+    scrapeSuccess = null
   }
 
   let hint
@@ -73,8 +83,9 @@ const Scraper = ({ updateRecipes }) => {
             width='40'
             radius={2}
             color='#1879ba'
-            visible={visibility}
+            visible={showLoading}
           />
+          {scrapeSuccess}
           <FormError error={errors} />
           {hint}
         </div>
