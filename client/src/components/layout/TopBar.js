@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import SignOutButton from "../authentication/SignOutButton";
 
 const TopBar = ({ user }) => {
@@ -24,8 +24,8 @@ const TopBar = ({ user }) => {
     <div className="top-bar">
       <div className="top-bar-left">
         <ul className="menu">
-          <Link className="menu-text tab" to='/'>Home</Link>
-          <Link className="menu-text tab" to="/recipes">Recipes</Link>
+          <NavLink className="menu-text tab" activeStyle={{ backgroundColor: '#65acdb', opacity: '0.75' }} exact to='/'>Home</NavLink>
+          <NavLink className="menu-text tab" activeStyle={{ backgroundColor: '#65acdb', opacity: '0.75' }} exact to="/recipes">Recipes</NavLink>
         </ul>
       </div>
       <div className="top-bar-right">
