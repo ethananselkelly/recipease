@@ -7,3 +7,9 @@
 .menu.right {
   margin-left: 1rem;
 }
+.menu-text:hover{
+  border: 1px solid black;
+  filter: drop-shadow(0.15em 0.15em 0.15em #65acdb);
+  // background-color: #65acdb;
+  // opacity: 0.75
+}

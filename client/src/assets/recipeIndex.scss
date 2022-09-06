@@ -5,47 +5,12 @@
   flex:1;
 }
 
-.scraper-container {
-  display: flex;
-  flex-direction: row;
-  margin-left: 1em;
-  justify-content: flex-start;
-  align-items: baseline;
-}
-
-.scraper-input {
-  margin-right: 1rem;
-}
-
-.scraper-header {
-  margin-left: 1rem;
-  margin-top: 1rem;
-  margin-bottom: 0;
-}
-
 .index-header {
   margin-left: 1rem;
 }
 
-.scraper-form {
-  display: flex;
-  flex-direction: row;
-  align-items: baseline;
-  height:auto
-}
-
-.scraper {
-  margin-bottom:0;
-}
-
-.search-form {
-  display: flex;
-  flex-direction: row;
-  align-items: baseline;
-}
-
 .search-bar {
-  margin-right: 1rem;
+  margin-right: 1em;
 }
 
 .form-container {
