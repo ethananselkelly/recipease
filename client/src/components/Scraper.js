@@ -73,7 +73,7 @@ const Scraper = ({ updateRecipes }) => {
           <label className='scraper-input'>
             <input type="text" name="url" id='url' onChange={handleInputChange} value={recipeURL.url}/>
           </label>
-          <div className='scraper submit'>
+          <div className='scraper-submit'>
             <input className='minus-button' type="submit" value="Save" />
           </div>
         </div>
