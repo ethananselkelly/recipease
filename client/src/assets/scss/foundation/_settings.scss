@@ -294,11 +294,11 @@ $breadcrumbs-item-separator-color: $medium-gray;
 
 $button-font-family: inherit;
 $button-font-weight: null;
-$button-padding: 0.85em 1em;
-$button-margin: 0 0 $global-margin 0;
+$button-padding: 0.2em 0.3em;
+$button-margin: 0 0.15em 0.1em;
 $button-fill: solid;
-$button-background: $primary-color;
-$button-background-hover: scale-color($button-background, $lightness: -15%);
+$button-background: #65acdb;
+$button-background-hover: scale-color($button-background, $lightness: -25%);
 $button-color: $white;
 $button-color-alt: $black;
 $button-radius: $global-radius;
