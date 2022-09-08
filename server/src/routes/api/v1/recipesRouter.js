@@ -21,6 +21,16 @@ recipesRouter.get('/', async (req, res) => {
   }
 })
 
+recipesRouter.get('/home', async (req, res) => {
+  try {
+    const randomRecipes = await Recipe.query().orderByRaw('RANDOM()').limit(9)
+    const serializedRecipes = randomRecipes.map(recipe => RecipeSerializer.getSummary(recipe))
+    return res.status(200).json({ recipes: serializedRecipes })
+  } catch (error) {
+    return res.status(500).json({ errors: error })
+  }
+})
+
 recipesRouter.get('/search', async (req, res) => {
   try {
     const recipeSearch = await handleRecipeSearch(req)

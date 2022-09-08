@@ -1,10 +1,10 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-const RecipeTile = ({ recipe }) => {
+const RecipeIndexTile = ({ recipe }) => {
 
   return (
-    <div className='recipe-tile'>
+    <div className='recipe-index-tile'>
       <li>
         <div className='recipe-info'>
           <Link className='recipe-link' to={`/recipes/${recipe.id}`}>{recipe.name}</Link>
@@ -15,4 +15,4 @@ const RecipeTile = ({ recipe }) => {
   )
 }
 
-export default RecipeTile
+export default RecipeIndexTile
