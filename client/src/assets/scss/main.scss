@@ -27,8 +27,10 @@ html, body {
 
 #app {
   display: flex;
+  margin: auto;
   min-height: 100%;
   flex-direction: column;
+  max-width: 1225px;
 }
 
 .tab:hover {

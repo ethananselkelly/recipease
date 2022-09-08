@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import RecipeTile from './RecipeTile'
+import RecipeIndexTile from './RecipeIndexTile'
 import Scraper from './Scraper'
 import KeywordSearch from './KeywordSearch'
 
@@ -37,7 +37,7 @@ const RecipesIndex = (props) => {
   let recipeListItems
   if (recipes[0]) {
     recipeListItems = recipes.map((recipeObject) => {
-      return <RecipeTile 
+      return <RecipeIndexTile 
         key={recipeObject.id}
         recipe={recipeObject}
       />

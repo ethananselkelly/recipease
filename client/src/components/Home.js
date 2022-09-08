@@ -1,6 +1,34 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
+import RecipeHomeTile from './RecipeHomeTile'
 
 const Home = () => {
+  const [recipes, setRecipes] = useState([])
+
+  const getRecipes = async () => {
+    try {
+      const response = await fetch(`/api/v1/recipes/home`)
+      if (!response.ok) {
+        const errorMessage = `${response.status} (${response.statusText})`
+        const error = new Error(errorMessage)
+        throw error
+      }
+      const body = await response.json()
+      setRecipes(body.recipes)
+    } catch (error) {
+      console.error(`Error in fetch: ${error.message}`)
+    }
+  }
+
+  useEffect(() => {
+    getRecipes()
+  }, [])
+
+  const recipeListItems = recipes.map((recipeObject) => {
+    return <RecipeHomeTile 
+      key={recipeObject.id}
+      recipe={recipeObject}
+    />
+  })
 
   return (
     <div className='index-container'>
@@ -10,6 +38,11 @@ const Home = () => {
         <p>A list of websites the app can scrape from can be found  <a href='https://github.com/hhursev/recipe-scrapers#scrapers-available-for' target='_blank'>here</a></p>
         <p>If you have questions, comments, or suggestions, you can reach me on LinkedIn or by email.</p>
         <p>Happy cooking 😋</p>
+      </div>
+      <div>
+        <ul className='home-list'>
+          {recipeListItems}
+        </ul>
       </div>
 
     </div>
