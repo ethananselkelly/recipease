@@ -7,8 +7,8 @@ const handleRecipeSearch = async (req) => {
   const recipes = await user
     .$relatedQuery('recipes')
     .where('name', 'ILike', `%${keyword}%`)
-    .orWhere('tags', '@>', [`${keyword}`])
-    .orWhere('notes', 'ILike', `%${keyword}%`)
+    .orWhere('ingredients', 'ILike', `%${keyword}%`)
+    .orWhere('instructions', 'ILike', `%${keyword}%`)
   const serializedRecipes = recipes.map(recipe => RecipeSerializer.getSummary(recipe))
   return {serializedRecipes, keyword}
 }
