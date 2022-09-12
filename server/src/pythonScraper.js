@@ -9,7 +9,9 @@ const pythonScraper = async (url) => {
     python.ex`scraper = scrape_me(${recipe.url})`
     recipe.name = await python`scraper.title()`
     recipe.ingredients = await python`scraper.ingredients()`
+    recipe.ingredients = recipe.ingredients.join('\n')
     recipe.instructions = await python`scraper.instructions_list()`
+    recipe.instructions = recipe.instructions.join('\n')
     recipe.image = await python`scraper.image()`
     recipe.source = await python`scraper.host()`
     return recipe

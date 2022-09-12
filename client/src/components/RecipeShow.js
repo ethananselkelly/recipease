@@ -8,10 +8,9 @@ const RecipeShow = (props) => {
     name: '',
     source: '',
     url: '',
-    ingredients: [],
-    instructions: [],
+    ingredients: '',
+    instructions: '',
     notes: '',
-    tags: [],
     image: ''
   })
   
@@ -41,10 +40,10 @@ const RecipeShow = (props) => {
     getRecipe()
   }, [])
   
-  let ingredientsList = recipe.ingredients.map((ingredient, index) => (
+  let ingredientsList = recipe.ingredients.split('\n').map((ingredient, index) => (
     <li className='ingredient' key={index}>{ingredient}</li>
   ))
-  let instructionsList = recipe.instructions.map((direction, index) => (
+  let instructionsList = recipe.instructions.split('\n').map((direction, index) => (
     <li className='instruction' key={index}>{direction}</li>
   ))
 
