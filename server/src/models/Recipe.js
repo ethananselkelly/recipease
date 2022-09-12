@@ -4,7 +4,22 @@ class Recipe extends Model {
   static get tableName() {
     return "recipes"
   }
-
+  
+  static get jsonSchema() {
+    return {
+      type: "object",
+      required: ["name", "ingredients", "instructions"],
+      properties: {
+        name: { type: "string", minLength: 1, maxLength: 255 },
+        ingredients: { type: "string" },
+        instructions: { type: "string" },
+        source: { type: "string", minLength: 1, maxLength: 55 },
+        url: { type: "string", minLength: 1, maxLength: 255 },
+        image: { type: "string" }
+      }
+    }
+  }
+ 
   static get relationMappings() {
     const { User, UserRecipe } = require("./index.js")
     return {
