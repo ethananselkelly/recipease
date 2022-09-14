@@ -5,6 +5,7 @@ import RecipeSerializer from '../../../serializers/RecipeSerializer.js'
 import handleRecipeScraper from '../../../services/handleRecipeScraper.js'
 import handleRecipeSearch from '../../../services/handleRecipeSearch.js'
 import handleGetRecipe from '../../../services/handleGetRecipe.js'
+import handleDeleteRecipe from '../../../services/handleDeleteRecipe.js'
 
 const { ValidationError } = objection
 
@@ -74,11 +75,9 @@ recipesRouter.post('/:id', async (req, res) => {
 })
 
 recipesRouter.delete('/', async (req, res) => {
-  const { id } = req.body
   try {
-    const deletedRecipe = await Recipe.query().findById( id )
-    await deletedRecipe.$relatedQuery('users').unrelate().findById( req.user.id )
-    return res.status(200).json({ deletedRecipe })
+    const recipeDelete = await handleDeleteRecipe(req)
+    return res.status(200).json({ recipeDelete })
   } catch (error) {
     return res.status(500).json({ errors: error })
   }
