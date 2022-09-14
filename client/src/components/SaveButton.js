@@ -57,7 +57,7 @@ const SaveButton = ({isUserRecipe, setIsUserRecipe, recipe, user}) => {
   if (user) {
     if (isUserRecipe) {
       saveButton = 
-      <button className='join-button show-link' onClick={handleRemove}>Unsave recipe</button>
+      <button className='join-button show-link' onClick={handleRemove}>Remove recipe</button>
     } else {
       saveButton =
       <button className='join-button show-link' onClick={handleSave}>Save recipe</button>

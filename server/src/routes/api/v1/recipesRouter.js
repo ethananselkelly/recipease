@@ -1,6 +1,6 @@
 import express from 'express'
 import objection from 'objection'
-import { Recipe, User } from '../../../models/index.js'
+import { Recipe, User, UserRecipe } from '../../../models/index.js'
 import RecipeSerializer from '../../../serializers/RecipeSerializer.js'
 import handleRecipeScraper from '../../../services/handleRecipeScraper.js'
 import handleRecipeSearch from '../../../services/handleRecipeSearch.js'
@@ -78,6 +78,10 @@ recipesRouter.delete('/', async (req, res) => {
   try {
     const deletedRecipe = await Recipe.query().findById( id )
     await deletedRecipe.$relatedQuery('users').unrelate().findById( req.user.id )
+    const multipleSaves = await UserRecipe.query().where({ recipeId: id })
+    if (!multipleSaves[0]) {
+      await Recipe.query().findById( id ).delete()
+    }
     return res.status(200).json({ deletedRecipe })
   } catch (error) {
     return res.status(500).json({ errors: error })
