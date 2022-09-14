@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from 'react-router-dom'
 
 const SaveButton = ({isUserRecipe, setIsUserRecipe, recipe, user}) => {
+  const [shouldRedirect, setShouldRedirect] = useState(false)
+
   const removeRecipe = async () => {
     try {
       const response = await fetch(`/api/v1/recipes`,
@@ -17,11 +19,13 @@ const SaveButton = ({isUserRecipe, setIsUserRecipe, recipe, user}) => {
         const error = new Error(errorMessage)
         throw error
       }
+      setShouldRedirect(true)
       return true
     } catch (error) {
       console.error(`Error in fetch: ${error.message}`)
     }
   }
+
   const saveRecipe = async () => {
     try {
       const response = await fetch(`/api/v1/recipes/${recipe.id}`,{
@@ -41,16 +45,23 @@ const SaveButton = ({isUserRecipe, setIsUserRecipe, recipe, user}) => {
       console.error(`Error in fetch: ${error.message}`)
     }
   }
+
   const handleRemove = async (event) => {
-    event.preventDefault()
-    await removeRecipe()
-    setIsUserRecipe(false)
+    if (window.confirm(`Remove ${recipe.name} from saved recipes?`)) {
+      event.preventDefault()
+      await removeRecipe()
+      setIsUserRecipe(false)
+    }
   }
 
   const handleSave = async (event) => {
     event.preventDefault()
     await saveRecipe()
     setIsUserRecipe(true)
+  }
+
+  if (shouldRedirect) {
+    location.href = "/recipes";
   }
 
   let saveButton
