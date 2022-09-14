@@ -8,21 +8,21 @@ const SignInForm = () => {
   const [errors, setErrors] = useState({});
 
   const validateInput = (payload) => {
-    setErrors({});
+    // setErrors({});
     const { email, password } = payload;
     const emailRegexp = config.validation.email.regexp;
     let newErrors = {};
     if (!email.match(emailRegexp)) {
       newErrors = {
         ...newErrors,
-        email: "is invalid",
+        email: "invalid email",
       };
     }
 
     if (password.trim() === "") {
       newErrors = {
         ...newErrors,
-        password: "is required",
+        password: "password is required",
       };
     }
 
@@ -50,6 +50,10 @@ const SignInForm = () => {
         setShouldRedirect(true)
       }
     } catch(err) {
+      let newErrors = {
+        login: "invalid email or password"
+      }
+      setErrors(newErrors)
       console.error(`Error in fetch: ${err.message}`)
     }
   }
@@ -89,6 +93,7 @@ const SignInForm = () => {
           </label>
         </div>
         <div>
+          <FormError error={errors.login} />
           <input type="submit" className="button" value="Sign In" />
         </div>
       </form>
