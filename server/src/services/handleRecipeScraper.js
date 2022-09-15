@@ -4,6 +4,7 @@ import pythonScraper from '../pythonScraper.js'
 const handleRecipeScraper = async (req) => {
   const { body } = req
   const recipeUrl = body.url
+  const wildMode = body.wildMode
   let recipeReturn
   const existingRecipe = await Recipe.query().findOne({ url: recipeUrl })
   if (existingRecipe) {
@@ -15,7 +16,7 @@ const handleRecipeScraper = async (req) => {
       recipeReturn = existingJoin
     }
   } else {
-    const recipe = await pythonScraper(recipeUrl)
+    const recipe = await pythonScraper(recipeUrl, wildMode)
     const { name, ingredients, instructions, image, url, source } = recipe
     const newRecipe = await Recipe.query().insertAndFetch({ name, ingredients, instructions, source, url, image })
     await newRecipe.$relatedQuery('users').relate( req.user.id )

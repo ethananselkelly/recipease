@@ -1,12 +1,16 @@
 import pythonBridge from 'python-bridge'
 
-const pythonScraper = async (url) => {
+const pythonScraper = async (url, wildMode) => {
   let python = pythonBridge()
   let recipe = {}
   recipe.url = url
-  try {
-    python.ex`from recipe_scrapers import scrape_me`
+  python.ex`from recipe_scrapers import scrape_me`
+  if (wildMode === true) {
+    python.ex`scraper = scrape_me(${recipe.url}, wild_mode=True)`
+  } else {
     python.ex`scraper = scrape_me(${recipe.url})`
+  }
+  try {
     recipe.name = await python`scraper.title()`
     recipe.ingredients = await python`scraper.ingredients()`
     recipe.ingredients = recipe.ingredients.join('\n')
