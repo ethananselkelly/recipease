@@ -4,13 +4,14 @@ import { ThreeDots } from 'react-loader-spinner'
 
 const Scraper = ({ updateRecipes }) => {
   const [recipeURL, setRecipeURL] = useState({
-    url: ''
+    url: '',
+    wildMode: false
   })
   const [errors, setErrors] = useState(null)
   const [showLoading, setShowLoading] = useState(false)
   const [showSuccess, setShowSuccess] = useState(false)
   
-  const postRecipe = async (recipeURL) => {
+  const postRecipe = async (recipeURL, wildMode) => {
     try {
       const response = await fetch(`/api/v1/recipes`, {
         method: "POST",
@@ -27,11 +28,15 @@ const Scraper = ({ updateRecipes }) => {
       const body = await response.json()
       const newRecipe = body.recipe
       await updateRecipes(newRecipe)
-      setRecipeURL({url: ''})
+      setRecipeURL({url: '', wildMode: false})
       setShowSuccess(true)
       setTimeout(() => {setShowSuccess(false)}, 1500)
       return newRecipe
     } catch (error) {
+      setRecipeURL({
+        ...recipeURL,
+        wildMode: false
+      })
       setErrors(`couldn't scrape recipe from URL`)
       console.error(`Error in fetch: ${error.message}`)
     }
@@ -41,8 +46,7 @@ const Scraper = ({ updateRecipes }) => {
     setRecipeURL({
       ...recipeURL,
       [event.currentTarget.name]: event.currentTarget.value
-    }
-    )
+    })
   }
 
   const handleSubmit = async (event) => {
@@ -51,6 +55,13 @@ const Scraper = ({ updateRecipes }) => {
     setErrors(null)
     await postRecipe(recipeURL)  
     setShowLoading(false)
+  }
+
+  const handleCheckboxChange = (event) => {
+    setRecipeURL({
+      ...recipeURL,
+      wildMode: !recipeURL.wildMode
+    })
   }
 
   let scrapeSuccess 
@@ -62,7 +73,21 @@ const Scraper = ({ updateRecipes }) => {
 
   let hint
   if (errors) {
-    hint = <a href='https://github.com/hhursev/recipe-scrapers#scrapers-available-for' target='_blank'>List of scrapable websites</a>
+    hint = 
+      <div>
+        <label>
+          <input 
+            className='wild-mode-checkbox'
+            type='checkbox' 
+            name='wild mode' 
+            onChange={handleCheckboxChange}
+          />
+          Wild mode*
+        </label>
+        <a href='https://github.com/hhursev/recipe-scrapers#scrapers-available-for' target='_blank'>List of scrapable websites</a>
+        <p className='text-hint'>*try wild mode if your url isn't included in the scrapable websites</p>
+        <p className='text-hint'>*may not scrape perfectly</p>
+      </div>
   }
 
   return (
@@ -92,7 +117,6 @@ const Scraper = ({ updateRecipes }) => {
       </form>
     </div>
   )
-
 }
 
 export default Scraper
