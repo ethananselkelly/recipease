@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import FormError from './layout/FormError'
 import { ThreeDots } from 'react-loader-spinner'
+import { TextField, Button } from '@mui/material'
 
 const Scraper = ({ updateRecipes }) => {
   const [recipeURL, setRecipeURL] = useState({
@@ -64,43 +65,23 @@ const Scraper = ({ updateRecipes }) => {
     })
   }
 
-  let scrapeSuccess 
-  if (showSuccess) {
-    scrapeSuccess = <p>Recipe scraped ✔️</p>
-  } else {
-    scrapeSuccess = null
-  }
-
-  let hint
-  if (errors) {
-    hint = 
-      <div>
-        <label>
-          <input 
-            className='wild-mode-checkbox'
-            type='checkbox' 
-            name='wild mode' 
-            onChange={handleCheckboxChange}
-          />
-          Wild mode*
-        </label>
-        <a href='https://github.com/hhursev/recipe-scrapers#scrapers-available-for' target='_blank'>List of scrapable websites</a>
-        <p className='text-hint'>*try wild mode if your url isn't included in the scrapable websites</p>
-        <p className='text-hint'>*may not scrape perfectly</p>
-      </div>
-  }
-
   return (
+
     <div>
-      <p className='scraper-header'>Enter a URL to a recipe below</p>
       <form id='scraper' onSubmit={handleSubmit}>
         <div className='scraper-container'>
           <label className='scraper-input'>
-            <input type="text" name="url" id='url' onChange={handleInputChange} value={recipeURL.url}/>
+            <TextField 
+              id='url'
+              name='url'
+              variant='outlined' 
+              label='Enter a Recipe URL' 
+              size='small'
+              onChange={handleInputChange}
+              value={recipeURL.url}
+              />
           </label>
-          <div className='scraper-submit'>
-            <input className='minus-button' type="submit" value="Save" />
-          </div>
+            <Button  type="submit" size='small' variant="contained">Save</Button>
         </div>
         <div className='scraper-feedback'>
           <ThreeDots 
@@ -110,9 +91,28 @@ const Scraper = ({ updateRecipes }) => {
             color='#1879ba'
             visible={showLoading}
           />
-          {scrapeSuccess}
+          {showSuccess && <p>Recipe scraped ✔️</p>}
           <FormError error={errors} />
-          {hint}
+          {errors && 
+            <div>
+              <a href='https://github.com/hhursev/recipe-scrapers#scrapers-available-for' target='_blank'>List of scrapable websites</a>
+              <label>
+                <input 
+                  className='wild-mode-checkbox'
+                  type='checkbox' 
+                  name='wild mode' 
+                  onChange={handleCheckboxChange}
+                />
+                Wild mode*
+              </label>
+              {recipeURL.wildMode && 
+                <div>
+                  <p className='text-hint'>*try wild mode if your url isn't included in the scrapable websites</p>
+                  <p className='text-hint'>*may not scrape perfectly</p>
+                </div>
+              }
+            </div>
+          }
         </div>
       </form>
     </div>

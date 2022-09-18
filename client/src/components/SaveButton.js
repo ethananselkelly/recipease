@@ -77,8 +77,10 @@ const SaveButton = ({isUserRecipe, setIsUserRecipe, recipe, user}) => {
     saveButton = 
     <Link className='show-link' to={`/user-sessions/new`}>Sign in to save recipe </Link>
   }
-
+  //this doesn't work right now, maybe can get it to work? idk lol
+  // {user ? isUserRecipe ? <button className='join-button show-link' onClick={handleRemove}>Remove recipe</button> : <button className='join-button show-link' onClick={handleSave}>Save recipe</button> : <Link className='show-link' to={`/user-sessions/new`}>Sign in to save recipe </Link>}
   return saveButton
+  
 }
 
 export default SaveButton

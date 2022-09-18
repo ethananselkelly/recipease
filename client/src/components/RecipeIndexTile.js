@@ -8,7 +8,7 @@ const RecipeIndexTile = ({ recipe }) => {
       <li>
         <div className='recipe-info'>
           <Link className='recipe-link' to={`/recipes/${recipe.id}`}>{recipe.name}</Link>
-          <p className='source'>{recipe.source}</p>
+          <a className='source' href={recipe.url} target='_blank'>{recipe.source}</a>
         </div>
       </li>
     </div>

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import RecipeIndexTile from './RecipeIndexTile'
 import Scraper from './Scraper'
 import KeywordSearch from './KeywordSearch'
+import Divider from '@mui/material/Divider'
 
 const RecipesIndex = (props) => {
   const [recipes, setRecipes] = useState([])
@@ -33,18 +34,6 @@ const RecipesIndex = (props) => {
       await getRecipes()
     }
   }
-
-  let recipeListItems
-  if (recipes[0]) {
-    recipeListItems = recipes.map((recipeObject) => {
-      return <RecipeIndexTile 
-        key={recipeObject.id}
-        recipe={recipeObject}
-      />
-    })
-  } else {
-    recipeListItems = <p>No recipes saved</p>
-  }
   
   return (
     <>
@@ -56,19 +45,25 @@ const RecipesIndex = (props) => {
           />
         </div>
       </div>
-      <hr className='dashed'/>
+      <Divider />
       <div className='search'>
-        <p className='index-header'>Search saved recipes</p>
         <KeywordSearch 
           setRecipes={setRecipes}
           getRecipes={getRecipes}
           recipes={recipes}
         />
       </div>
-      <hr className='dashed'/>
+      <Divider />
       <div className='container'>
         <ol>
-          {recipeListItems}
+          {recipes[0] ?
+            recipes.map((recipeObject) => {
+              return <RecipeIndexTile 
+                key={recipeObject.id}
+                recipe={recipeObject}
+              />
+            }) : <p>No recipes saved</p>
+          }
         </ol>
       </div>
     </div>
