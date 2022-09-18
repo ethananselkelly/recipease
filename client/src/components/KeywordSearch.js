@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Button, TextField } from '@mui/material'
 
 const KeywordSearch = ({ recipes, setRecipes, getRecipes }) => {
   const [keyword, setKeyword] = useState({
@@ -36,7 +37,6 @@ const KeywordSearch = ({ recipes, setRecipes, getRecipes }) => {
   const handleSubmit = async (event) => {
     event.preventDefault()
     await searchRecipes(keyword)
-    document.getElementById('keyword').value = ''
   }
 
   const handleReset = async (event) => {
@@ -44,22 +44,7 @@ const KeywordSearch = ({ recipes, setRecipes, getRecipes }) => {
     await getRecipes()
     setSearchResults(false)
     setReturnedKeyword(undefined)
-    document.getElementById('keyword').value = ''
-  }
-
-  let showResults
-
-  if (searchResults) {
-    showResults = 
-    <>
-      <p>
-      Showing {recipes.length} recipes
-       for '{returnedKeyword}'
-      </p>
-      <form onSubmit={handleReset}>
-        <input className="minus-button" type='submit' value='Reset' />
-      </form>
-    </>
+    setKeyword({keyword: ''})
   }
 
   return (
@@ -67,12 +52,30 @@ const KeywordSearch = ({ recipes, setRecipes, getRecipes }) => {
       <div className="search">
         <form className="search-form" id='keywordSearch' onSubmit={handleSubmit}>
           <label className="search-bar">
-            <input type='text' name='keyword' id='keyword' onChange={handleInputChange} value={keyword.keyword} />
+            <TextField 
+              id='keyword'
+              name='keyword'
+              variant='outlined' 
+              label='Search saved recipes' 
+              size='small'
+              onChange={handleInputChange}
+              value={keyword.keyword}
+            />
           </label>
-          <input className="minus-button" type='submit' value='Search' />
+          <Button type='submit' size='small' variant='contained'>Search</Button>
         </form>
         <div>
-          {showResults}
+          {searchResults && 
+            <>
+              <p>
+                Showing {recipes.length} recipes
+                for '{returnedKeyword}'
+              </p>
+              <form onSubmit={handleReset}>
+                <Button type='submit' size='small' variant="contained">Reset</Button>
+              </form>
+            </>
+          }
         </div>
       </div>
     </div>

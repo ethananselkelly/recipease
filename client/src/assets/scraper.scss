@@ -12,9 +12,10 @@
   display: flex;
   display: -webkit-flex;
   flex-direction: row;
+  margin-top: 1em;
   margin-left: 1em;
-  justify-content: flex-start;
-  align-items: baseline;
+  margin-bottom: 0.5em;
+  align-items:center;
 }
 
 .scraper-input {
@@ -35,13 +36,13 @@
 }
 
 .scraper {
-  margin-bottom:0;
+  margin-bottom: 0.5em;
 }
 
 .search-form {
   display: flex;
   flex-direction: row;
-  align-items: baseline;
+  align-items: center;
 }
 
 .text-hint {

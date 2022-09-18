@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { withRouter } from 'react-router'
 import { Link } from 'react-router-dom'
+import Divider from '@mui/material/Divider'
 import SaveButton from './SaveButton'
 
 const RecipeShow = (props) => {
@@ -40,26 +41,6 @@ const RecipeShow = (props) => {
     getRecipe()
   }, [])
   
-  let ingredientsList = recipe.ingredients.split('\n').map((ingredient, index) => (
-    <li className='ingredient' key={index}>{ingredient}</li>
-  ))
-  let instructionsList = recipe.instructions.split('\n').map((direction, index) => (
-    <li className='instruction' key={index}>{direction}</li>
-  ))
-
-  let notes
-  if (recipe.notes) {
-    notes =
-      <>
-        <hr className='dashed'/>
-        <div className='container'>
-          <p>
-            {recipe.notes}
-          </p>
-        </div>
-      </>
-  }
-  
   return (
     <div className='index-container'>
       <div className='nav container'>
@@ -67,7 +48,7 @@ const RecipeShow = (props) => {
           <Link className='show-link' to={`/recipes`}>Back to recipes</Link>
         </p>
       </div>
-      <hr className='dashed'/>
+      <Divider />
       <div>
         <div className='container'>
           <h4 className='recipe-name'>
@@ -77,17 +58,22 @@ const RecipeShow = (props) => {
         <div className='image-container'>
           <img className='recipe-image' src={recipe.image} />
         </div>
-        <hr className='dashed'/>
+        <Divider/>
         <div className='lists container'>
           <ul className='ingredient list'>
-            {ingredientsList}
+            {recipe.ingredients.split('\n').map((ingredient, index) => (
+              <li className='ingredient' key={index}>{ingredient}</li>
+              ))
+            }
           </ul>
           <ol className='instruction list'>
-            {instructionsList}  
+            {recipe.instructions.split('\n').map((direction, index) => (
+              <li className='instruction' key={index}>{direction}</li>
+              ))
+            } 
           </ol> 
         </div>
-        {notes}
-        <hr className='dashed'/>
+        <Divider />
         <div className='nav-container'>
           <a className='show-link' href={recipe.url} target='_blank'>Link to recipe source</a>
           <SaveButton 

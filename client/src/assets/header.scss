@@ -1,20 +1,12 @@
 .top-bar-right {
   display: flex;
   margin-right: .1rem;
+  justify-content: flex-end;
   align-items: baseline;
 }
 
 .menu.right {
   margin-left: 0.25rem;
   color: white;
+  align-items: baseline;
 }
-
-// .nav {
-//   font-size: 75%;
-// }
-// .menu-text:hover{
-//   border: 1px solid black;
-//   filter: drop-shadow(0.15em 0.15em 0.15em white);
-//   // background-color: #65acdb;
-//   // opacity: 0.75
-// }

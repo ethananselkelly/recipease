@@ -4,6 +4,7 @@
   object-fit: cover;
   margin-left: auto;
   margin-right: auto;
+  margin-bottom: 1em;
 }
 
 .recipe-name {
@@ -37,8 +38,10 @@
 
 .nav-container {
   display: flex;
-  margin-left: 1rem;
-  margin-right: 1.5rem;
+  margin-left: 1em;
+  margin-right: 1.5em;
+  margin-top: 1em;
+  margin-bottom: 1em;
   justify-content: space-between;
   align-items: baseline;
 }

@@ -1,9 +1,10 @@
 import React from "react";
+import Divider from '@mui/material/Divider'
 
 const Footer = () => {
   return (
     <div className="fixed-bottom">
-      <hr className='footer dashed'/>
+      <Divider />
       <div className="footer container">
         <a className="link" href="https://github.com/ethananselkelly/recipease" target='_blank'>GitHub</a>
         ||
