@@ -16,7 +16,7 @@ const TopBar = ({ user }) => {
   ];
 
   const authenticatedListItems = [
-    <li className="username">
+    <li key='username' className="username">
       {user && user.username}
     </li>,
     <li key="sign-out">
