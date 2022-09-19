@@ -12,6 +12,7 @@ import RecipeShow from "./RecipeShow";
 import AuthenticatedRoute from "./authentication/AuthenticatedRoute";
 import Footer from "./layout/Footer";
 import Home from "./Home";
+import AboutMe from "./AboutMe";
 
 const App = (props) => {
   const [currentUser, setCurrentUser] = useState(undefined);
@@ -42,7 +43,8 @@ const App = (props) => {
         <AuthenticatedRoute exact path="/recipes" component={RecipesIndex} user={currentUser}/>
         <Route exact path="/recipes/:id">
           <RecipeShow user={currentUser} />
-        </Route>        
+        </Route>   
+        <Route exact path="/about-me" component={AboutMe}/>     
       </Switch>
       <Footer/>
     </Router>
