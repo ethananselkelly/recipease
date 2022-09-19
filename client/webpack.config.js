@@ -86,8 +86,6 @@ module.exports = {
       ...reactDomAlias,
       "@Components": path.resolve(__dirname, "src/components/"),
       "@Providers": path.resolve(__dirname, "src/providers/"),
-      "react/jsx-dev-runtime": "react/jsx-dev-runtime.js",
-      "react/jsx-runtime": "react/jsx-runtime.js"
     },
     extensions: ["*", ".js", ".scss"],
   },
