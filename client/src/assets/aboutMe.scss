@@ -1,0 +1,22 @@
+.about-me-container {
+  height: 100%;
+  margin-left: 1rem;
+  margin-right: 1rem;
+  flex:1;
+}
+
+.about-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.about-image {
+  width: clamp(15em, 25em, 30em);
+  overflow: hidden;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+  border-radius: 3%;
+}

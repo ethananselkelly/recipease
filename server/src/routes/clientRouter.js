@@ -11,6 +11,7 @@ const clientRoutes = [
   "/recipes/:id",
   "/scraper",
   "/recipe-form",
+  "/about-me"
 ];
 
 const authedClientRoutes = ["/profile"];

@@ -29,6 +29,7 @@ const TopBar = ({ user }) => {
         <ul className="menu">
           <NavLink className="nav button" activeStyle={{ backgroundColor: '#3190cf' }} exact to='/'>Home</NavLink>
           <NavLink className="nav button" activeStyle={{ backgroundColor: '#3190cf' }} exact to="/recipes">Recipes</NavLink>
+          <NavLink className='nav button' activeStyle={{ backgroundColor: '#3190cf' }} exact to='/about-me'>About Me</NavLink>
         </ul>     
         <ul className="menu right">{user ? authenticatedListItems : unauthenticatedListItems}</ul>
     </Stack>
