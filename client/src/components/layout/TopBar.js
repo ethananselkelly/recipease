@@ -4,25 +4,6 @@ import SignOutButton from "../authentication/SignOutButton";
 import { Stack } from '@mui/material'
 
 const TopBar = ({ user }) => {
-  const unauthenticatedListItems = [
-    <li key="sign-in">
-      <Link to="/user-sessions/new" className="button">Sign In</Link>
-    </li>,
-    <li key="sign-up">
-      <Link to="/users/new" className="button">
-        Sign Up
-      </Link>
-    </li>,
-  ];
-
-  const authenticatedListItems = [
-    <li key='username' className="username">
-      {user && user.username}
-    </li>,
-    <li key="sign-out">
-      <SignOutButton />
-    </li>,
-  ];
 
   return (
       <Stack className='top-bar' direction='row' >
@@ -31,7 +12,22 @@ const TopBar = ({ user }) => {
           <NavLink className="nav button" activeStyle={{ backgroundColor: '#3190cf' }} exact to="/recipes">Recipes</NavLink>
           <NavLink className='nav button' activeStyle={{ backgroundColor: '#3190cf' }} exact to='/about-me'>About Me</NavLink>
         </ul>     
-        <ul className="menu right">{user ? authenticatedListItems : unauthenticatedListItems}</ul>
+        <ul className="menu right">
+          {user ? 
+            <>
+              <li key='username' className="username">
+                {user && user.username}
+              </li>
+              <li key="sign-out">
+                <SignOutButton />
+              </li> 
+            </>
+            :
+            <li key="sign-in">
+              <Link to="/user-sessions/new" className="button">Sign In</Link>
+            </li>
+          }
+      </ul>
     </Stack>
   );
 };

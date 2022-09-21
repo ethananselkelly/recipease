@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import config from "../../config";
 import FormError from "../layout/FormError";
+import { Button, Stack } from "@mui/material";
+import { NavLink } from "react-router-dom";
 
 const SignInForm = () => {
   const [userPayload, setUserPayload] = useState({ email: "", password: "" });
@@ -70,8 +72,8 @@ const SignInForm = () => {
   }
 
   return (
-    <div className="index-container" onSubmit={onSubmit}>
-      <form className="grid-container">
+    <div className="index-container">
+      <form className="grid-container" onSubmit={onSubmit}>
         <h4>Sign In</h4>
         <div>
           <label>
@@ -94,9 +96,17 @@ const SignInForm = () => {
         </div>
         <div>
           <FormError error={errors.login} />
-          <input type="submit" className="button" value="Sign In" />
+          <Button type='submit' size='small' variant="contained">Sign In</Button>
         </div>
       </form>
+      <div className="grid-container">
+        <Stack direction="column" py={1} >
+          Need an account?
+          <NavLink exact to='/users/new'>
+            <Button size='small' variant='contained' >Sign Up</Button>
+          </NavLink>
+        </Stack>
+      </div>
     </div>
   );
 };
