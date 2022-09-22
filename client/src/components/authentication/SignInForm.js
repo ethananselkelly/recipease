@@ -101,7 +101,7 @@ const SignInForm = () => {
       </form>
       <div className="grid-container">
         <Stack direction="column" py={1} >
-          Need an account?
+          Don't have an account?
           <NavLink exact to='/users/new'>
             <Button size='small' variant='contained' >Sign Up</Button>
           </NavLink>

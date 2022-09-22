@@ -32,12 +32,12 @@ const AboutMe = () => {
           </p>
           <p>
             Changing careers is both scary and exciting - a bit like jumping off a cliff, except when you jump it takes a little longer than 1 second to land.
-            Despite that, I'm happy I took the plunge and I'm eager to continuing to learn and challenge myself in my new career.
+            Despite that, I'm happy I took the plunge and I'm eager to continue learning and challenging myself in my new career.
             Attending a coding bootcamp was a great, fast-paced educational experience, and I'm ready to bring those skills to a Boston-based or remote company. 
  
           </p>
           <p>
-            I'm seeking a junior dev or similar role, and am open to conversations if you would like to reach me on LinkedIn or email (see below).
+            I'm seeking a junior dev or similar role, and am open to conversations if you would like to reach me on LinkedIn or email (links below).
 
           </p>
         </Stack>

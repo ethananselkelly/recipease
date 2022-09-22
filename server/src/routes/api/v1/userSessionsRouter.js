@@ -24,7 +24,8 @@ sessionRouter.get("/current", async (req, res) => {
   if (req.user) {
     res.status(200).json(req.user);
   } else {
-    res.status(401).json(undefined);
+    // this causes the menu click event listener to stop working when there is no user signed in
+    // res.status(401).json(undefined);
   }
 });
 
