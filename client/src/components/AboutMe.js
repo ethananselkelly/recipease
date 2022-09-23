@@ -27,7 +27,7 @@ const AboutMe = () => {
           </p>
           <p>        
             I'm Ethan Ansel-Kelly. Career changer, full stack developer, and home cook (and more, but this is most relevant here), with a background in environmental science and clinical research. 
-            I learned full stack web development at Launch Academy, a coding bootcamp in Boston that mainly taught Node.js, React, and Postgresql, as well as software engineering fundamentals to help me get job-ready in this new field.
+            I learned full stack web development at Launch Academy, a coding bootcamp in Boston that mainly taught Node.js, React, and Postgresql, as well as software engineering fundamentals to help me get job-ready in this field.
 
           </p>
           <p>
@@ -38,7 +38,6 @@ const AboutMe = () => {
           </p>
           <p>
             I'm seeking a junior dev or similar role, and am open to conversations if you would like to reach me on LinkedIn or email (links below).
-
           </p>
         </Stack>
       </Stack>

@@ -4,7 +4,7 @@ import Scraper from './Scraper'
 import KeywordSearch from './KeywordSearch'
 import Divider from '@mui/material/Divider'
 
-const RecipesIndex = (props) => {
+const RecipesIndex = () => {
   const [recipes, setRecipes] = useState([])
   
   const getRecipes = async () => {
