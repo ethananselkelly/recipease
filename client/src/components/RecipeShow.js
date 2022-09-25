@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { withRouter } from 'react-router'
 import { Link } from 'react-router-dom'
 import Divider from '@mui/material/Divider'
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import SaveButton from './SaveButton'
 
 const RecipeShow = (props) => {
@@ -43,10 +44,10 @@ const RecipeShow = (props) => {
   
   return (
     <div className='index-container'>
-      <div className='nav container'>
-        <p>
-          <Link className='show-link' to={`/recipes`}>Back to recipes</Link>
-        </p>
+      <div className='nav-container'>
+          <Link className='show-link' to={`/recipes`}>
+            <ArrowBackIcon variant='contained' />
+          </Link>
       </div>
       <Divider />
       <div>
@@ -75,7 +76,7 @@ const RecipeShow = (props) => {
         </div>
         <Divider />
         <div className='nav-container'>
-          <a className='show-link' href={recipe.url} target='_blank'>Link to recipe source</a>
+          <a className='show-link' href={recipe.url} target='_blank'>Recipe source</a>
           <SaveButton 
             isUserRecipe={isUserRecipe} 
             setIsUserRecipe={setIsUserRecipe}
