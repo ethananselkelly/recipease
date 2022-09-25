@@ -33,6 +33,25 @@ const App = (props) => {
     fetchCurrentUser()
   }, [])
 
+  // let scrollPosition = 0
+
+  // const topBar = document.getElementsByClassName('topbar')[0]
+  // window.addEventListener('scroll', () => {
+  //   const scrollTop = window.scrollY || document.documentElement.scrollTop
+  //   if (scrollTop > scrollPosition) {
+  //     topBar.style.top='-80px'
+  //   } else {
+  //     topBar.style.top = '0'
+  //   }
+  //   scrollPosition = scrollTop
+  // })
+
+  // const scrollContent = document.querySelector('#app')
+  // scrollContent.addEventListener('scroll', (e) => {
+  //   scrollPosition = scrollContent.scrollTop
+  //   console.log(scrollPosition)
+  // })
+
   return (
     <Router>
       <TopBar user={currentUser} />

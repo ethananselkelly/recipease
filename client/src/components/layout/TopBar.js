@@ -9,12 +9,43 @@ const TopBar = ({ user }) => {
   const [visibility, setVisibility] = useState(false)
 
   const navToggle = document.querySelector('.mobile-nav-toggle')
+  const primaryNav = document.querySelector('.primary-navigation')
+  // const topBar = document.querySelector('.topbar')
 
   const handleVisibility = () => {
     if (navToggle) {
+      console.log(visibility)
       setVisibility(!visibility)
     }
   }
+  // if (visibility) {
+  //   document.addEventListener('click', (event) => {
+  //     if (!topBar.contains(event.target)) {
+  //       console.log(visibility)
+  //       setVisibility(false)
+  //       console.log('hi')
+  //     }
+  //   })
+  // }
+  // if (primaryNav) {
+  //   primaryNav.addEventListener('click', () => {
+  //     if (visibility) {
+  //       setVisibility(false)
+  //     }
+  //   })
+  // }
+  let scrollPosition = 0
+
+  const topBar = document.getElementsByClassName('topbar')[0]
+  window.addEventListener('scroll', () => {
+    const scrollTop = window.scrollY || document.documentElement.scrollTop
+    if (scrollTop > scrollPosition) {
+      topBar.style.top='-80px'
+    } else {
+      topBar.style.top = '0'
+    }
+    scrollPosition = scrollTop
+  })
 
   return (
       <Stack className='topbar' direction='row' >
