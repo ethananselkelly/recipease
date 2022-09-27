@@ -52,12 +52,14 @@ const RecipeShow = (props) => {
       <Divider />
       <div>
         <div className='container'>
-          <h4 className='recipe-name'>
+          <h3 className='recipe-name'>
             {recipe.name}
-          </h4> 
+          </h3> 
         </div>
         <div className='image-container'>
-          <img className='recipe-image' src={recipe.image} />
+          {recipe.image &&
+            <img className='recipe-image' src={recipe.image} />
+          }
         </div>
         <Divider/>
         <div className='lists container'>
@@ -76,7 +78,9 @@ const RecipeShow = (props) => {
         </div>
         <Divider />
         <div className='nav-container'>
-          <a className='show-link' href={recipe.url} target='_blank'>Recipe source</a>
+          {recipe.url &&
+            <a className='show-link' href={recipe.url} target='_blank'>Recipe source</a>
+          }
           <SaveButton 
             isUserRecipe={isUserRecipe} 
             setIsUserRecipe={setIsUserRecipe}
