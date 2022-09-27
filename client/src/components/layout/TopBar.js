@@ -5,19 +5,19 @@ import { Stack, Divider } from '@mui/material'
 import MenuIcon from '@mui/icons-material/Menu'
 import CloseIcon from '@mui/icons-material/Close';
 
-const TopBar = ({ user }) => {
-  const [visibility, setVisibility] = useState(false)
+const TopBar = ({ user, navVisibility, handleVisibility }) => {
+  // const [visibility, setVisibility] = useState(false)
 
   const navToggle = document.querySelector('.mobile-nav-toggle')
   const primaryNav = document.querySelector('.primary-navigation')
   // const topBar = document.querySelector('.topbar')
 
-  const handleVisibility = () => {
-    if (navToggle) {
-      console.log(visibility)
-      setVisibility(!visibility)
-    }
-  }
+  // const handleVisibility = () => {
+  //   if (navToggle) {
+  //     console.log(navVisibility)
+  //     setNavVisibility(!navVisibility)
+  //   }
+  // }
   // if (visibility) {
   //   document.addEventListener('click', (event) => {
   //     if (!topBar.contains(event.target)) {
@@ -34,18 +34,18 @@ const TopBar = ({ user }) => {
   //     }
   //   })
   // }
-  let scrollPosition = 0
+  // let scrollPosition = 0
 
-  const topBar = document.getElementsByClassName('topbar')[0]
-  window.addEventListener('scroll', () => {
-    const scrollTop = window.scrollY || document.documentElement.scrollTop
-    if (scrollTop > scrollPosition) {
-      topBar.style.top='-80px'
-    } else {
-      topBar.style.top = '0'
-    }
-    scrollPosition = scrollTop
-  })
+  // const topBar = document.getElementsByClassName('topbar')[0]
+  // window.addEventListener('scroll', () => {
+  //   const scrollTop = window.scrollY || document.documentElement.scrollTop
+  //   if (scrollTop > scrollPosition) {
+  //     topBar.style.top='-80px'
+  //   } else {
+  //     topBar.style.top = '0'
+  //   }
+  //   scrollPosition = scrollTop
+  // })
 
   return (
       <Stack className='topbar' direction='row' >
@@ -61,15 +61,15 @@ const TopBar = ({ user }) => {
           }
         </div>
 
-        <button className="mobile-nav-toggle" aria-controls="primary-navigation" aria-expanded={visibility} onClick={handleVisibility}>
-          {visibility ? 
+        <button className="mobile-nav-toggle" aria-controls="primary-navigation" aria-expanded={navVisibility} onClick={handleVisibility}>
+          {navVisibility ? 
             <CloseIcon className="menu-icon" />
             :
             <MenuIcon className="menu-icon" />
           }
         </button>
 
-        <ul className="primary-navigation" data-visible={visibility}>
+        <ul className="primary-navigation" data-visible={navVisibility}>
           <NavLink className="nav-button" activeStyle={{ color: 'white', backgroundColor: '#3190cf' }} exact to="/recipes">Recipes</NavLink>
           <NavLink className='nav-button' activeStyle={{ color: 'white', backgroundColor: '#3190cf' }} exact to='/about-me'>About Me</NavLink>
           {user ? 

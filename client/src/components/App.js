@@ -51,10 +51,31 @@ const App = (props) => {
   //   scrollPosition = scrollContent.scrollTop
   //   console.log(scrollPosition)
   // })
+  const navToggle = document.querySelector('.mobile-nav-toggle')
+  const topBar = document.querySelector('.topbar')
+
+  const [navVisibility, setNavVisibility] = useState(false)
+  document.addEventListener('click', function (event) {
+    if (navVisibility === true && !topBar.contains(event.target)) {
+      setNavVisibility(false)
+      console.log(navVisibility)
+    }
+  })
+
+  const handleVisibility = () => {
+    // console.log(navVisibility)
+    if (navToggle) {
+      if (navVisibility === true) {
+        setNavVisibility(false)
+      } else {
+        setNavVisibility(true)
+      }
+    }
+  }
 
   return (
     <Router>
-      <TopBar user={currentUser} />
+      <TopBar user={currentUser} navVisibility={navVisibility} handleVisibility={handleVisibility} />
       <Switch>
         <Route exact path="/" component={Home}/>
         <Route exact path="/users/new" component={RegistrationForm} />
