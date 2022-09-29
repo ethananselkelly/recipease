@@ -9,6 +9,7 @@ import SignInForm from "./authentication/SignInForm";
 import TopBar from "./layout/TopBar";
 import RecipesIndex from "./RecipesIndex";
 import RecipeShow from "./RecipeShow";
+import RecipeForm from "./RecipeForm";
 import AuthenticatedRoute from "./authentication/AuthenticatedRoute";
 import Footer from "./layout/Footer";
 import Home from "./Home";
@@ -41,6 +42,7 @@ const App = (props) => {
         <Route exact path="/users/new" component={RegistrationForm} />
         <Route exact path="/user-sessions/new" component={SignInForm} />
         <AuthenticatedRoute exact path="/recipes" component={RecipesIndex} user={currentUser}/>
+        <AuthenticatedRoute exact path="/recipe-form" component={RecipeForm} user={currentUser}/>
         <Route exact path="/recipes/:id">
           <RecipeShow user={currentUser} />
         </Route>   
