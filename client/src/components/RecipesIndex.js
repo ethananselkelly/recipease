@@ -3,6 +3,7 @@ import RecipeIndexTile from './RecipeIndexTile'
 import Scraper from './Scraper'
 import KeywordSearch from './KeywordSearch'
 import Divider from '@mui/material/Divider'
+import Link from "@mui/material/Link"
 
 const RecipesIndex = () => {
   const [recipes, setRecipes] = useState([])
@@ -44,6 +45,9 @@ const RecipesIndex = () => {
             updateRecipes={updateRecipes}
           />
         </div>
+      </div>
+      <div className='link-to-form'>
+        <Link href='/recipes/form' >Enter a recipe manually</Link>
       </div>
       <Divider />
       <div className='search'>
