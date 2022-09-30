@@ -6,6 +6,7 @@ import handleRecipeScraper from '../../../services/handleRecipeScraper.js'
 import handleRecipeSearch from '../../../services/handleRecipeSearch.js'
 import handleGetRecipe from '../../../services/handleGetRecipe.js'
 import handleDeleteRecipe from '../../../services/handleDeleteRecipe.js'
+import handleRecipeForm from '../../../services/handleRecipeForm.js'
 
 const { ValidationError } = objection
 
@@ -60,6 +61,15 @@ recipesRouter.post('/', async (req, res) => {
     if (error instanceof ValidationError) {
       return res.status(422).json({ errors: error.data})
     }
+    return res.status(500).json({ errors: error })
+  }
+})
+
+recipesRouter.post('/form', async (req, res) => {
+  try {
+    const newRecipe = await handleRecipeForm(req)
+    return res.status(201).json({ recipe: newRecipe })
+  } catch (error) {
     return res.status(500).json({ errors: error })
   }
 })

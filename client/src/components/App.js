@@ -42,7 +42,7 @@ const App = (props) => {
         <Route exact path="/users/new" component={RegistrationForm} />
         <Route exact path="/user-sessions/new" component={SignInForm} />
         <AuthenticatedRoute exact path="/recipes" component={RecipesIndex} user={currentUser}/>
-        <AuthenticatedRoute exact path="/recipe-form" component={RecipeForm} user={currentUser}/>
+        <AuthenticatedRoute exact path="/recipes/form" component={RecipeForm} user={currentUser}/>
         <Route exact path="/recipes/:id">
           <RecipeShow user={currentUser} />
         </Route>   

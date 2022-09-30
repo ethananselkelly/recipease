@@ -14,7 +14,6 @@ h3 {
   display: flex;
   flex-direction: column;
   margin-bottom: 1em;
-  // justify-content: space-around;
   align-items: center;
   gap: 0.5em;
 }
@@ -25,7 +24,6 @@ h3 {
   flex-direction: column;
   justify-content: flex-start;
   gap:0.5em;
-  // align-items: center;
 }
 
 .multi-input-container {
@@ -41,3 +39,34 @@ h3 {
   gap: 0.5em;
 }
 
+.remove-button {
+  position: relative;
+  left: 70vw;
+}
+
+.add-button {
+  position: relative;
+  left: 70vw;
+}
+
+.form-error.is-visible {
+  margin: 0;
+}
+
+@media (min-width: 30em) {
+  .input-container {
+    width: 60%;
+  }
+
+  .multi-input-container {
+    width: 60%;
+  }
+
+  .remove-button {
+    left:0;
+  }
+
+  .add-button {
+    left: 0;
+  }
+}

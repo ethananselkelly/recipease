@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import FormError from "./layout/FormError";
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
 import { TextField, Button } from "@mui/material";
@@ -13,10 +14,91 @@ const RecipeForm = (props) => {
     image: '',
 
   })
-
   const [errors, setErrors] = useState({});
-
   const [shouldRedirect, setShouldRedirect] = useState(false);
+
+  const postRecipe = async (recipePayload) => {
+    try {
+      const response = await fetch(`/api/v1/recipes/form`, {
+        method: "POST",
+        headers: new Headers({
+          "Content-Type": "application/json"
+        }),
+        body: JSON.stringify(recipePayload)
+      })
+      if (!response.ok) {
+        const errorMessage = `${response.status} (${response.statusText})`
+        const error = new Error(errorMessage)
+        throw error
+      }
+      const recipeData = response.json()
+      setShouldRedirect(true)
+      return true
+    } catch (error) {
+      console.error(`Error in fetch: ${error.message}`)
+    }
+  }
+
+  const validateInput = (payload) => {
+    setErrors({})
+    const { name, ingredients, instructions } = payload
+    let newErrors = {}
+
+    if (name.trim() == '') {
+      newErrors = {
+        ...newErrors,
+        name: 'name cannot be blank'
+      }
+    }
+    if (ingredients.length < 2) {
+      newErrors = {
+        ...newErrors,
+        ingredients: 'must have at least 2 ingredients'
+      }
+    }
+
+    let blankIngredients = []
+    ingredients.forEach((ingredient, index) => {
+      if (ingredient.name.trim() == '') {
+        blankIngredients.push(index+1)
+        newErrors = {
+          ...newErrors,
+          ingredient: `ingredient cannot be blank - ingredient(s) ${blankIngredients}`
+        }
+      }
+    })
+
+    if (instructions.length < 2) {
+      newErrors = {
+        ...newErrors,
+        instructions: 'must have at least 2 instructions'
+      }
+    }
+
+    let blankInstructions = []
+    instructions.forEach((instruction, index) => {
+      if (instruction.name.trim() == '') {
+        blankInstructions.push(index+1)
+        newErrors = {
+          ...newErrors,
+          instruction: `instruction cannot be blank - instruction(s) ${blankInstructions}`
+        }
+      }
+    })
+
+    setErrors(newErrors)
+    if (Object.keys(newErrors).length === 0) {
+      return true
+    }
+    return false
+  }
+
+  const handleSubmit = async (event) => {
+    event.preventDefault()
+    if (validateInput(recipePayload)) {
+      await postRecipe(recipePayload)
+    }
+  }
 
   const onInputChange = (event) => {
     setRecipePayload({
@@ -117,23 +199,29 @@ const RecipeForm = (props) => {
     )
   })
 
+  if (shouldRedirect) {
+    location.href = '/recipes'
+  }
+
   return (
     <div className="form-container">
       <h3>New Recipe Form</h3>
-      <form className="recipe-form" onSubmit={console.log(recipePayload)} >
+      <form className="recipe-form" onSubmit={handleSubmit} >
         <label className="input-container">
           Name
+          <FormError error={errors.name} />
           <TextField 
             name='name'
             label='Enter a title for your recipe'
             value={recipePayload.name}
             onChange={onInputChange} 
             size='small'
-            required={true}
           />
         </label>
         <label className="multi-input-container">
           Ingredients
+          <FormError error={errors.ingredient} />
+          <FormError error={errors.ingredients} />
           {ingredientInputs}
           <AddIcon 
             className="add-button" 
@@ -143,6 +231,8 @@ const RecipeForm = (props) => {
         </label>
         <label className="multi-input-container">
           Instructions
+          <FormError error={errors.instruction} />
+          <FormError error={errors.instructions} />
           {instructionInputs}
           <AddIcon 
             className="add-button" 

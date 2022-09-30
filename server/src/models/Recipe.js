@@ -14,8 +14,8 @@ class Recipe extends Model {
         ingredients: { type: "string" },
         instructions: { type: "string" },
         source: { type: "string", minLength: 1, maxLength: 55 },
-        url: { type: "string", minLength: 1, maxLength: 255 },
-        image: { type: "string" }
+        url: { type: "string", maxLength: 255 },
+        image: { type: "string", maxLength: 255 }
       }
     }
   }

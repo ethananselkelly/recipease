@@ -9,8 +9,7 @@ const clientRoutes = [
   "/users/new",
   "/recipes",
   "/recipes/:id",
-  "/scraper",
-  "/recipe-form",
+  "/recipes/form",
   "/about-me"
 ];
 
