@@ -10,6 +10,16 @@ const config = {
       regexp: {
         passwordRegex: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/,
       }
+    },
+    image: {
+      regexp: {
+        imageRegex: /(https?:\/\/.*\.(?:png|jpg))/i,
+      }
+    },
+    url: {
+      regexp: {
+        urlRegex: /^((https?|ftp|smtp):\/\/)?(www.)?[a-z0-9]+\.[a-z]+(\/[a-zA-Z0-9#]+\/?)*$/i
+      }
     }
   },
 };

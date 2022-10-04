@@ -3,6 +3,7 @@ import FormError from "./layout/FormError";
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
 import { TextField, Button } from "@mui/material";
+import config from "../config";
 
 const RecipeForm = (props) => {
 
@@ -41,7 +42,7 @@ const RecipeForm = (props) => {
 
   const validateInput = (payload) => {
     setErrors({})
-    const { name, ingredients, instructions } = payload
+    const { name, ingredients, instructions, url, image } = payload
     let newErrors = {}
 
     if (name.trim() == '') {
@@ -85,6 +86,22 @@ const RecipeForm = (props) => {
         }
       }
     })
+
+    const urlRegex = config.validation.url.regexp.urlRegex
+    if (!url == '' && !url.match(urlRegex)) {
+      newErrors = {
+        ...newErrors,
+        url: 'must be a valid URL'
+      }
+    }
+
+    const imageRegex = config.validation.image.regexp.imageRegex
+    if (!image == '' && !image.match(imageRegex)) {
+      newErrors = {
+        ...newErrors,
+        image: 'must be a valid image URL (.png or .jpg)'
+      }
+    }
 
     setErrors(newErrors)
     if (Object.keys(newErrors).length === 0) {
@@ -242,6 +259,7 @@ const RecipeForm = (props) => {
         </label>
         <label className="input-container">
           Source URL
+          <FormError error={errors.url} />
           <TextField 
             name='url'
             label='Optional'
@@ -252,6 +270,7 @@ const RecipeForm = (props) => {
         </label>
         <label className="input-container">
           Image URL
+          <FormError error={errors.image} />
           <TextField
             name='image'
             label='Optional'
@@ -261,8 +280,11 @@ const RecipeForm = (props) => {
           />
         </label>
         <label>
-          <Button variant='contained' type='submit' size='small' >
+          <Button variant='contained' type='submit' size='small' sx={{marginRight: '0.5em'}} >
             Save Recipe
+          </Button>
+          <Button variant="outlined" size='small' href='/recipes' sx={{marginLeft: '0.5em'}} >
+            Cancel
           </Button>
         </label>
       </form>
