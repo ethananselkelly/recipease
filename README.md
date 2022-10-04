@@ -4,8 +4,12 @@ Simple full-stack web app for scraping and saving recipes from all over the inte
 
 Skips the blog posts and goes straight to the important stuff.
 
+https://recipease1.herokuapp.com/
+
 Running the App locally
 =========
+
+This is a web app but can be run locally if you prefer.
 
 Recipease was created using Node 14.15. Please make sure you have the proper packages installed using yarn install
 
