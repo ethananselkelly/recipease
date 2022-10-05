@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import FormError from "../layout/FormError";
 import config from "../../config";
+import { Button } from "@mui/material";
 
 const RegistrationForm = () => {
   const [userPayload, setUserPayload] = useState({
@@ -157,7 +158,7 @@ const RegistrationForm = () => {
           </label>
         </div>
         <div>
-          <input type="submit" className="button" value="Register" />
+          <Button type='submit' size='small' variant='contained'>Register</Button>
         </div>
       </form>
     </div>
