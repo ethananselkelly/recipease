@@ -5,7 +5,7 @@ import RemoveIcon from '@mui/icons-material/Remove';
 import { TextField, Button } from "@mui/material";
 import config from "../config";
 
-const RecipeForm = (props) => {
+const NewRecipeForm = (props) => {
 
   const [recipePayload, setRecipePayload] = useState({
     name: '',
@@ -222,7 +222,7 @@ const RecipeForm = (props) => {
 
   return (
     <div className="form-container">
-      <h3>New Recipe Form</h3>
+      <h4>New Recipe Form</h4>
       <form className="recipe-form" onSubmit={handleSubmit} >
         <label className="input-container">
           Name
@@ -292,4 +292,4 @@ const RecipeForm = (props) => {
   )
 }
 
-export default RecipeForm
+export default NewRecipeForm
