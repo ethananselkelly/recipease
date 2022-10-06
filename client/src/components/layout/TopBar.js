@@ -39,17 +39,17 @@ const TopBar = ({ user }) => {
         </button>
 
         <ul className="primary-navigation" data-visible={visibility}>
-          <NavLink className="nav-button" activeStyle={{ color: 'white', backgroundColor: '#3190cf' }} exact to="/recipes">Recipes</NavLink>
-          <NavLink className='nav-button' activeStyle={{ color: 'white', backgroundColor: '#3190cf' }} exact to='/about-me'>About Me</NavLink>
+          <NavLink className="nav-button" activeStyle={{ color: 'white', backgroundColor: '#3190cf' }} exact to="/recipes" onClick={handleVisibility}>Recipes</NavLink>
+          <NavLink className='nav-button' activeStyle={{ color: 'white', backgroundColor: '#3190cf' }} exact to='/about-me' onClick={handleVisibility}>About Me</NavLink>
           {user ? 
             <> 
               <li className="nav-button" key="sign-out">
-                <SignOutButton />
+                <SignOutButton  onClick={handleVisibility}/>
               </li> 
             </>
             :
             <li key="sign-in" >
-              <NavLink className="nav-button" activeStyle={{ color: 'white', backgroundColor: '#3190cf' }} exact to="/user-sessions/new" >Sign In</NavLink>
+              <NavLink className="nav-button" activeStyle={{ color: 'white', backgroundColor: '#3190cf' }} exact to="/user-sessions/new" onClick={handleVisibility} >Sign In</NavLink>
             </li>
           }
         </ul>     
