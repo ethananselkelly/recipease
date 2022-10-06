@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 import Divider from '@mui/material/Divider'
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import SaveButton from './SaveButton'
+import EditIcon from '@mui/icons-material/Edit';
 
 const RecipeShow = (props) => {
   const [recipe, setRecipe] = useState({
@@ -15,9 +16,8 @@ const RecipeShow = (props) => {
     notes: '',
     image: ''
   })
-  
+  console.log(props)
   const [isUserRecipe, setIsUserRecipe] = useState(false)
-
   const recipeId = props.match.params.id
 
   const getRecipe = async () => {
@@ -47,6 +47,9 @@ const RecipeShow = (props) => {
       <div className='nav-container'>
           <Link className='show-link' to={`/recipes`}>
             <ArrowBackIcon variant='contained' />
+          </Link>
+          <Link className='show-link' to={`/recipes/${recipeId}/edit`}>
+            <EditIcon variant='contained' />
           </Link>
       </div>
       <Divider />

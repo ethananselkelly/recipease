@@ -5,7 +5,8 @@ import KeywordSearch from './KeywordSearch'
 import Divider from '@mui/material/Divider'
 import Link from "@mui/material/Link"
 
-const RecipesIndex = () => {
+const RecipesIndex = (props) => {
+  console.log(props)
   const [recipes, setRecipes] = useState([])
   
   const getRecipes = async () => {
