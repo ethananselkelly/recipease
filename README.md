@@ -9,7 +9,7 @@ https://recipease1.herokuapp.com/
 Running the App locally
 =========
 
-This is a web app but can be run locally if you prefer.
+This is a web app but can be run locally on your machine.
 
 Recipease was created using Node 14.15. Please make sure you have the proper packages installed using yarn install
 
