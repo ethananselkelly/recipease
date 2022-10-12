@@ -70,7 +70,7 @@ const Scraper = ({ updateRecipes }) => {
     <div>
       <form id='scraper' onSubmit={handleSubmit}>
         <div className='scraper-container'>
-          <label className='scraper-input'>
+          <label className='scraper-input' >
             <TextField 
               id='url'
               name='url'
@@ -81,7 +81,7 @@ const Scraper = ({ updateRecipes }) => {
               value={recipeURL.url}
               />
           </label>
-            <Button  type="submit" size='small' variant="contained">Save</Button>
+          <Button  type="submit" size='small' variant="contained">Save</Button>
         </div>
         <div className='scraper-feedback'>
           <ThreeDots 

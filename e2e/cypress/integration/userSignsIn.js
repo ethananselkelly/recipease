@@ -9,7 +9,7 @@ describe("As a user visiting the sign in page", () => {
     cy.task("db:truncate", "User");
     cy.task("db:insert", {
       modelName: "User",
-      json: { email: "user@example.com", password: "password" },
+      json: { email: "user@example.com", username: "username", password: "Password123" },
     });
   });
 
@@ -18,11 +18,11 @@ describe("As a user visiting the sign in page", () => {
     cy.get("form").within(() => {
       cy.findByLabelText("Email").type("user@example.com");
 
-      cy.findByLabelText("Password").type("password");
+      cy.findByLabelText("Password").type("Password123");
 
       cy.root().submit();
 
-      cy.url().should("eq", `${Cypress.config().baseUrl}/`);
+      cy.url().should("eq", `${Cypress.config().baseUrl}/recipes`);
     });
     cy.contains("Sign Out");
   });
@@ -31,7 +31,7 @@ describe("As a user visiting the sign in page", () => {
     visitSignInPage();
     cy.get("form").within(() => {
       cy.findByLabelText("Email").type("just@a.joke");
-      cy.findByLabelText("Password").type("password");
+      cy.findByLabelText("Password").type("Password123");
       cy.root().submit();
 
       cy.url().should("eq", `${Cypress.config().baseUrl}/user-sessions/new`);
@@ -44,7 +44,7 @@ describe("As a user visiting the sign in page", () => {
       cy.findByLabelText("Password").type("password");
       cy.root().submit();
 
-      cy.contains("is invalid");
+      cy.contains("invalid email or password");
     });
   });
 });
