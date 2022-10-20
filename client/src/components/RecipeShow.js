@@ -47,9 +47,11 @@ const RecipeShow = (props) => {
           <Link className='show-link' to={`/recipes`}>
             <ArrowBackIcon variant='contained' />
           </Link>
-          <Link className='show-link' to={`/recipes/${recipeId}/edit`}>
-            <EditIcon variant='contained' />
-          </Link>
+          {isUserRecipe &&
+            <Link className='show-link' to={`/recipes/${recipeId}/edit`}>
+              <EditIcon variant='contained' />
+            </Link>
+          }
       </div>
       <Divider />
       <div>
