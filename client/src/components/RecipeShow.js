@@ -16,7 +16,6 @@ const RecipeShow = (props) => {
     notes: '',
     image: ''
   })
-  console.log(props)
   const [isUserRecipe, setIsUserRecipe] = useState(false)
   const recipeId = props.match.params.id
 
