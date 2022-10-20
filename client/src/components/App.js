@@ -9,11 +9,12 @@ import SignInForm from "./authentication/SignInForm";
 import TopBar from "./layout/TopBar";
 import RecipesIndex from "./RecipesIndex";
 import RecipeShow from "./RecipeShow";
-import RecipeForm from "./RecipeForm";
+import NewRecipeForm from "./NewRecipeForm";
 import AuthenticatedRoute from "./authentication/AuthenticatedRoute";
 import Footer from "./layout/Footer";
 import Home from "./Home";
 import AboutMe from "./AboutMe";
+import EditRecipeForm from "./EditRecipeForm";
 
 const App = (props) => {
   const [currentUser, setCurrentUser] = useState(undefined);
@@ -38,15 +39,19 @@ const App = (props) => {
     <Router>
       <TopBar user={currentUser} />
       <Switch>
-        <Route exact path="/" component={Home}/>
+        <Route exact path="/" component={Home} />
         <Route exact path="/users/new" component={RegistrationForm} />
         <Route exact path="/user-sessions/new" component={SignInForm} />
-        <AuthenticatedRoute exact path="/recipes" component={RecipesIndex} user={currentUser}/>
-        <AuthenticatedRoute exact path="/recipes/form" component={RecipeForm} user={currentUser}/>
-        <Route exact path="/recipes/:id">
+        <AuthenticatedRoute exact path="/recipes" component={RecipesIndex} user={currentUser} />
+        <AuthenticatedRoute exact path="/recipes/form" component={NewRecipeForm} user={currentUser} />
+        <Route exact path="/recipes/:id" >
           <RecipeShow user={currentUser} />
         </Route>   
-        <Route exact path="/about-me" component={AboutMe}/>     
+        {/* <AuthenticatedRoute exact path='/recipes/:id/edit' component={EditRecipeForm} user={currentUser} /> */}
+        <Route exact path='/recipes/:id/edit' >
+          <EditRecipeForm user={currentUser} />
+        </Route>
+        <Route exact path="/about-me" component={AboutMe} />     
       </Switch>
       <Footer/>
     </Router>

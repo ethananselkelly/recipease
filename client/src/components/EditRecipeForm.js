@@ -1,22 +1,53 @@
-import React, { useState } from "react";
-import FormError from "./layout/FormError";
-import AddIcon from '@mui/icons-material/Add';
-import RemoveIcon from '@mui/icons-material/Remove';
+import React, {useState, useEffect} from "react";
+import { withRouter } from "react-router-dom";
 import { TextField, Button } from "@mui/material";
+import RemoveIcon from "@mui/icons-material/Remove";
+import AddIcon from "@mui/icons-material/Add";
+import FormError from "./layout/FormError";
 import config from "../config";
 
-const RecipeForm = (props) => {
-
+const EditRecipeForm = (props) => {
   const [recipePayload, setRecipePayload] = useState({
     name: '',
-    ingredients: [{name: ''}],
-    instructions: [{name: ''}],
+    ingredients: [],
+    instructions: [],
     url: '',
     image: '',
-
   })
-  const [errors, setErrors] = useState({});
-  const [shouldRedirect, setShouldRedirect] = useState(false);
+  const [errors, setErrors] = useState({})
+  const [shouldRedirect, setShouldRedirect] = useState(false)
+
+  const recipeId = props.match.params.id
+  const getRecipe = async () => {
+    try {
+      const response = await fetch(`/api/v1/recipes/${recipeId}`)
+      if (!response.ok) {
+        const errorMessage = `${response.status} (${response.statusText})`
+        const error = new Error(errorMessage)
+        throw error
+      }
+      const body = await response.json()
+      const ingredientArray = body.recipe.ingredients.split('\n')
+      const ingredientObjectArray = []
+      ingredientArray.forEach(ingredient => {
+        ingredientObjectArray.push({name: ingredient})
+      })
+      const instructionArray = body.recipe.instructions.split('\n')
+      const instructionObjectArray = []
+      instructionArray.forEach(instruction => {
+        instructionObjectArray.push({name: instruction})
+      })
+      setRecipePayload({
+        name: body.recipe.name,
+        ingredients: ingredientObjectArray,
+        instructions: instructionObjectArray,
+        url: body.recipe.url,
+        image: body.recipe.image
+      })
+    } catch (error) {
+      console.error(`Error in fetch ${error.message}`)
+    }
+  }
 
   const postRecipe = async (recipePayload) => {
     try {
@@ -39,6 +70,10 @@ const RecipeForm = (props) => {
       console.error(`Error in fetch: ${error.message}`)
     }
   }
+  
+  useEffect(() => {
+    getRecipe()
+  }, [])
 
   const validateInput = (payload) => {
     setErrors({})
@@ -57,7 +92,6 @@ const RecipeForm = (props) => {
         ingredients: 'must have at least 2 ingredients'
       }
     }
-
     let blankIngredients = []
     ingredients.forEach((ingredient, index) => {
       if (ingredient.name.trim() == '') {
@@ -86,23 +120,7 @@ const RecipeForm = (props) => {
         }
       }
     })
-
-    const urlRegex = config.validation.url.regexp.urlRegex
-    if (!url == '' && !url.match(urlRegex)) {
-      newErrors = {
-        ...newErrors,
-        url: 'must be a valid URL'
-      }
-    }
-
-    const imageRegex = config.validation.image.regexp.imageRegex
-    if (!image == '' && !image.match(imageRegex)) {
-      newErrors = {
-        ...newErrors,
-        image: 'must be a valid image URL (.png or .jpg)'
-      }
-    }
-
+  
     setErrors(newErrors)
     if (Object.keys(newErrors).length === 0) {
       return true
@@ -146,7 +164,7 @@ const RecipeForm = (props) => {
     })
   }
 
-  const addIngredient = () => {
+  const addIngredient = (index) => {
     setRecipePayload({
       ...recipePayload,
       ingredients: recipePayload.ingredients.concat([{ name: '' }])
@@ -174,64 +192,21 @@ const RecipeForm = (props) => {
     })
   }
 
-  const ingredientInputs = recipePayload.ingredients.map((ingredient, index) => {
-    return (
-      <div className="multi-input" key={index+1}>
-        <TextField 
-          name='ingredient' 
-          label={`Ingredient ${index+1}`}
-          value={ingredient.name}
-          onChange={onIngredientChange(index)}
-          size='small'
-        />
-        <RemoveIcon 
-          className="remove-button" 
-          onClick={removeIngredient(index)} 
-          size='small' 
-          sx={{ color: 'white', borderRadius: 1.2, bgcolor: '#3190cf', boxShadow: 3}}
-        />
-      </div>
-    )
-  })
-
-  const instructionInputs = recipePayload.instructions.map((instruction, index) => {
-    return (
-      <div className="multi-input" key={index+1}>
-         <TextField 
-          name='instruction' 
-          label={`Instruction ${index+1}`}
-          value={instruction.name}
-          onChange={onInstructionChange(index)}
-          size='small'
-          multiline={true}
-          rows={2}
-        />
-        <RemoveIcon 
-          className="remove-button"  
-          onClick={removeInstruction(index)} 
-          size='small' 
-          sx={{ color: 'white', borderRadius: 1.2, bgcolor: '#3190cf', boxShadow: 3}}
-        />
-      </div>
-    )
-  })
-
   if (shouldRedirect) {
     location.href = '/recipes'
   }
-
   return (
     <div className="form-container">
-      <h3>New Recipe Form</h3>
-      <form className="recipe-form" onSubmit={handleSubmit} >
+      <h4>Edit Recipe - this will save a copy of the recipe</h4>
+      <form className="recipe-form" onSubmit={handleSubmit}>
         <label className="input-container">
           Name
           <FormError error={errors.name} />
-          <TextField 
+          <TextField
             name='name'
-            label='Enter a title for your recipe'
+            label='Recipe title'
             value={recipePayload.name}
-            onChange={onInputChange} 
+            onChange={onInputChange}
             size='small'
           />
         </label>
@@ -239,7 +214,23 @@ const RecipeForm = (props) => {
           Ingredients
           <FormError error={errors.ingredient} />
           <FormError error={errors.ingredients} />
-          {ingredientInputs}
+          {recipePayload.ingredients.map((ingredient, index) => (
+            <div className="multi-input" key={index+1}>
+              <TextField 
+                name='ingredient' 
+                label={`Ingredient ${index+1}`}
+                value={ingredient.name}
+                onChange={onIngredientChange(index)}
+                size='small'
+              />
+              <RemoveIcon 
+                className="remove-button" 
+                onClick={removeIngredient(index)} 
+                size='small' 
+                sx={{ color: 'white', borderRadius: 1.2, bgcolor: '#3190cf', boxShadow: 3}}
+              />
+            </div>
+          ))}
           <AddIcon 
             className="add-button" 
             onClick={addIngredient}
@@ -250,46 +241,38 @@ const RecipeForm = (props) => {
           Instructions
           <FormError error={errors.instruction} />
           <FormError error={errors.instructions} />
-          {instructionInputs}
+          {recipePayload.instructions.map((instruction, index) => (
+            <div className="multi-input" key={index+1}>
+              <TextField 
+                name='instruction' 
+                label={`Instruction ${index+1}`}
+                value={instruction.name}
+                onChange={onInstructionChange(index)}
+                size='small'
+                multiline={true}
+                rows={2}
+              />
+              <RemoveIcon 
+                className="remove-button"  
+                onClick={removeInstruction(index)} 
+                size='small' 
+                sx={{ color: 'white', borderRadius: 1.2, bgcolor: '#3190cf', boxShadow: 3}}
+              />
+            </div>
+          ))}
           <AddIcon 
             className="add-button" 
             onClick={addInstruction}
             sx={{ color: 'white', borderRadius: 1.2, bgcolor: '#3190cf', boxShadow: 3}}
           />
         </label>
-        <label className="input-container">
-          Source URL
-          <FormError error={errors.url} />
-          <TextField 
-            name='url'
-            label='Optional'
-            value={recipePayload.url}
-            onChange={onInputChange}
-            size='small'
-          />
-        </label>
-        <label className="input-container">
-          Image URL
-          <FormError error={errors.image} />
-          <TextField
-            name='image'
-            label='Optional'
-            value={recipePayload.image}
-            onChange={onInputChange}
-            size='small'
-          />
-        </label>
         <label>
-          <Button variant='contained' type='submit' size='small' sx={{marginRight: '0.5em'}} >
-            Save Recipe
-          </Button>
-          <Button variant="outlined" size='small' href='/recipes' sx={{marginLeft: '0.5em'}} >
-            Cancel
-          </Button>
+          <Button size='small' variant='contained' type='submit' sx={{marginRight: '0.5em'}} >Save</Button>
+          <Button size='small' variant='outlined' href={`/recipes/${recipeId}`} sx={{marginLeft: '0.5em'}} >Cancel</Button>
         </label>
       </form>
     </div>
   )
 }
 
-export default RecipeForm
+export default withRouter(EditRecipeForm)
