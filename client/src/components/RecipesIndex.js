@@ -50,7 +50,7 @@ const RecipesIndex = (props) => {
         <Link href='/recipes/form' >Enter a recipe manually</Link>
       </div>
       <Divider />
-      <div className='search'>
+      <div className='search-container'>
         <KeywordSearch 
           setRecipes={setRecipes}
           getRecipes={getRecipes}
