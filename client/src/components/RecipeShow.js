@@ -48,7 +48,7 @@ const RecipeShow = (props) => {
           <Link className='show-link' to={`/recipes`}>
             <ArrowBackIcon className='icon' variant='contained' />
           </Link>
-          <div className='container'>
+          <div className='recipe-header'>
             <h4 className='recipe-name'>
               {recipe.name}
             </h4> 
@@ -83,7 +83,7 @@ const RecipeShow = (props) => {
           }
         </div>
         <Divider/>
-        <div className='lists container'>
+        <div className='list-container'>
           <ul className='ingredient list'>
             {recipe.ingredients.split('\n').map((ingredient, index) => (
               <li className='ingredient' key={index}>{ingredient}</li>

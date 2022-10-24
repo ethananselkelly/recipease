@@ -17,7 +17,7 @@
   font-weight: bold;
 }
 
-.lists {
+.list-container {
   display: flex;  
   flex-direction: column;
   gap: 2rem;
@@ -36,7 +36,7 @@
   gap: 1rem;
 }
 
-.container {
+.recipe-header {
   margin-left: 1rem;
 }
 
@@ -91,13 +91,14 @@ hr.dashed {
 }
 
 @media screen and (min-width: 58em) {
-  .lists {
+  .list-container {
     flex-direction: row;
+    margin-top: 0.5em;
     margin-right: 2rem;
     margin-left: 2rem;
   }
 
-  .lists > * {
+  .list-container > * {
     flex: 1;
     padding-left: 2rem;
     padding-right: 2rem;

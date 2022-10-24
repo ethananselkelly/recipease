@@ -8,7 +8,7 @@ const Footer = () => {
   return (
     <div className="fixed-bottom">
       <Divider />
-      <div className="footer container">
+      <div className="footer-container">
         <a className="link" href="https://github.com/ethananselkelly/recipease" target='_blank'><GitHubIcon/></a>
         |
         <a className="link" href="https://www.linkedin.com/in/ethan-ansel-kelly/" target='_blank'><LinkedInIcon/></a>
