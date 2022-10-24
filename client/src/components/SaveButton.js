@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { Link } from 'react-router-dom'
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 
 const SaveButton = ({isUserRecipe, setIsUserRecipe, recipe, user}) => {
   const [shouldRedirect, setShouldRedirect] = useState(false)
@@ -68,14 +70,14 @@ const SaveButton = ({isUserRecipe, setIsUserRecipe, recipe, user}) => {
   if (user) {
     if (isUserRecipe) {
       saveButton = 
-      <button className='join-button show-link' onClick={handleRemove}>Remove recipe</button>
+        <FavoriteIcon className='unsave-button' variant='contained' color='red' onClick={handleRemove} />
     } else {
       saveButton =
-      <button className='join-button show-link' onClick={handleSave}>Save recipe</button>
+      <FavoriteBorderIcon className='save-button' variant='contained' onClick={handleSave}/>
     }
   } else {
     saveButton = 
-    <Link className='show-link' to={`/user-sessions/new`}>Sign in to save recipe </Link>
+    <Link className='show-link' to={`/user-sessions/new`}><FavoriteBorderIcon className="save-button" variant='contained' /></Link>
   }
   //this doesn't work right now, maybe can get it to work? idk lol
   // {user ? isUserRecipe ? <button className='join-button show-link' onClick={handleRemove}>Remove recipe</button> : <button className='join-button show-link' onClick={handleSave}>Save recipe</button> : <Link className='show-link' to={`/user-sessions/new`}>Sign in to save recipe </Link>}

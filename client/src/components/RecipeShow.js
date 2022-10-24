@@ -5,6 +5,7 @@ import Divider from '@mui/material/Divider'
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import SaveButton from './SaveButton'
 import EditIcon from '@mui/icons-material/Edit';
+import OpenInNewIcon from '@mui/icons-material/OpenInNew';
 
 const RecipeShow = (props) => {
   const [recipe, setRecipe] = useState({
@@ -45,21 +46,37 @@ const RecipeShow = (props) => {
     <div className='index-container'>
       <div className='nav-container'>
           <Link className='show-link' to={`/recipes`}>
-            <ArrowBackIcon variant='contained' />
+            <ArrowBackIcon className='icon' variant='contained' />
           </Link>
-          {isUserRecipe &&
-            <Link className='show-link' to={`/recipes/${recipeId}/edit`}>
-              <EditIcon variant='contained' />
-            </Link>
-          }
+          <div className='container'>
+            <h4 className='recipe-name'>
+              {recipe.name}
+            </h4> 
+          </div>
+          <div className='icon-container'>
+            <div className='icon'>
+              <SaveButton 
+                className='icon'
+                isUserRecipe={isUserRecipe} 
+                setIsUserRecipe={setIsUserRecipe}
+                recipe={recipe}
+                user={props.user}
+              />
+            </div>
+            {isUserRecipe &&
+              <Link className='icon' to={`/recipes/${recipeId}/edit`}>
+                <EditIcon variant='contained' />
+              </Link>
+            }
+            {recipe.url &&
+              <a className='icon' href={recipe.url} target='_blank'>
+                <OpenInNewIcon variant='contained' />
+              </a>
+            }
+          </div>
       </div>
       <Divider />
       <div>
-        <div className='container'>
-          <h3 className='recipe-name'>
-            {recipe.name}
-          </h3> 
-        </div>
         <div className='image-container'>
           {recipe.image &&
             <img className='recipe-image' src={recipe.image} />
@@ -79,18 +96,6 @@ const RecipeShow = (props) => {
               ))
             } 
           </ol> 
-        </div>
-        <Divider />
-        <div className='nav-container'>
-          {recipe.url &&
-            <a className='show-link' href={recipe.url} target='_blank'>Recipe source</a>
-          }
-          <SaveButton 
-            isUserRecipe={isUserRecipe} 
-            setIsUserRecipe={setIsUserRecipe}
-            recipe={recipe}
-            user={props.user}
-          />
         </div>
       </div>
     </div>
