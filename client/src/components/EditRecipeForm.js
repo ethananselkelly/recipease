@@ -13,6 +13,7 @@ const EditRecipeForm = (props) => {
     instructions: [],
     url: '',
     image: '',
+    source: '',
   })
   const [errors, setErrors] = useState({})
   const [shouldRedirect, setShouldRedirect] = useState(false)
@@ -42,7 +43,8 @@ const EditRecipeForm = (props) => {
         ingredients: ingredientObjectArray,
         instructions: instructionObjectArray,
         url: body.recipe.url,
-        image: body.recipe.image
+        image: body.recipe.image,
+        source: body.recipe.source
       })
     } catch (error) {
       console.error(`Error in fetch ${error.message}`)
@@ -195,6 +197,7 @@ const EditRecipeForm = (props) => {
   if (shouldRedirect) {
     location.href = '/recipes'
   }
+
   return (
     <div className="form-container">
       <h4>Edit Recipe - this will save a copy of the recipe</h4>
