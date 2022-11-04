@@ -2,11 +2,7 @@ import express from 'express'
 import objection from 'objection'
 import { Recipe, User } from '../../../models/index.js'
 import RecipeSerializer from '../../../serializers/RecipeSerializer.js'
-import handleRecipeScraper from '../../../services/handleRecipeScraper.js'
-import handleRecipeSearch from '../../../services/handleRecipeSearch.js'
-import handleGetRecipe from '../../../services/handleGetRecipe.js'
-import handleDeleteRecipe from '../../../services/handleDeleteRecipe.js'
-import handleRecipeForm from '../../../services/handleRecipeForm.js'
+import RecipeHandler from '../../../services/RecipeHandler.js'
 
 const { ValidationError } = objection
 
@@ -35,7 +31,7 @@ recipesRouter.get('/home', async (req, res) => {
 
 recipesRouter.get('/search', async (req, res) => {
   try {
-    const recipeSearch = await handleRecipeSearch(req)
+    const recipeSearch = await RecipeHandler.recipeSearch(req)
     const { serializedRecipes, keyword } = recipeSearch
     return res.status(200).json({ recipes: serializedRecipes, returnedKeyword:keyword })
   } catch (error) {
@@ -45,7 +41,7 @@ recipesRouter.get('/search', async (req, res) => {
 
 recipesRouter.get('/:id', async (req, res) =>{
   try {
-    const recipeGet = await handleGetRecipe(req)
+    const recipeGet = await RecipeHandler.recipeGet(req)
     const { serializedRecipe, userRecipe } = recipeGet
     return res.status(200).json({ recipe: serializedRecipe, userRecipe })
   } catch (error) {
@@ -55,7 +51,7 @@ recipesRouter.get('/:id', async (req, res) =>{
 
 recipesRouter.post('/', async (req, res) => {
   try {
-    const recipeReturn = await handleRecipeScraper(req)
+    const recipeReturn = await RecipeHandler.recipeScraper(req)
     return res.status(201).json({ recipe: recipeReturn })
   } catch (error) {
     if (error instanceof ValidationError) {
@@ -67,7 +63,7 @@ recipesRouter.post('/', async (req, res) => {
 
 recipesRouter.post('/form', async (req, res) => {
   try {
-    const newRecipe = await handleRecipeForm(req)
+    const newRecipe = await RecipeHandler.recipeForm(req)
     return res.status(201).json({ recipe: newRecipe })
   } catch (error) {
     return res.status(500).json({ errors: error })
@@ -86,7 +82,7 @@ recipesRouter.post('/:id', async (req, res) => {
 
 recipesRouter.delete('/', async (req, res) => {
   try {
-    const recipeDelete = await handleDeleteRecipe(req)
+    const recipeDelete = await RecipeHandler.recipeDelete(req)
     return res.status(200).json({ recipeDelete })
   } catch (error) {
     return res.status(500).json({ errors: error })
