@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import FormError from "./layout/FormError";
+import FormError from "../layout/FormError";
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
 import { TextField, Button } from "@mui/material";
-import config from "../config";
+import config from "../../config.js";
 
 const NewRecipeForm = (props) => {
 

@@ -3,8 +3,7 @@ import { withRouter } from "react-router-dom";
 import { TextField, Button } from "@mui/material";
 import RemoveIcon from "@mui/icons-material/Remove";
 import AddIcon from "@mui/icons-material/Add";
-import FormError from "./layout/FormError";
-import config from "../config";
+import FormError from "../layout/FormError";
 
 const EditRecipeForm = (props) => {
   const [recipePayload, setRecipePayload] = useState({

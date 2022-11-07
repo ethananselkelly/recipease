@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import FormError from './layout/FormError'
+import FormError from '../layout/FormError'
 import { ThreeDots } from 'react-loader-spinner'
 import { TextField, Button } from '@mui/material'
 

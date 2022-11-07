@@ -7,14 +7,14 @@ import "../assets/scss/main.scss";
 import RegistrationForm from "./registration/RegistrationForm";
 import SignInForm from "./authentication/SignInForm";
 import TopBar from "./layout/TopBar";
-import RecipesIndex from "./RecipesIndex";
-import RecipeShow from "./RecipeShow";
-import NewRecipeForm from "./NewRecipeForm";
+import RecipesIndex from "./recipeIndex/RecipesIndex";
+import RecipeShow from "./recipeShow/RecipeShow";
+import NewRecipeForm from "./recipeForms/NewRecipeForm";
+import EditRecipeForm from "./recipeForms/EditRecipeForm";
 import AuthenticatedRoute from "./authentication/AuthenticatedRoute";
 import Footer from "./layout/Footer";
 import Home from "./Home";
 import AboutMe from "./AboutMe";
-import EditRecipeForm from "./EditRecipeForm";
 
 const App = (props) => {
   const [currentUser, setCurrentUser] = useState(undefined);
