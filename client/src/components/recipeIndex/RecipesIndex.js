@@ -4,10 +4,17 @@ import Scraper from './Scraper'
 import KeywordSearch from './KeywordSearch'
 import Divider from '@mui/material/Divider'
 import Link from "@mui/material/Link"
+import Pagination from '@mui/material/Pagination'
 
 const RecipesIndex = (props) => {
   const [recipes, setRecipes] = useState([])
-  
+  const [currentPage, setCurrentPage] = useState(1)
+  const [recipesPerPage] = useState(window.innerWidth <= 480 ? 15 : 25 )
+
+  const indexOfLastRecipe = currentPage * recipesPerPage
+  const indexOfFirstRecipe = indexOfLastRecipe - recipesPerPage
+  const currentRecipes = recipes.slice(indexOfFirstRecipe, indexOfLastRecipe)
+
   const getRecipes = async () => {
     try {
       const response = await fetch(`/api/v1/recipes`)
@@ -35,7 +42,7 @@ const RecipesIndex = (props) => {
       await getRecipes()
     }
   }
-  
+
   return (
     <>
     <div className='index-container'>
@@ -61,14 +68,23 @@ const RecipesIndex = (props) => {
       <div className='container'>
         <ol>
           {recipes[0] ?
-            recipes.map((recipeObject) => {
+            currentRecipes.map((recipeObject, index) => {
               return <RecipeIndexTile 
                 key={recipeObject.id}
+                index={index}
                 recipe={recipeObject}
               />
             }) : <p>No recipes saved</p>
           }
         </ol>
+      </div>
+      <div className='index-container'>
+          <Pagination 
+            className='pagination' 
+            count={Math.ceil(recipes.length/recipesPerPage)} 
+            size='small' 
+            onChange={(e, v) => {setCurrentPage(v)}} 
+          />
       </div>
     </div>
     </>
