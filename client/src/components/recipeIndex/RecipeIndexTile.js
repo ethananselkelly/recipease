@@ -5,7 +5,7 @@ const RecipeIndexTile = ({ recipe }) => {
 
   return (
     <div className='recipe-index-tile'>
-      <li>
+      <li value={recipe.key}>
         <div className='recipe-info'>
           <Link className='recipe-link' to={`/recipes/${recipe.id}`}>{recipe.name}</Link>
           <a className='source' href={recipe.url} target='_blank'>{recipe.source}</a>
