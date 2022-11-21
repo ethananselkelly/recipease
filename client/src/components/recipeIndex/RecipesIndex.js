@@ -43,6 +43,10 @@ const RecipesIndex = (props) => {
     }
   }
 
+  recipes.forEach((recipe, index) => {
+    recipe.key = index+1
+  })
+
   return (
     <>
     <div className='index-container'>
@@ -66,15 +70,16 @@ const RecipesIndex = (props) => {
       </div>
       <Divider />
       <div className='container'>
-        <ol>
-          {recipes[0] ?
-            currentRecipes.map((recipeObject, index) => {
+        <ol className='recipe-list'>
+          {recipes[0] 
+            ? currentRecipes.map((recipeObject, index) => {
               return <RecipeIndexTile 
-                key={recipeObject.id}
+                key={recipeObject.key}
                 index={index}
                 recipe={recipeObject}
               />
-            }) : <p>No recipes saved</p>
+            }) 
+            : <p>No recipes saved</p>
           }
         </ol>
       </div>
