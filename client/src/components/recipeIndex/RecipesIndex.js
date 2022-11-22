@@ -33,15 +33,6 @@ const RecipesIndex = (props) => {
   useEffect(() => {
     getRecipes()
   }, [])
-  
-  const updateRecipes = async (addedRecipe) => {
-    const found = recipes.find(recipe => {
-      return recipe.id === addedRecipe.id
-    })
-    if (!found) {
-      await getRecipes()
-    }
-  }
 
   recipes.forEach((recipe, index) => {
     recipe.key = index+1
@@ -53,7 +44,8 @@ const RecipesIndex = (props) => {
       <div className='scraper-form'>
         <div className='scraper'>
           <Scraper 
-            updateRecipes={updateRecipes}
+            getRecipes={getRecipes}
+            recipes={recipes}
           />
         </div>
       </div>

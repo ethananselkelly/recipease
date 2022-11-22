@@ -3,7 +3,7 @@ import FormError from '../layout/FormError'
 import { ThreeDots } from 'react-loader-spinner'
 import { TextField, Button } from '@mui/material'
 
-const Scraper = ({ updateRecipes }) => {
+const Scraper = ({ getRecipes, recipes }) => {
   const [recipeURL, setRecipeURL] = useState({
     url: '',
     wildMode: false
@@ -63,6 +63,15 @@ const Scraper = ({ updateRecipes }) => {
       ...recipeURL,
       wildMode: !recipeURL.wildMode
     })
+  }
+
+  const updateRecipes = async (addedRecipe) => {
+    const found = recipes.find(recipe => {
+      return recipe.id === addedRecipe.id
+    })
+    if (!found) {
+      await getRecipes()
+    }
   }
 
   return (
