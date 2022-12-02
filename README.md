@@ -4,7 +4,7 @@ Simple full-stack web app for scraping and saving recipes from all over the inte
 
 Skips the blog posts and goes straight to the important stuff.
 
-https://recipease1.herokuapp.com/
+https://recipease.onrender.com/
 
 Running the App locally
 =========
