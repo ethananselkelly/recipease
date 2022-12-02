@@ -7,7 +7,7 @@ services:
     env: docker # valid values: https://render.com/docs/yaml-spec#environment
     dockerfilePath: Dockerfile.render
     plan: free # optional; defaults to starter
-    numInstances: 0
+    num Instances: 1
     envVars:
       - key: PGSSLMODE # Imported from Heroku app
         value: no-verify
