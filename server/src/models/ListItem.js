@@ -8,9 +8,9 @@ class ListItem extends Model {
   static get jsonSchema() {
     return {
       type: "object",
-      required: ["itemName", "userId", "isChecked"],
+      required: ["name", "userId", "isChecked"],
       properties: {
-        itemName: { type: "string", minLength: 1, maxLength: 255 },
+        name: { type: "string", minLength: 1, maxLength: 255 },
         userId: { type: ['string', "integer"] },
         isChecked: { type: 'boolean' }
       }

@@ -13,7 +13,7 @@ exports.up = async (knex) => {
       .unsigned()
       .index()
       .references('users.id')
-    table.string("itemName").notNullable()
+    table.string("name").notNullable()
     table.boolean("isChecked").notNullable()
     table.timestamp('createdAt').notNullable().defaultTo(knex.fn.now())
     table.timestamp('updatedAt').notNullable().defaultTo(knex.fn.now())
