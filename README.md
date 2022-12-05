@@ -1,6 +1,6 @@
 RECIPEASE
 =========
-Simple full-stack web app for scraping and saving recipes from all over the internet.
+Full-stack web app for scraping and saving recipes from various online sources.
 
 Skips the blog posts and goes straight to the important stuff.
 
