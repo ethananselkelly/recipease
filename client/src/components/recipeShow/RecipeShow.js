@@ -6,6 +6,7 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import SaveButton from './SaveButton'
 import EditIcon from '@mui/icons-material/Edit';
 import OpenInNewIcon from '@mui/icons-material/OpenInNew';
+import AddIcon from '@mui/icons-material/Add'
 
 const RecipeShow = (props) => {
   const [recipe, setRecipe] = useState({
@@ -38,6 +39,28 @@ const RecipeShow = (props) => {
     }
   }
   
+  const postIngredient = async (ingredient) => {
+    const ingredientObject = {
+      name: ingredient
+    }
+    try {
+      const response = await fetch(`/api/v1/checklist`, {
+        method: "POST",
+        headers: new Headers({
+          "Content-Type": "application/json"
+        }),
+        body: JSON.stringify(ingredientObject)
+      })
+      if (!response.ok) {
+        const errorMessage = `${response.status} (${response.statusText})`
+        const error = new Error(errorMessage)
+        throw error
+      }
+    } catch (error) {
+      console.error(`Error in fetch: ${error.message}`)
+    }
+  }
+
   useEffect(() => {
     getRecipe()
   }, [])
@@ -86,13 +109,20 @@ const RecipeShow = (props) => {
         <div className='list-container'>
           <ul className='ingredient list'>
             {recipe.ingredients.split('\n').map((ingredient, index) => (
-              <li className='ingredient' key={index}>{ingredient}</li>
+              <div key={index}>
+                <li className='ingredient'>{ingredient}</li>
+                <AddIcon
+                    className='add-button'
+                    onClick={() => {postIngredient(ingredient)}}
+                    sx={{ color: 'white', borderRadius: 1.2, bgcolor: '#3190cf', boxShadow: 3}}
+                />
+              </div>
               ))
             }
           </ul>
           <ol className='instruction list'>
             {recipe.instructions.split('\n').map((direction, index) => (
-              <li className='instruction' key={index}>{direction}</li>
+                <li className='instruction' key={index}>{direction}</li>                
               ))
             } 
           </ol> 

@@ -15,6 +15,7 @@ import AuthenticatedRoute from "./authentication/AuthenticatedRoute";
 import Footer from "./layout/Footer";
 import Home from "./Home";
 import AboutMe from "./AboutMe";
+import Checklist from "./checklist/Checklist";
 
 const App = (props) => {
   const [currentUser, setCurrentUser] = useState(undefined);
@@ -51,7 +52,8 @@ const App = (props) => {
         <Route exact path='/recipes/:id/edit' >
           <EditRecipeForm user={currentUser} />
         </Route>
-        <Route exact path="/about-me" component={AboutMe} />     
+        <Route exact path="/about-me" component={AboutMe} />  
+        <Route exact path="/checklist" component={Checklist} />   
       </Switch>
       <Footer/>
     </Router>
