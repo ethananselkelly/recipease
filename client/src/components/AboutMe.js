@@ -14,7 +14,7 @@ const AboutMe = () => {
         spacing={2}
         margin={2}
       >
-        <img className='about-image' src='https://lh3.googleusercontent.com/pw/AL9nZEWwnTTpN6Mp2lpYF619JbDlHEgABst3zGcEVWrn_ONS6QgO2lN7oj4y5tLH8XYcRXOu_-e0eFJR45zTCU5Yt8gOh922qbAT82nddai5y3sqgHEF9rjzMPQg9sKjjzn2CsrI0a-kyTcdIAwjFWlwlaS8=w1002-h1336-no?authuser=0'></img>
+        <img className='about-image' src='https://lh3.googleusercontent.com/pw/AL9nZEX7i8F6FHOcXYjMz_knW5aB_S4At56ADA-K2Yka14xBNhHjo13SVpCeh0FdbySwhanM1MVmX1d2dtQmj9UvnVKdxJ-y5g2FuAQYv458bOapi600OgKD2iUA3Qu0HYP6uS4X2D7WkSmvkKZHYpLwOJN6=w1280-h960-no?authuser=0'></img>
  
         <Stack
           justifyContent='center'
@@ -23,22 +23,16 @@ const AboutMe = () => {
           px={{lg: 25, md: 18, sm:4}}
         >
           <p>
-            First, thanks for visiting my web app. Second, I'm looking for work!
+            Thanks for visiting my web app.
           </p>
-          <p>        
-            I'm Ethan Ansel-Kelly. Career changer, full stack developer, and home cook, with a background in environmental science and clinical research. 
-            I learned full stack web development at Launch Academy, a coding bootcamp in Boston that taught Node.js, React, and Postgresql, as well as software engineering fundamentals to help me get job-ready in this field.
-
-          </p>
-          <p>
-            Changing careers is both scary and exciting - a bit like jumping off a cliff, except when you jump it takes a little longer than 1 second to land.
-            Despite that, I'm happy I took the plunge and I'm eager to continue learning and challenging myself in my new career.
-            Attending a coding bootcamp was a great, fast-paced educational experience, and I'm ready to bring those skills to a Boston-based or remote company. 
- 
-          </p>
-          <p>
-            I'm seeking a junior developer or similar role, and am open to conversations if you would like to reach me on LinkedIn or email (links below).
-          </p>
+          <p> 
+            I'm Ethan: aspiring software engineer transitioning from a career in public and environmental health research. 
+            After gaining valuable work experience with a great team at Boston Children’s Hospital, I decided to learn a new skill set to pursue my interest in technology. 
+          </p>  
+          <p>  
+            Completing Launch Academy’s full stack coding bootcamp with a cohort of motivated, like-minded career-switchers was a great experience, and I left the program well positioned to continue my learning and begin my new career. 
+            I’m excited to solve challenging problems and build on the fundamentals of software engineering to drive success for a remote or Boston-based team.       
+          </p> 
         </Stack>
       </Stack>
     </div>
