@@ -26,11 +26,11 @@ const AboutMe = () => {
             Thanks for visiting my web app.
           </p>
           <p> 
-            I'm Ethan: aspiring software engineer transitioning from a career in public and environmental health research. 
-            After gaining valuable work experience with a great team at Boston Children’s Hospital, I decided to learn a new skill set to pursue my interest in technology. 
+            I'm Ethan: full stack software engineer after transitioning from a career in public and environmental health research. 
+            I pursued my interest in technology by learning software engineering fundamentals and web development technologies at Launch Academy’s full stack coding bootcamp.
           </p>  
           <p>  
-            Completing Launch Academy’s full stack coding bootcamp with a cohort of motivated, like-minded career-switchers was a great experience, and I left the program well positioned to continue my learning and begin my new career. 
+            Completing a coding bootcamp with a cohort of motivated, like-minded career-switchers was a great experience, and I left Launch Academy well positioned to continue my learning and further develop my technical skills in my new career. 
             I’m excited to solve challenging problems and build on the fundamentals of software engineering to drive success for a remote or Boston-based team.       
           </p> 
         </Stack>
