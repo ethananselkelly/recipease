@@ -44,3 +44,16 @@
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.9);
 }
 
+.recipe-home-tile {
+  animation: fadeIn 1s;
+  -webkit-animation: fadeIn 1s;
+}
+
+@keyframes fadeIn {
+  0% {opacity: 0;}
+  100% {opacity: 1;}
+}
+@-webkit-keyframes fadeIn {
+  0% {opacity: 0;}
+  100% {opacity: 1;}
+}
