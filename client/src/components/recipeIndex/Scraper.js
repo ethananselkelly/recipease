@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import FormError from '../layout/FormError'
+import config from '../../config'
 import { ThreeDots } from 'react-loader-spinner'
 import { TextField, Button } from '@mui/material'
 
@@ -8,10 +9,28 @@ const Scraper = ({ getRecipes, recipes }) => {
     url: '',
     wildMode: false
   })
-  const [errors, setErrors] = useState(null)
+  const [errors, setErrors] = useState({})
   const [showLoading, setShowLoading] = useState(false)
   const [showSuccess, setShowSuccess] = useState(false)
   
+  const validateInput = (payload) => {
+    setErrors({})
+    const { url } = payload
+    const urlRegex = config.validation.url.regexp.urlRegex
+    let newErrors = {}
+    if (url.trim() === '' || !url.match(urlRegex)) {
+      newErrors = {
+        ...newErrors,
+        url: 'please enter a valid url'
+      }
+    }
+    setErrors(newErrors)
+    if (Object.keys(newErrors).length === 0) {
+      return true
+    }
+    return false
+  }
+
   const postRecipe = async (recipeURL, wildMode) => {
     try {
       const response = await fetch(`/api/v1/recipes`, {
@@ -38,7 +57,7 @@ const Scraper = ({ getRecipes, recipes }) => {
         ...recipeURL,
         wildMode: false
       })
-      setErrors(`couldn't scrape recipe from URL`)
+      setErrors({url:`couldn't scrape recipe from URL`})
       console.error(`Error in fetch: ${error.message}`)
     }
   }
@@ -52,10 +71,12 @@ const Scraper = ({ getRecipes, recipes }) => {
 
   const handleSubmit = async (event) => {
     event.preventDefault()
-    setShowLoading(true)
-    setErrors(null)
-    await postRecipe(recipeURL)  
-    setShowLoading(false)
+    if (validateInput(recipeURL)) {
+      setShowLoading(true)
+      setErrors({})
+      await postRecipe(recipeURL)  
+      setShowLoading(false)
+    }
   }
 
   const handleCheckboxChange = (event) => {
@@ -101,8 +122,8 @@ const Scraper = ({ getRecipes, recipes }) => {
             visible={showLoading}
           />
           {showSuccess && <p>Recipe scraped ✔️</p>}
-          <FormError error={errors} />
-          {errors && 
+          <FormError error={errors.url} />
+          {errors.url && 
             <div>
               <a href='https://github.com/hhursev/recipe-scrapers#scrapers-available-for' target='_blank'>List of scrapable websites</a>
               <label>
