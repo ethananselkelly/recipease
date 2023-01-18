@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import { withRouter } from 'react-router'
 import { Link } from 'react-router-dom'
+import SaveButton from './SaveButton'
+import PDFButton from './PDFButton'
 import Divider from '@mui/material/Divider'
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import SaveButton from './SaveButton'
 import EditIcon from '@mui/icons-material/Edit';
 import OpenInNewIcon from '@mui/icons-material/OpenInNew';
 
@@ -54,22 +55,28 @@ const RecipeShow = (props) => {
             </h4> 
           </div>
           <div className='icon-container'>
-            <div className='icon'>
+            <div className='icon' title='Save/remove recipe'>
               <SaveButton 
-                className='icon'
                 isUserRecipe={isUserRecipe} 
                 setIsUserRecipe={setIsUserRecipe}
                 recipe={recipe}
                 user={props.user}
               />
             </div>
+            <div className='icon' title='Download as PDF'>
+              <PDFButton
+                recipe={recipe}
+              />
+            </div>
             {isUserRecipe &&
-              <Link className='icon' to={`/recipes/${recipeId}/edit`}>
-                <EditIcon variant='contained' />
-              </Link>
+              <div className='icon' title='Edit recipe' >
+                <Link to={`/recipes/${recipeId}/edit`}>
+                  <EditIcon variant='contained' />
+                </Link>
+              </div>
             }
             {recipe.url &&
-              <a className='icon' href={recipe.url} target='_blank'>
+              <a className='icon' title='Recipe source' href={recipe.url} target='_blank'>
                 <OpenInNewIcon variant='contained' />
               </a>
             }

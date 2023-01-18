@@ -73,6 +73,10 @@
   width: 30px;
 }
 
+.icon:hover {
+  cursor: pointer;
+}
+
 .save-button {
   color: #1879ba;
   width: 30px;
@@ -80,19 +84,11 @@
   
 }
 
-.save-button:hover {
-  cursor: pointer;
-}
-
 .unsave-button {
-  color: #c70000;
+  // color: #c70000;
   margin-left: 0.25em;
   width: 30px;
   height: 30px;
-}
-
-.unsave-button:hover {
-  cursor: pointer;
 }
 
 hr.dashed {

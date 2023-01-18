@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link } from 'react-router-dom'
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import { red } from '@mui/material/colors'
 
 const SaveButton = ({isUserRecipe, setIsUserRecipe, recipe, user}) => {
   const [shouldRedirect, setShouldRedirect] = useState(false)
@@ -70,10 +71,10 @@ const SaveButton = ({isUserRecipe, setIsUserRecipe, recipe, user}) => {
   if (user) {
     if (isUserRecipe) {
       saveButton = 
-        <FavoriteIcon className='unsave-button' variant='contained' color='red' onClick={handleRemove} />
+        <FavoriteIcon className='unsave-button' variant='contained' onClick={handleRemove} sx= {{ color: red['A700'] }}/>
     } else {
       saveButton =
-      <FavoriteBorderIcon className='save-button' variant='contained' onClick={handleSave}/>
+      <FavoriteBorderIcon className='save-button' variant='contained' onClick={handleSave} sx= {{ color: red['A700'] }}/>
     }
   } else {
     saveButton = 
