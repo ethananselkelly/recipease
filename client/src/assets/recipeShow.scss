@@ -48,27 +48,25 @@
 }
 
 .recipe-header {
-  margin-left: 1rem;
+  margin-left: 0.5em;
 }
 
 .nav-container {
   display: flex;
-  margin-left: 1em;
-  margin-right: 1em;
   justify-content: space-between;
   align-items: baseline;
 }
 
 .icon-container {
   display: flex;
-  margin-right: 1em;
   margin-top: 0.5em;
   justify-content: space-evenly;
   align-items: baseline;
 }
 
 .icon {
-  margin-left: 0.25em;
+  margin-left: 0.1em;
+  margin-right: 0.1em;
   height: 30px;
   width: 30px;
 }
