@@ -28,10 +28,14 @@ const Home = () => {
       <div className='text-container'>
         <h2 className='header-text'>Recipease</h2>
         <p>
-          A web app for scraping and saving recipes from all over the internet.
-          A list of websites the app can scrape from can be found  <a href='https://github.com/hhursev/recipe-scrapers#scrapers-available-for' target='_blank'>here</a>.</p>
-        <p>Feel free to reach out to me via LinkedIn or email.</p>
-        <p>Thanks for visiting and happy cooking.</p>
+          Welcome to your digital cookbook.
+        </p>
+        <p>
+          Scrape and save recipes from all over the internet.
+        </p>
+        <p>
+          A list of websites the app can scrape from can be found  <a href='https://github.com/hhursev/recipe-scrapers#scrapers-available-for' target='_blank'>here</a>.
+        </p>
       </div>
       <div>
         <ul className='home-list'>
