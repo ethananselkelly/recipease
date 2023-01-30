@@ -7,6 +7,8 @@ const clientRoutes = [
   "/", 
   "/user-sessions/new", 
   "/users/new",
+  "/users/forgot-password",
+  "/users/:id/reset-password/:token",
   "/recipes",
   "/recipes/:id",
   "/recipes/:id/edit",
