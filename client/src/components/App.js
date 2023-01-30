@@ -15,6 +15,8 @@ import AuthenticatedRoute from "./authentication/AuthenticatedRoute";
 import Footer from "./layout/Footer";
 import Home from "./Home";
 import AboutMe from "./AboutMe";
+import ForgotPassword from "./registration/ForgotPassword";
+import ResetPassword from "./registration/ResetPassword";
 
 const App = (props) => {
   const [currentUser, setCurrentUser] = useState(undefined);
@@ -41,6 +43,8 @@ const App = (props) => {
       <Switch>
         <Route exact path="/" component={Home} />
         <Route exact path="/users/new" component={RegistrationForm} />
+        <Route exact path="/users/forgot-password" component={ForgotPassword} />
+        <Route exact path="/users/:id/reset-password/:token" component={ResetPassword} />
         <Route exact path="/user-sessions/new" component={SignInForm} />
         <AuthenticatedRoute exact path="/recipes" component={RecipesIndex} user={currentUser} />
         <AuthenticatedRoute exact path="/recipes/form" component={NewRecipeForm} user={currentUser} />

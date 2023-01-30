@@ -10,7 +10,6 @@ const SignInForm = () => {
   const [errors, setErrors] = useState({});
 
   const validateInput = (payload) => {
-    // setErrors({});
     const { email, password } = payload;
     const emailRegexp = config.validation.email.regexp;
     let newErrors = {};
@@ -104,6 +103,14 @@ const SignInForm = () => {
           Don't have an account?
           <NavLink exact to='/users/new'>
             <Button size='small' variant='contained' >Sign Up</Button>
+          </NavLink>
+        </Stack>
+      </div>
+      <div className="grid-container">
+        <Stack direction="column" py={1} >
+          Forgot password?
+          <NavLink exact to='/users/forgot-password'>
+            <Button size='small' variant='contained' >Reset Password</Button>
           </NavLink>
         </Stack>
       </div>
