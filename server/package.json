@@ -9,6 +9,7 @@
     "migrate:rollback": "knex --knexfile ./knexfile.cjs migrate:rollback",
     "migrate:make": "knex --knexfile ./knexfile.cjs migrate:make",
     "db:seed": "node ./bin/seed.js",
+    "db:production:migrate": "NODE_ENV='production' yarn run migrate:latest",
     "db:test:migrate": "NODE_ENV='test' yarn run migrate:latest",
     "db:e2e:migrate": "NODE_ENV='e2e' yarn run migrate:latest",
     "test": "jest",
