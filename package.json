@@ -10,7 +10,7 @@
     "build:client": "yarn workspace recipease-client build",
     "dev": "yarn workspace recipease-server dev",
     "dev:debug": "yarn workspace recipease-server dev:debug",
-    "heroku-postbuild": "yarn workspace recipease-client build && cd server && yarn run migrate:latest && ..",
+    "heroku-postbuild": "yarn workspace recipease-client build",
     "start": "yarn workspace recipease-server start",
     "dev:cypress": "yarn workspace recipease-server dev:e2e",
     "e2e:open": "yarn workspace recipease-e2e e2e:open",
