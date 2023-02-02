@@ -4,8 +4,9 @@
 services:
   - type: web # valid values: https://render.com/docs/yaml-spec#type
     name: recipease
-    env: docker # valid values: https://render.com/docs/yaml-spec#environment
-    dockerfilePath: Dockerfile.render
+    env: node # valid values: https://render.com/docs/yaml-spec#environment
+    buildCommand: yarn install && yarn workspace recipease-client build && cd server && yarn run migrate:latest && ..
+    startCommand: yarn workspace recipease-server start
     plan: free # optional; defaults to starter
     numInstances: 1
     envVars:
