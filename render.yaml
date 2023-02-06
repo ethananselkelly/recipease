@@ -9,6 +9,7 @@ services:
     startCommand: yarn workspace recipease-server start
     plan: free # optional; defaults to starter
     numInstances: 1
+    healthCheckPath: /api/v1/healthz
     envVars:
       - key: PGSSLMODE # Imported from Heroku app
         value: no-verify
