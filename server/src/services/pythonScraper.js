@@ -4,7 +4,7 @@ const pythonScraper = async (url, wildMode) => {
   let python = pythonBridge()
   let recipe = {}
   recipe.url = url
-  python.ex`from recipe_scrapers import scrape_me`
+  python.ex`from ..recipe_scrapers import scrape_me`
   if (wildMode === true) {
     python.ex`scraper = scrape_me(${recipe.url}, wild_mode=True)`
   } else {
