@@ -4,7 +4,7 @@
 services:
   - type: web # valid values: https://render.com/docs/yaml-spec#type
     name: recipease
-    env: node # valid values: https://render.com/docs/yaml-spec#environment
+    env: python # valid values: https://render.com/docs/yaml-spec#environment
     buildCommand: ./build.sh
     startCommand: yarn workspace recipease-server start
     plan: free # optional; defaults to starter
