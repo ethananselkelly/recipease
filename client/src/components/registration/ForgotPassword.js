@@ -26,12 +26,11 @@ const ForgotPassword = () => {
             setResetButtonDisabled(true)
             setResetButtonText('Reset link sent')
             setErrors({})
-            console.log(body)
         } catch (error) {
             console.error(`Error in fetch: ${error.message}`)
             setErrors({
                 ...errors,
-                email: 'email not found'
+                email: error.message
             })
         }
     }

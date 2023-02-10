@@ -13,7 +13,6 @@ const ResetPassword = (props) => {
         userId: props.match.params.id,
     })
     const [errors, setErrors] = useState({});
-
     const [shouldRedirect, setShouldRedirect] = useState(false);
 
     const validateInput = (payload) => {
@@ -67,6 +66,10 @@ const ResetPassword = (props) => {
             setShouldRedirect(true)
         } catch (error) {
             console.error(`Error in fetch: ${error.message}`)
+            setErrors({
+                ...errors,
+                response: error.message
+            })        
         }
     }
 
@@ -113,6 +116,7 @@ const ResetPassword = (props) => {
                     onChange={handleInputChange}
                 />
                 <FormError error={errors.passwordConfirm} />
+                <FormError error={errors.response} />
                 <Button type="submit" size='small' variant="contained">Reset password</Button>
             </form>
         </div>
