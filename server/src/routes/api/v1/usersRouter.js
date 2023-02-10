@@ -1,6 +1,6 @@
 import express from "express";
-import passwordResetHandler from "../../../services/passwordResetHandler.js";
 import { User } from "../../../models/index.js";
+import PasswordResetHandler from "../../../services/passwordResetHandler.js";
 
 const usersRouter = new express.Router();
 
@@ -19,26 +19,22 @@ usersRouter.post("/", async (req, res) => {
 
 usersRouter.patch("/forgot-password", async (req, res) => {
   try {
-    await passwordResetHandler(req)
+    await PasswordResetHandler.passwordForget(req)
     res.status(200).json({ message: "check your email" })
   } catch (error) {
     console.log(error)
-    return res.status(500).json({ errors: error })
+    res.statusMessage = error
+    return res.status(404).json({ errors: error })
   }
 })
 
 usersRouter.patch("/reset-password", async (req, res) => {
   try {
-    const { password, passwordConfirm, resetToken, userId } = req.body
-    const validUser = await User.query().findOne({ id: userId, passwordResetToken: resetToken })
-    if (validUser) {
-      await validUser.$query().patch({ password })
-      res.status(200).json({ message: "password reset" })
-    } else {
-      throw new Error('Incorrect user information!')
-    }
+    await PasswordResetHandler.passwordReset(req)
+    res.status(200).json({ message: "password reset" })
   } catch (error) {
     console.log(error)
+    res.statusMessage = error
     return res.status(500).json({ errors: error })
   }
 })
